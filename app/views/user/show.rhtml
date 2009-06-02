@@ -49,7 +49,7 @@
     </tr>
     <tr>
         <th>Current Project:</th>
-        <td><% if @user.current_projects %> <%= h(@user.current_projects) %> <% end %></td>
+        <td><% if @user.current_projects %> <%= markdown(h(@user.current_projects)) %> <% end %></td>
     </tr>
 </table>
 </div>

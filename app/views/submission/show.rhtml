@@ -50,7 +50,7 @@
         Admin Rating: <%=h number_with_precision(@submission.average_admin_rating.to_s, 2) %><br />
 		Rating: <%=h number_with_precision(@submission.average_rating.to_s, 2) %><br />
     </div>
-    <div><%= h(@submission.description) %></div>
+    <div><%= markdown(h(@submission.description)) %></div>
     <div style="clear: both;"></div>
 </div>
 
