@@ -1,0 +1,11 @@
+<h2><%=h @featured.title %></h2>
+
+<%= render(:partial => "shared/featured") %>
+
+<% unless @featured_submissions == nil  %>
+	<%= render(:partial => "shared/submission_preview", :collection => @featured_submissions) %>
+<% end %>
+
+<%= will_paginate @featured_submissions %>
+
+<br />

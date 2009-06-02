@@ -1,0 +1,4 @@
+<% form_for	:rating, :url => { :controller => "rating", :action => "update", :id => @submission  } do |form| %>
+  <p>Rating: <%= form.text_field :rating, :size => "3", :maxlength => "3" %></p>
+  <p><%= submit_tag "Submit Rating" %></p>
+<% end %>

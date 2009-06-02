@@ -1,0 +1,27 @@
+<h2>Featured Collection</h2>
+<ul>
+  <% @featured_cart.items.each_with_index do |item, index| %>
+    <li><%=h item.title %>  <%= link_to 'Remove From Featured', :controller => '/admin/feature', :action => 'remove_from_featured_cart', :index => index %></li>
+  <% end %>
+</ul>
+<h3>Submit Feature</h3>
+<% form_for (:featured, :url => {:action => 'create'}, :html => {:multipart => true}) do |form| %>
+
+<p>
+	<label for="featured_title">Title:</label><br/>
+	<%= form.text_field :title %>
+</p>
+
+<p>
+	<label for="featured_comment">Comment:</label><br/>
+	<%= form.text_area :comment %>
+</p>
+
+<p>
+	<label for="featured_image">Image Upload</label><br/>
+	<% fields_for :featured_image do |featured_image| %>
+		<%= featured_image.file_field :uploaded_data %>
+	<% end -%>
+</p>
+  <%= submit_tag 'Submit' %>
+<% end %>

@@ -1,0 +1,22 @@
+<h3><%= h(@user.username) %></h3>
+<% if @user.user_image %>
+<%= link_to image_tag(@user.user_image.public_filename(:thumb)), @user.user_image.public_filename %>
+<% end %>
+
+<h3>Info</h3>
+<p>Name: <%= h(@user.name) %></p>
+<p>Last Login: <%= h(@user.last_login_time) %></p>
+<p>Location: <% if @user.location %> <%= h(@user.location) %> <% end %></p>
+<p>Country: <% if @user.country %> <%= h(@user.country) %> <% end %></p>
+<p>E-mail: <% if @user.email %> <%= h(@user.email) %> <% end %></p>
+<p>AIM: <% if @user.aim %> <%= h(@user.aim) %> <% end %></p>
+<p>MSN: <% if @user.msn %> <%= h(@user.msn) %> <% end %></p>
+<p>ICQ: <% if @user.icq %> <%= h(@user.icq) %> <% end %></p>
+<p>Yahoo: <% if @user.yahoo %> <%= h(@user.yahoo) %> <% end %></p>
+<p>Website: <% if @user.website %> <%= h(@user.website) %> <% end %></p>
+<p>Current Project: <% if @user.current_projects %> <%= h(@user.current_projects) %> <% end %></p>
+
+<%= render(:partial => "submission", :collection => @submissions) %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @user %> |
+<%= link_to 'Back', :action => 'list' %>

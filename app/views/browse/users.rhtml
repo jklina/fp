@@ -1,0 +1,11 @@
+<h2>Listing Users</h2>
+
+<%= render(:partial => "filter_form") %>
+
+<% unless @users == nil  %>
+	<%= render(:partial => "user_preview", :collection => @users) %>
+<% end %>
+
+<%= will_paginate @users %>
+
+<br />

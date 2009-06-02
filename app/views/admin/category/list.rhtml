@@ -1,0 +1,12 @@
+<h1>Listing categories</h1>
+
+
+<table border="0" width="100%">
+<% unless @categories == nil  %>
+	<%= render(:partial => "category_preview", :collection => @categories) %>
+<% end %>
+</table>
+
+<%= will_paginate @categories %>
+
+<%= link_to 'New category', :action => 'new' %>

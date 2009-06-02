@@ -1,0 +1,17 @@
+class CreateRatings < ActiveRecord::Migration
+  def self.up
+    create_table :ratings do |t|
+      t.column			:user_id,					:integer
+      t.column			:submission_id,				:integer
+      
+	  t.column 			:rating,	 				:integer
+	  t.column			:admin, 					:boolean
+
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :ratings
+  end
+end

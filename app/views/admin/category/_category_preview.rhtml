@@ -1,0 +1,10 @@
+<tr>
+	<td>
+    <%= link_to (h(category_preview.title), :controller => 'category', :action => 'show', :id => category_preview) %>
+    </td>
+    <td width="80px">
+    <%= link_to "Edit", :controller => 'admin/category', :action => 'edit', :id => category_preview %> | 
+	<%= link_to "Delete", {:controller => 'admin/category', :action => 'destroy', :id => category_preview}, {:confirm => "Are you sure?"} %>
+	</td>
+</tr>
+  

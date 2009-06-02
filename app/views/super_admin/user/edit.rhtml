@@ -1,0 +1,95 @@
+<h1>Editing User Profile</h1>
+
+<%= error_messages_for(:user) %>
+	
+<% form_for (:user, :url => {:action => 'update', :id => @user}, :html => {:multipart => true}) do |form| %>
+<!--[form:user]-->
+<p>
+	<label for="user_username">User Name:</label><br/>
+	<%= form.text_field :username %>
+</p>
+
+<p>
+	<label for="user_name">Name:</label><br/>
+	<%= form.text_field :name %>
+</p>
+
+<p>
+	<label for="user_location">Location:</label><br/>
+	<%= form.text_field :location %>
+</p>
+
+<p>
+	<label for="user_country">Country:</label><br/>
+	<%= form.text_field :country %>
+</p>
+
+<p>
+	<label for="user_email">E-mail:</label><br/>
+	<%= form.text_field :email %>
+</p>
+
+<p>
+	<label for="user_aim">AIM:</label><br/>
+	<%= form.text_field :aim %>
+</p>
+
+<p>
+	<label for="user_msn">MSN:</label><br/>
+	<%= form.text_field :msn %>
+</p>
+
+<p>
+	<label for="user_icq">ICQ:</label><br/>
+	<%= form.text_field :icq %>
+</p>
+
+<p>
+	<label for="user_yahoo">Yahoo IM:</label><br/>
+	<%= form.text_field :yahoo %>
+</p>
+
+<p>
+	<label for="user_website">Website:</label><br/>
+	<%= form.text_field :website %>
+</p>
+
+<p>
+	<label for="user_current_projects">Current Projects:</label><br/>
+	<%= form.text_area :current_projects %>
+</p>
+
+<p>
+	<label for="user_image">Image Upload</label><br/>
+	<% fields_for :user_image do |user_image| %>
+		<%= user_image.file_field :uploaded_data %>
+	<% end -%>
+</p>
+
+<p>
+	<label for="user_access_level">Access Level</label><br/>
+	<%= form.select(:access_level, [ ['Normal', 1],
+							  ['Moderator', 2],
+							  ['Administrator', 3]]) %>
+</p>
+
+<p>
+	<label for="user_password">Password:</label><br/>
+	<%= form.password_field :password %>
+</p>
+
+<p>
+	<label for="user_password_confirmation">Confirm:</label><br/>
+	<%= form.password_field :password_confirmation %>
+</p>
+
+<br/>
+
+<!--[eoform:submission]-->
+
+
+  <%= submit_tag 'Update' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @user %> |
+<%= link_to 'Back', :action => 'list' %>

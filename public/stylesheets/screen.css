@@ -1,0 +1,245 @@
+@import url("base.css");
+
+html, body {
+	height: 100%;
+}
+
+body {
+	background: #dddbcf url('../images/bgt1.png') top center repeat-y;
+}
+
+div#container {
+    position: relative;
+    left: 50%;
+    margin-left: -403px;
+    width: 806px;
+    min-height: 100%;
+}
+
+* html div#container {
+    height: 100%;
+}
+
+a img {
+    border: none;
+}
+
+div#wrapper {
+    padding-bottom: 50px;
+}
+
+div#header {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+div#header a h1 {
+    text-indent: -9999px;
+    height: 24px;
+    margin-bottom: 5px;
+    background: url('../images/hd.gif') top left no-repeat;
+}
+
+div#header ul {
+    margin: 0 0 5px -1px;
+    padding: 0 0 25px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+div#header ul li {
+    display: inline;
+    list-style: none;
+    padding-right: 8px;
+}
+
+div#header ul li a:link,
+div#header ul li a:active,
+div#header ul li a:visited {
+    color: #000000;
+    font-weight: bold;
+}
+
+div#header ul li a:hover,
+div#header ul li#active a {
+    color: #97481d;
+}
+
+div#content {
+    width: 806px;
+}
+
+div#footer {
+    position: relative;
+    width: 806px;
+    height: 50px;
+    padding-top: 5px;
+    border-top: 1px solid #e5e5e5;
+    color: #c8c8c8;
+}
+
+div#footer span.right,
+div.iconbar span.right {
+    margin-right: 0;
+}
+
+div#footer span.cr {
+    color: #000000;
+}
+
+div#featured {
+    width: 806px;
+    margin-bottom: 40px;
+}
+
+div#submissions {
+    width: 816px;
+}
+
+div#submission {
+    width: 806px;
+}
+
+div#comments {
+	display: block;
+}
+
+div.comment {
+  	display: block;
+	width: 100%;
+	margin-bottom: 5px;
+	clear: both;
+}
+
+div.comment img {
+  	float: left;
+}
+
+div.comment div.text {
+    margin-left: 58px;
+}
+
+div.iconbar {
+    padding-bottom: 25px;
+    color: #c8c8c8;
+}
+
+div.thumb {
+    float: left;
+    display: block;
+    width: 197px;
+    height: 122px;
+    margin: 0 5px 45px 0;
+    text-align: center;
+}
+
+div.thumb .description,
+div#featured .description {
+    margin-top: 0;
+    font-size: 8pt;
+}
+
+div.submission div {
+    width: 610px;
+    height: 506px;
+}
+
+div#artist_notes {
+    background: #e5e4dd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+div#artist_notes div#meta {
+    width: 20%;
+    border-left: 1px solid #b9b9b0;
+    padding-left: 10px;
+    float: right;
+}
+
+input#search {
+    position: relative;
+    top: 20px;
+    width: 190px;
+    height: 22px;
+    background: url('../images/search.gif') no-repeat;
+    border: none;
+    padding: 4px 5px 5px 20px;
+    color: #b2b2b2;
+    float: right;
+}
+
+a.category {
+    font-size: 6pt;
+    position: relative;
+    top: -13px;
+}
+
+a.icon {
+    display: block;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    text-indent: -9999px;
+    background-repeat: no-repeat;
+}
+
+a.icon.app_get {
+    background-image: url('../images/silk/application_get.gif');
+}
+
+a.icon.app_put {
+    background-image: url('../images/silk/application_put.gif')
+}
+
+a.icon.cog {
+    background-image: url('../images/silk/cog.gif');
+}
+
+a.icon.help {
+    background-image: url('../images/silk/help.gif')
+}
+
+a.icon.zoomin {
+    background-image: url('../images/silk/magnifier_zoom_in.gif')
+}
+
+div.toolbox {
+    margin-left: 15px;
+}
+
+div.toolbox img {
+    vertical-align: middle;
+}
+
+div.toolbox a.icon {
+    text-indent: 0;
+    width: 200px;
+    padding-left: 22px;
+    float: none;
+}
+
+div.pagination {
+	clear: both;
+}
+
+div.form {
+	margin-bottom: 20px;
+}
+
+div.user_image {
+    float: right;
+}
+
+div.user_info table th {
+	text-align: left;
+}
+
+.clear {
+    clear: both;
+}
+
+.right {
+    float: right;
+    margin-right: 10px;
+}

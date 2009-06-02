@@ -1,0 +1,9 @@
+<h2>Listing Featureds</h2>
+
+<%= render(:partial => "filter_form") %>
+  
+<% unless @featureds == nil  %>
+	<%= render(:partial => "featured_preview", :collection => @featureds) %>
+<% end %>
+
+<%= will_paginate @featureds %>

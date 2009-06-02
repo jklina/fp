@@ -1,0 +1,6 @@
+<h1>Please Log In</h1>
+
+<% form_for(:user, @user, :url => { :action => 'create' }) do |f| %>
+<%= render :partial => 'form', :locals => { :form => f } %>
+<p><%= submit_tag "Log In" %></p>
+<% end %>

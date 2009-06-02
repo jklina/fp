@@ -1,0 +1,11 @@
+<h2>Listing Submissions In <%= h(@category.title) %></h2>
+
+<%= render(:partial => "filter_form") %>
+
+<% unless @submissions == nil  %>
+	<%= render(:partial => "shared/submission_preview", :collection => @submissions) %>
+<% end %>
+
+<%= will_paginate @submissions %>
+
+<br />

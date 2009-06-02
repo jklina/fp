@@ -1,0 +1,8 @@
+<div id="featured" class="shadow">
+	<div>
+		<%= link_to image_tag(@featured.featured_image.public_filename), :controller => '/feature', :action => 'show', :id => @featured %>
+		<span class="description">
+			<%= link_to h(@featured.comment), :controller => '/feature', :action => 'show', :id => @featured %> chosen by <%=h @featured.user.username %>
+		</span>
+	</div>
+</div>

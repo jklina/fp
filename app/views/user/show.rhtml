@@ -1,0 +1,65 @@
+<h2><%= h(@user.username) %></h2>
+
+<div class="user_block">
+
+<% if @user.user_image %>
+<div class="user_image">
+<%= link_to image_tag(@user.user_image.public_filename(:thumb)), @user.user_image.public_filename %>
+</div>
+<% end %>
+
+<div class="user_info">
+<h2>User Info</h2>
+<table border="0">
+    <tr>
+        <th>Last Login:</th>
+        <td><%= h(@user.last_login_time) %></td>
+    </tr>
+    <tr>
+        <th>Location:</th>
+        <td><% if @user.location %> <%= h(@user.location) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>Country:</th>
+        <td><% if @user.country %> <%= h(@user.country) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>E-mail:</th>
+        <td><% if @user.email %> <%= h(@user.email) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>AIM:</th>
+        <td><% if @user.aim %> <%= h(@user.aim) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>MSN:</th>
+        <td><% if @user.msn %> <%= h(@user.msn) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>ICQ:</th>
+        <td><% if @user.icq %> <%= h(@user.icq) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>Yahoo:</th>
+        <td><% if @user.yahoo %> <%= h(@user.yahoo) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>Website:</th>
+        <td><% if @user.website %> <%= h(@user.website) %> <% end %></td>
+    </tr>
+    <tr>
+        <th>Current Project:</th>
+        <td><% if @user.current_projects %> <%= h(@user.current_projects) %> <% end %></td>
+    </tr>
+</table>
+</div>
+
+</div>
+
+<%= render(:partial => "submission", :collection => @submissions) %>
+
+<% if @userIsSessionUser %>
+<%= link_to 'Edit', :action => 'edit', :id => @user %> |
+<%= link_to 'View Trashed Submissions', :action => 'show_owner_trashed_subs', :id => @user %> |
+<% end %>
+<%= link_to 'Back', :action => 'list' %>

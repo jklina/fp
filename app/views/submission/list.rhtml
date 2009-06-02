@@ -1,0 +1,9 @@
+<h2>Listing submissions</h2>
+
+<% unless @submissions == nil  %>
+	<%= render(:partial => "shared/submission_preview", :collection => @submissions) %>
+<% end %>
+
+<%= will_paginate @submissions %>
+
+<br />

@@ -1,0 +1,9 @@
+<h1>Editing submission</h1>
+
+<% form_for (:submission, :url => {:action => 'update', :id => @submission}, :html => {:multipart => true}) do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Update' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @submission %> |
+<%= link_to 'Back', :action => 'list' %>
