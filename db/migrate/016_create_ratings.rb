@@ -6,6 +6,8 @@ class CreateRatings < ActiveRecord::Migration
       
 	  t.column 			:rating,	 				:integer
 	  t.column			:admin, 					:boolean
+	  
+	  t.column			:rated_user_id,				:int
 
       t.timestamps
     end

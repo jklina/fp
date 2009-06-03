@@ -1,6 +1,8 @@
 <h2>Featured</h2>
 
+<% if @featured %>
 <%= render(:partial => "shared/featured") %>
+<% end %>
 
 <% unless @submissions == nil  %>
 	<%= render(:partial => "shared/submission_preview", :collection => @submissions) %>

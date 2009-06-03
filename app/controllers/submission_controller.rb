@@ -65,7 +65,8 @@ class SubmissionController < ApplicationController
 	@submission_association = SubmissionAssociation.new
 	
 	#make sure there is data there before saving the submission_file
-    if (params[:sub_file][:uploaded_data].size != 0) 
+    #if (params[:sub_file][:uploaded_data].size != 0)
+	if (params[:sub_file])
       @sub_file =  SubFile.new(params[:sub_file])
 	  @submission.sub_file = @sub_file
     end

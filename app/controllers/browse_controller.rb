@@ -12,16 +12,16 @@ class BrowseController < ApplicationController
   #Make this method name plural eventually 
   def category
     @category = Category.find_by_id(params[:selection])
-	@submissions = @category.submissions.paginate :page => params[:page], :per_page => 4, :order => params[:sort].select{|name| Submission.column_names.include? (name)}.join(',')+" "+params[:order], :conditions => { :owner_trash => false, :moderator_trash => false }
+	@submissions = @category.submissions.paginate :page => params[:page], :per_page => 16, :order => params[:sort].select{|name| Submission.column_names.include? (name)}.join(',')+" "+params[:order], :conditions => { :owner_trash => false, :moderator_trash => false }
   end
   
   #maybe this method name should be features instead of featureds?
   def featureds
-    @featureds = Featured.paginate :page => params[:page], :per_page => 4, :order => 'id '+params[:order]
+    @featureds = Featured.paginate :page => params[:page], :per_page => 16, :order => 'id '+params[:order]
   end
   
   def users
-	@users = User.paginate :page => params[:page], :per_page => 12,  :order => params[:sort].select{|name| Submission.column_names.include? (name)}.join(',')+" "+params[:order]
+	@users = User.paginate :page => params[:page], :per_page => 16,  :order => params[:sort].select{|name| Submission.column_names.include? (name)}.join(',')+" "+params[:order]
   end
   
   protected

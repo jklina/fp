@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(:version => 20090531221415) do
 
   create_table "featureds", :force => true do |t|
     t.text     "comment"
+    t.string   "title"
+    t.integer  "user_id"
     t.datetime "created_on"
     t.datetime "updated_on"
-    t.integer  "user_id"
-    t.string   "title"
   end
 
   create_table "ratings", :force => true do |t|
@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(:version => 20090531221415) do
     t.integer  "submission_id"
     t.integer  "rating"
     t.boolean  "admin"
+    t.integer  "rated_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "rated_user_id"
   end
 
   create_table "sub_files", :force => true do |t|
@@ -94,23 +94,8 @@ ActiveRecord::Schema.define(:version => 20090531221415) do
     t.datetime "updated_at"
   end
 
-  create_table "submissions", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "category_id"
-    t.datetime "created_on"
-    t.datetime "updated_on"
-    t.float    "average_rating"
-    t.float    "average_rating_lower_bound"
-    t.float    "average_rating_upper_bound"
-    t.float    "average_admin_rating"
-    t.float    "average_admin_rating_lower_bound"
-    t.float    "average_admin_rating_upper_bound"
-    t.boolean  "owner_trash"
-    t.boolean  "moderator_trash"
-    t.integer  "views",                            :default => 0
-    t.integer  "downloads",                        :default => 0
-  end
+# Could not dump table "submissions" because of following StandardError
+#   Unknown type 'bool' for column 'owner_trash'
 
   create_table "user_images", :force => true do |t|
     t.integer  "user_id"
@@ -125,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20090531221415) do
   end
 
   create_table "users", :force => true do |t|
+    t.string   "username"
     t.string   "name"
     t.datetime "last_login_time"
     t.string   "location"
@@ -136,21 +122,20 @@ ActiveRecord::Schema.define(:version => 20090531221415) do
     t.string   "yahoo"
     t.string   "website"
     t.text     "current_projects"
-    t.integer  "access_level",                     :default => 1
-    t.string   "password_salt"
-    t.string   "password_hash"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "email_confirmation",               :default => false
-    t.string   "email_confirmation_salt"
-    t.string   "email_confirmation_hash"
-    t.string   "username"
     t.float    "average_rating"
     t.float    "average_rating_lower_bound"
     t.float    "average_rating_upper_bound"
     t.float    "average_admin_rating"
     t.float    "average_admin_rating_lower_bound"
     t.float    "average_admin_rating_upper_bound"
+    t.integer  "access_level",                     :default => 1
+    t.boolean  "email_confirmation",               :default => false
+    t.string   "email_confirmation_salt"
+    t.string   "email_confirmation_hash"
+    t.string   "password_salt"
+    t.string   "password_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
