@@ -1,4 +1,8 @@
 class Admin::SubmissionController < ApplicationController
+
+  #Here for the ratings moderation (probably want to move to a ratings controller in the future)
+  require "statistics/statistics2"
+  require "statistics/statsupdater"
   
   before_filter :find_submission, :find_submission_users, :only => [ :move_to_moderator_trash, :remove_from_moderator_trash ]
   
@@ -26,6 +30,23 @@ class Admin::SubmissionController < ApplicationController
 	else
 	  flash[:warning] = "There was a problem restoring this submission. Please contact the staff."
 	  redirect_to :controller => '/admin/submission', :action => 'show_moderator_trashed_subs'
+	end
+  end
+  
+  #Might want to move to a ratings controller in the future.
+  def remove_rating
+    @rating = Rating.find(params[:id])
+	@rated_submission = @rating.submission
+	if @rating.destroy
+	  StatsUpdater.new.update_rating_stats(@rated_submission, @rated_submission.ratings)
+      for user in @rated_submission.users
+	    StatsUpdater.new.update_rating_stats(user, user.received_ratings)
+	  end
+	  flash[:notice] = "Rating has been deleted."
+	  redirect_to(request.env["HTTP_REFERER"])
+	else
+	  flash[:warning] = "There has been an error deleting the rating. Please contact the staff."
+	  redirect_to(request.env["HTTP_REFERER"])
 	end
   end
   

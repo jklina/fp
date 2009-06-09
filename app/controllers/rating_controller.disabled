@@ -6,42 +6,48 @@ class RatingController < ApplicationController
   
   def create
 	
-    @rating = Rating.new(params[:rating])
-	@rating.admin = @user.is_authorative_user?
-	@rating.user = @user
-	@rating.submission = @submission
+    #@rating = Rating.new(params[:rating])
+	#@rating.admin = @user.is_authorative_user?
+	#@rating.user = @user
+	#@rating.submission = @submission
 	
-	#Add rating
-    if @rating.save
-	  update_rating_stats(@submission, @submission.ratings)
-	  for user in @submission.users
-	    user.received_ratings << @rating
-		update_rating_stats(user, user.received_ratings)
-	  end
-      flash[:notice] = 'Your rating has been posted.'
-      redirect_to (:back)
-    else
-      flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
-	  redirect_to (:back)
-    end
+	##Add rating
+    #if @rating.save
+	#  update_rating_stats(@submission, @submission.ratings)
+	#  for user in @submission.users
+	#    user.received_ratings << @rating
+	#	update_rating_stats(user, user.received_ratings)
+	#  end
+    #  flash[:notice] = 'Your rating has been posted.'
+    #  redirect_to (:back)
+    #else
+    #  flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
+	#  redirect_to (:back)
+    #end
+	flash[:warning] = "Rating has not yet begun. It begins 00:00 June 5."
+	#redirect_to :back, isn't working so I'm writing out the long form. 
+	redirect_to(request.env["HTTP_REFERER"])
   end
 	
   def update
 	
-	@rating = @submission.ratings.find_by_user_id(@user)
+	#@rating = @submission.ratings.find_by_user_id(@user)
 	
-	#Add rating
-    if @rating.update_attributes(params[:rating])
-	  update_rating_stats(@submission, @submission.ratings)
-	  for user in @submission.users
-		update_rating_stats(user, user.received_ratings)
-	  end
-      flash[:notice] = 'Your rating has been posted.'
-      redirect_to (:back)
-    else
-      flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
-	  redirect_to (:back)
-    end
+	##Add rating
+    #if @rating.update_attributes(params[:rating])
+	#  update_rating_stats(@submission, @submission.ratings)
+	#  for user in @submission.users
+	#	update_rating_stats(user, user.received_ratings)
+	#  end
+    #  flash[:notice] = 'Your rating has been posted.'
+    #  redirect_to (:back)
+    #else
+    #  flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
+	#  redirect_to (:back)
+    #end
+	flash[:warning] = "Rating has not yet begun. It begins 00:00 June 5."
+	#redirect_to :back, isn't working so I'm writing out the long form. 
+	redirect_to(request.env["HTTP_REFERER"])
   end
 	
   protected

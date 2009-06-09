@@ -2,7 +2,7 @@ class SubmissionController < ApplicationController
 
   require "statistics/statistics2"
   
-  before_filter :find_submission, :find_submission_users, :only => [ :show, :edit, :update, :destroy, :move_to_owners_trash, :remove_from_owners_trash, :download ]
+  before_filter :find_submission, :find_submission_users, :only => [ :show, :edit, :update, :destroy, :move_to_owners_trash, :remove_from_owners_trash, :download, :list_ratings, :list_moderator_ratings ]
   before_filter :request_authentication, :find_all_categories, :only => [ :new, :create, :edit ]
   before_filter :request_submission_author_authentication, :only => [ :edit, :update, :destroy, :move_to_owners_trash, :remove_from_owners_trash ]
   
@@ -17,6 +17,14 @@ class SubmissionController < ApplicationController
 
   def list
     @submissions = Submission.paginate :page => params[:page], :per_page => 8, :order => 'created_on DESC', :conditions => { :owner_trash => false, :moderator_trash => false }
+  end
+  
+  def list_ratings
+    @ratings = Rating.paginate :page => params[:page], :per_page => 24, :order => 'created_at DESC', :conditions => { :admin => false, :submission_id => @submission.id }
+  end
+   
+  def list_moderator_ratings
+    @ratings = Rating.paginate :page => params[:page], :per_page => 24, :order => 'created_at DESC', :conditions => { :admin => true, :submission_id => @submission.id }
   end
 
   def show
@@ -65,8 +73,7 @@ class SubmissionController < ApplicationController
 	@submission_association = SubmissionAssociation.new
 	
 	#make sure there is data there before saving the submission_file
-    #if (params[:sub_file][:uploaded_data].size != 0)
-	if (params[:sub_file])
+    if (params[:sub_file][:uploaded_data].size != 0) 
       @sub_file =  SubFile.new(params[:sub_file])
 	  @submission.sub_file = @sub_file
     end

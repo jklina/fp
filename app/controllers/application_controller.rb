@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   session :session_key => '_pixelfuckers.org_session_id'
   
   def index
-    @submissions = Submission.paginate :page => params[:page], :per_page => 8, :order => 'created_on DESC', :conditions => { :owner_trash => 'false', :moderator_trash => 'false' }
+    @submissions = Submission.paginate :page => params[:page], :per_page => 16, :order => 'created_on DESC', :conditions => { :owner_trash => 'false', :moderator_trash => 'false' }
 	@featured = Featured.find(:last)
   end
   

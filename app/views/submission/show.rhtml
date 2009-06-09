@@ -47,8 +47,8 @@
         Comments: <%=h @submission.comments.count.to_s %><br />
         Views: <%=h @submission.views %><br />
         Downloads: <%=h @submission.downloads %><br />
-        Admin Rating: <%=h number_with_precision(@submission.average_admin_rating.to_s, 2) %><br />
-		Rating: <%=h number_with_precision(@submission.average_rating.to_s, 2) %><br />
+        <%= link_to_if(@submission.ratings, "Admin Rating:",{ :action => 'list_moderator_ratings', :id => @submission }) %> <%=h number_with_precision(@submission.average_admin_rating.to_s, 2) %><br />
+		<%= link_to_if(@submission.ratings, "Rating:",{ :action => 'list_ratings', :id => @submission }) %> <%=h number_with_precision(@submission.average_rating.to_s.to_s, 2) %><br /> 
     </div>
     <div><%= h(@submission.description) %></div>
     <div style="clear: both;"></div>

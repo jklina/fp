@@ -1,6 +1,7 @@
 class RatingController < ApplicationController
 
   require "statistics/statistics2"
+  require "statistics/statsupdater"
 
   before_filter :request_authentication, :find_user, :find_submission
   
@@ -19,10 +20,10 @@ class RatingController < ApplicationController
 		update_rating_stats(user, user.received_ratings)
 	  end
       flash[:notice] = 'Your rating has been posted.'
-      redirect_to (:back)
+      redirect_to(request.env["HTTP_REFERER"])
     else
       flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
-	  redirect_to (:back)
+	  redirect_to(request.env["HTTP_REFERER"])
     end
   end
 	
@@ -32,15 +33,16 @@ class RatingController < ApplicationController
 	
 	#Add rating
     if @rating.update_attributes(params[:rating])
-	  update_rating_stats(@submission, @submission.ratings)
+	  #I don't like this .new in these, but i'm leaving them in for now until i can think of something better.
+	  StatsUpdater.new.update_rating_stats(@submission, @submission.ratings)
 	  for user in @submission.users
-		update_rating_stats(user, user.received_ratings)
+		StatsUpdater.new.update_rating_stats(user, user.received_ratings)
 	  end
       flash[:notice] = 'Your rating has been posted.'
-      redirect_to (:back)
+      redirect_to(request.env["HTTP_REFERER"])
     else
       flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
-	  redirect_to (:back)
+	  redirect_to(request.env["HTTP_REFERER"])
     end
   end
 	
@@ -58,7 +60,6 @@ class RatingController < ApplicationController
 	  #Get ratings stats
 	  @counts = ratings.count(:group => :admin)
 	  @averages = ratings.average(:rating, :group => :admin)
-	  #Not database independent. Have to think of a way to do that.
 	  @stds = ratings.calculate(:std, :rating, :group => :admin)
 	
 	  #Get T-values for a 95% confidence interval
