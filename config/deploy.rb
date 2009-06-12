@@ -54,17 +54,17 @@ namespace :deploy do
  
   desc "Redefine deploy:start"
   task :start, :roles => :app do
-    invoke_command "LD_LIBRARY_PATH=/home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib /home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails start -c #{deploy_to}/current -d -e production -P /home/#{webfaction_username}/webapps/#{application}/log/mongrel.pid -p #{webfaction_port}", :via => run_method
+    invoke_command "LD_LIBRARY_PATH=/home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib:/home/#{webfaction_username}/lib /home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails start -c #{deploy_to}/current -d -e production -P /home/#{webfaction_username}/webapps/#{application}/log/mongrel.pid -p #{webfaction_port}", :via => run_method
   end
  
   desc "Redefine deploy:restart"
   task :restart, :roles => :app do
-    invoke_command "LD_LIBRARY_PATH=/home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib /home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails restart -c #{deploy_to}/current -P /home/#{webfaction_username}/webapps/#{application}/log/mongrel.pid", :via => run_method
+    invoke_command "LD_LIBRARY_PATH=/home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib:/home/#{webfaction_username}/lib /home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails restart -c #{deploy_to}/current -P /home/#{webfaction_username}/webapps/#{application}/log/mongrel.pid", :via => run_method
   end
  
   desc "Redefine deploy:stop"
   task :stop, :roles => :app do
-    invoke_command "LD_LIBRARY_PATH=/home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib /home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails stop -c #{deploy_to}/current -P /home/#{webfaction_username}/webapps/#{application}/log/mongrel.pid", :via => run_method
+    invoke_command "LD_LIBRARY_PATH=/home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib:/home/#{webfaction_username}/lib /home/#{webfaction_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails stop -c #{deploy_to}/current -P /home/#{webfaction_username}/webapps/#{application}/log/mongrel.pid", :via => run_method
   end
 end
 
