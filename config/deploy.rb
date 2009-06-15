@@ -27,6 +27,16 @@ desc "Symlink public to what webfaction expects the webroot to be"
 task :after_symlink, :roles => :web do
   run "ln -nfs #{release_path}/public /home/#{webfaction_username}/webapps/#{application}/"
 end
+
+task :after_update_code, :roles => :app do
+  #Makes sure all the images for submissions, etc appear to be in the public folder. They're really symlinks to the Capistrano shared folder though ;)
+  %w{featured_images sub_files sub_images user_images}.each do |share|
+    run "rm -rf #{release_path}/public/#{share}"
+    run "mkdir -p #{shared_path}/system/#{share}"
+    run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
+  end
+end
+
  
 namespace :deploy do
  
