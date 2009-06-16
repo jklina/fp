@@ -73,7 +73,7 @@ class SubmissionController < ApplicationController
 	@submission_association = SubmissionAssociation.new
 	
 	#make sure there is data there before saving the submission_file
-    if (params[:sub_file][:uploaded_data].size != 0) 
+    if params[:sub_file] 
       @sub_file =  SubFile.new(params[:sub_file])
 	  @submission.sub_file = @sub_file
     end
@@ -107,11 +107,11 @@ class SubmissionController < ApplicationController
 
   def update	
     @submission.category = Category.find(params[:category][:id])
-    if (params[:sub_image][:uploaded_data].size != 0) 
+    if (params[:sub_image]) 
       @sub_image = SubImage.new(params[:sub_image])
       @submission.sub_image = @sub_image
     end
-    if ( params[:sub_file][:uploaded_data].size != 0)  
+    if ( params[:sub_file])  
       @sub_file = SubFile.new(params[:sub_file])
       @submission.sub_file = @sub_file
     end

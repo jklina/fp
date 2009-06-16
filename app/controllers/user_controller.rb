@@ -12,7 +12,7 @@ class UserController < ApplicationController
 	#If there is data incoming try to save it as a user 
 	  @user = User.new(params[:user])
       
-      if (params[:user_image][:uploaded_data].size != 0)
+      if (params[:user_image])
         @user_image = UserImage.new(params[:user_image])  
         #save image to user (may want validation here in the future to make sure the image was added before saving the user)
         @user.user_image = @user_image
@@ -33,7 +33,7 @@ class UserController < ApplicationController
   
   def update
     if request.post?
-      if (params[:user_image][:uploaded_data].size != 0) 
+      if (params[:user_image]) 
         @user_image = UserImage.new(params[:user_image])
         @user.user_image = @user_image
       end
