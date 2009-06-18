@@ -43,15 +43,15 @@
 <h2>Artist Notes</h2>
 <div id="artist_notes">
     <div id="meta">
-        Submitted: <%=h @submission.created_on.to_s(:submission) %><br />
+        <p>Submitted: <%=h @submission.created_on.to_s(:submission) %><br />
         Comments: <%=h @submission.comments.count.to_s %><br />
         Views: <%=h @submission.views %><br />
         Downloads: <%=h @submission.downloads %><br />
         <%= link_to_if(@submission.ratings, "Admin Rating:",{ :action => 'list_moderator_ratings', :id => @submission }) %> <%=h number_with_precision(@submission.average_admin_rating.to_s, 2) %><br />
-		<%= link_to_if(@submission.ratings, "Rating:",{ :action => 'list_ratings', :id => @submission }) %> <%=h number_with_precision(@submission.average_rating.to_s.to_s, 2) %><br /> 
+		<%= link_to_if(@submission.ratings, "Rating:",{ :action => 'list_ratings', :id => @submission }) %> <%=h number_with_precision(@submission.average_rating.to_s.to_s, 2) %><br /></p>
     </div>
-    <div><%= RedCloth.new(h(@submission.description)).to_html %></div>
-    <div style="clear: both;"></div>
+    <div id="description"><%= RedCloth.new(h(@submission.description)).to_html %></div>
+    <div class="clear"></div>
 </div>
 
 <div id="comments">

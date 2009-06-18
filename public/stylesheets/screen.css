@@ -149,11 +149,19 @@ div#artist_notes {
     margin-bottom: 20px;
 }
 
-div#artist_notes div#meta {
+div#description {
+    width: 80%;
+    float: left;
+}
+
+div#meta {
     width: 20%;
+    float: right;
+}
+
+div#meta p {
     border-left: 1px solid #b9b9b0;
     padding-left: 10px;
-    float: right;
 }
 
 input#search {
