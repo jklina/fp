@@ -4,7 +4,7 @@
 		<br />
 		<span class="description">
 		<br />
-			<%=  h(@featured.comment) %> chosen by <%=h @featured.user.username %>
+			<%=  RedCloth.new(h(@featured.comment)).to_html %> chosen by <%=h @featured.user.username %>
 		</span>
 	</div>
 </div>
