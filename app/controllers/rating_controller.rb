@@ -3,7 +3,7 @@ class RatingController < ApplicationController
   require "statistics/statistics2"
   require "statistics/statsupdater"
 
-  before_filter :request_authentication, :find_user, :find_submission
+  before_filter :request_authentication, :find_user, :find_submission, :check_for_self_rater
   
   def create
 	
@@ -14,19 +14,19 @@ class RatingController < ApplicationController
 	
 	#Add rating
 	
-    if @rating.save
+	if @rating.save
 	  #I don't like this .new in these, but i'm leaving them in for now until i can think of something better.
 	  StatsUpdater.new.update_rating_stats(@submission, @submission.ratings)
 	  for user in @submission.users
-	    user.received_ratings << @rating
+		user.received_ratings << @rating
 		StatsUpdater.new.update_rating_stats(user, user.received_ratings)
 	  end
-      flash[:notice] = 'Your rating has been posted.'
-      redirect_to(request.env["HTTP_REFERER"])
-    else
-      flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
+	  flash[:notice] = 'Your rating has been posted.'
 	  redirect_to(request.env["HTTP_REFERER"])
-    end
+	else
+	  flash[:warning] = 'Unable to save your rating. Please make sure you have entered something.'
+	  redirect_to(request.env["HTTP_REFERER"])
+	end
   end
 	
   def update
@@ -50,49 +50,18 @@ class RatingController < ApplicationController
 	
   protected
   
-    def find_user
-	  @user = User.find_by_id(session[:user])
+  def check_for_self_rater
+    if @submission.users.find_by_id(@user)
+	  flash[:warning] = 'I can\'t go for that. No can do. '
+	  redirect_to(request.env["HTTP_REFERER"])
 	end
+  end
+  
+  def find_user
+    @user = User.find_by_id(session[:user])
+  end
 	
-	def find_submission
-	 @submission = Submission.find_by_id(params[:id]) 
-	end
-	
-	def update_rating_stats(ratings_parent, ratings)
-	  #Get ratings stats
-	  @counts = ratings.count(:group => :admin)
-	  @averages = ratings.average(:rating, :group => :admin)
-	  @stds = ratings.calculate(:std, :rating, :group => :admin)
-	
-	  #Get T-values for a 95% confidence interval
-	  @adminTValue = Statistics2.ptdist(@counts[true].to_i-1, 0.05)
-	  @tValue = Statistics2.ptdist(@counts[false].to_i-1, 0.05)
-	  
-	  #Put results in instance variables
-	  @numOfAdminRatings = @counts[true].to_i
-	  @numOfRatings = @counts[false].to_i
-	
-	  @adminAverage = @averages[true].to_f
-	  @average = @averages[false].to_f
-	
-	  @adminSTD = @stds[true].to_f
-	  @STD = @stds[false].to_f
-	
-	  #Put statistics into submission variables for easy access
-	  unless(@numOfAdminRatings <= 0)
-	    ratings_parent.average_admin_rating_lower_bound = @adminAverage + @adminTValue*(@adminSTD/Math.sqrt(@numOfAdminRatings))
-	    ratings_parent.average_admin_rating_upper_bound = @adminAverage - @adminTValue*(@adminSTD/Math.sqrt(@numOfAdminRatings))
-	  end
-	
-	  unless(@numOfRatings <= 0)
-	    ratings_parent.average_rating_lower_bound = @average + @tValue*(@STD/Math.sqrt(@numOfRatings))
-	    ratings_parent.average_rating_upper_bound = @average - @tValue*(@STD/Math.sqrt(@numOfRatings))
-	  end
-	  
-	  ratings_parent.average_admin_rating = @adminAverage.to_f
-	  ratings_parent.average_rating = @average.to_f
-	  
-	  ratings_parent.save
-	end
-
+  def find_submission
+    @submission = Submission.find_by_id(params[:id]) 
+  end
 end
