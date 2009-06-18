@@ -11,8 +11,14 @@ class BrowseController < ApplicationController
   
   #Make this method name plural eventually 
   def category
-    @category = Category.find_by_id(params[:selection])
-	@submissions = @category.submissions.paginate :page => params[:page], :per_page => 12, :order => params[:sort].select{|name| Submission.column_names.include?(name)}.join(',')+" "+params[:order], :conditions => { :owner_trash => false, :moderator_trash => false }
+    if params[:selection] #Coming from browse index
+	  @category = Category.find_by_id(params[:selection])
+	  @submissions = @category.submissions.paginate :page => params[:page], :per_page => 12, :order => params[:sort].select{|name| Submission.column_names.include?(name)}.join(',')+" "+params[:order], :conditions => { :owner_trash => false, :moderator_trash => false }
+	else #coming from submission => show
+	  @category = Category.find_by_id(params[:id])
+	  @submissions = @category.submissions.paginate :page => params[:page], :per_page => 12, :order => 'average_admin_rating_lower_bound DESC', :conditions => { :owner_trash => false, :moderator_trash => false }
+	end
+	
   end
   
   #maybe this method name should be features instead of featureds?

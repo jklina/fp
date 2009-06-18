@@ -13,11 +13,13 @@ class RatingController < ApplicationController
 	@rating.submission = @submission
 	
 	#Add rating
+	
     if @rating.save
-	  update_rating_stats(@submission, @submission.ratings)
+	  #I don't like this .new in these, but i'm leaving them in for now until i can think of something better.
+	  StatsUpdater.new.update_rating_stats(@submission, @submission.ratings)
 	  for user in @submission.users
 	    user.received_ratings << @rating
-		update_rating_stats(user, user.received_ratings)
+		StatsUpdater.new.update_rating_stats(user, user.received_ratings)
 	  end
       flash[:notice] = 'Your rating has been posted.'
       redirect_to(request.env["HTTP_REFERER"])
