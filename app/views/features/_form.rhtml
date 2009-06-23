@@ -1,0 +1,16 @@
+<p>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+</p>
+
+<p>
+	<%= f.label :comment %>
+	<%= f.text_area :comment %>
+</p>
+
+<p>
+	<label for="featured_image">Image Upload</label><br/>
+	<% fields_for :featured_image do |fi| %>
+		<%= fi.file_field :uploaded_data %>
+	<% end -%>
+</p>

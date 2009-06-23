@@ -1,0 +1,7 @@
+<div class="rating">
+  <p>
+    <%= link_to h(rating.user.username), user_path(rating.user) %> <%=h rating.rating %>
+    <% if has_authority? %>
+      <%= link_to 'Delete Rating', rating_path(rating), :method => :delete %>
+  <% end %>
+</div>

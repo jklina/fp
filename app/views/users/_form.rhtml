@@ -1,0 +1,76 @@
+<p>
+	<%= f.label :username %><br/>
+	<%= f.text_field :username %>
+</p>
+
+<p>
+	<%= f.label :name %><br/>
+	<%= f.text_field :name %>
+</p>
+
+<% unless controller.action_name == "new" -%>
+<p>
+	<%= f.label :location %><br/>
+	<%= f.text_field :location %>
+</p>
+
+<p>
+	<%= f.label :country %><br/>
+	<%= f.text_field :country %>
+</p>
+<% end -%>
+
+<p>
+	<%= f.label :email %><br/>
+	<%= f.text_field :email %>
+</p>
+
+<% unless controller.action_name == "new" -%>
+<p>
+	<%= f.label :aim %><br/>
+	<%= f.text_field :aim %>
+</p>
+
+<p>
+	<%= f.label :msn %><br/>
+	<%= f.text_field :msn %>
+</p>
+
+<p>
+	<%= f.label :icq %><br/>
+	<%= f.text_field :icq %>
+</p>
+
+<p>
+	<%= f.label :yahoo %><br/>
+	<%= f.text_field :yahoo %>
+</p>
+
+<p>
+	<%= f.label :website %><br/>
+	<%= f.text_field :website %>
+</p>
+
+<p>
+	<%= f.label :current_projects %><br/>
+	<%= f.text_area :current_projects %>
+</p>
+
+<p>
+	<label for="user_image">Image Upload</label><br/>
+	<% fields_for :user_image do |user_image| %>
+		<%= user_image.file_field :uploaded_data %>
+	<% end -%>
+</p>
+
+<% end -%>
+
+<p>
+	<%= f.label :password %><br/>
+	<%= f.password_field :password %>
+</p>
+
+<p>
+	<%= f.label :password_confirmation %><br/>
+	<%= f.password_field :password_confirmation %>
+</p>

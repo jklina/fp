@@ -1,0 +1,22 @@
+<%= error_messages_for :submission %>
+
+<p><%= f.label :title %><br/>
+<%= f.text_field :title %></p>
+
+<p><%= f.label :description %><br/>
+<%= f.text_area :description %></p>
+
+<p><% fields_for :category do |c| %>
+  <label for="category">Choose Category</label><br/>
+  <%= c.collection_select(:id, @categories, :id, :title) %>
+<% end -%></p>
+
+<p><label for="sub_image">Image Upload</label><br/>
+<% fields_for :sub_image do |si| %>
+	<%= si.file_field :uploaded_data %>
+<% end -%></p>
+
+<p><label for="sub_file">File Upload</label><br/>
+<% fields_for :sub_file do |sf| %>
+	<%= sf.file_field :uploaded_data %>
+<% end -%></p>

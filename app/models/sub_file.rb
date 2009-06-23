@@ -5,5 +5,4 @@ class SubFile < ActiveRecord::Base
                   :max_size => 30.megabytes,
                   :thumbnails => { :thumb => '500x500>', :tiny => '200x200>' },
                   :processor => 'Rmagick'
-
 end

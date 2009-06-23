@@ -1,0 +1,10 @@
+<h2><%=h @featured.title %></h2>
+
+<%= render :partial => "features/feature", :object => @featured %>
+
+<%= render :partial => "submissions/submission", :collection => @submissions %>
+
+<% if has_authority? -%>
+<%= link_to "Edit this feature", edit_feature_path(@featured) %> |
+<%= link_to "Delete this feature", feature_path(@featured), :method => :delete, :confirm => "Are you sure?" %>
+<% end -%>

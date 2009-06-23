@@ -1,56 +1,67 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
+  helper_method :current_user, :logged_in?, :moderator?, :administrator?, :has_authority?
 
-  layout :determine_layout
-  
-  #helper :all # include all helpers, all the time
-
-  #before_filter :request_authentication_if_necessary
+  before_filter :request_authentication_if_necessary
+  before_filter :redirect_if_unauthorized
 
   filter_parameter_logging :password, :password_confirmation
-  
-  # Pick a unique cookie name to distinguish our session data from others'
-  session :session_key => '_pixelfuckers.org_session_id'
-  
+
   def index
-    @submissions = Submission.paginate :page => params[:page], :per_page => 16, :order => 'created_on DESC', :conditions => { :owner_trash => false, :moderator_trash => false }
-	@featured = Featured.find(:last)
+    @submissions = Submission.paginate  :page => params[:page],
+                                        :per_page => 16,
+                                        :order => "created_on DESC",
+                                        :conditions => { :owner_trash => false,
+                                                         :moderator_trash => false }
+	  @featured = Featured.find(:last)
   end
-  
+
   protected
-  
-  private
-  
-  def determine_layout
-    if @logged_in_user = User.find_by_id(session[:user])
-	  #Get user name for layout header
-	  
-	  template = @logged_in_user.access_level.to_s
-	else
-	  template = "0"
-	end
+
+  def authentication_required?
+    false
   end
-  
-  def request_authentication
-	unless ((@user = User.find_by_id(session[:user])) && @user.access_level > User.unregistered_user)
+
+  def authority_required?
+    false
+  end
+
+  def current_user
+    @current_user ||= User.find_by_id(session[:user])
+  end
+
+  def logged_in?
+    !current_user.nil?
+  end
+
+  def moderator?
+    logged_in? && current_user.access_level >= User::Role::MODERATOR
+  end
+
+  def administrator?
+    logged_in? && current_user.access_level >= User::Role::ADMINISTRATOR
+  end
+
+  def has_authority?
+    moderator? || administrator?
+  end
+
+  def pending_featured_submissions
+    session[:pending_featured_submissions] ||= []
+  end
+
+  private
+
+  def request_authentication_if_necessary
+    if authentication_required? && current_user.nil?
       session[:destination] = request.request_uri
-      redirect_to(:controller => "session", :action => "new")
+      redirect_to login_url
     end
   end
-  
-  def request_admin_authentication
-   unless ((@user = User.find_by_id(session[:user])) && @user.access_level > User.registered_user)
-	  session[:destination] = request.request_uri
-      redirect_to(:controller => "/session", :action => "new")
-	end
-  end
-  
-   def request_super_admin_authentication
-   unless ((@user = User.find_by_id(session[:user])) && @user.access_level > User.moderator)
-	  session[:destination] = request.request_uri
-      redirect_to(:controller => "/session", :action => "new")
-	end
+
+  def redirect_if_unauthorized
+    if authority_required? && !has_authority?
+      flash[:warning] = "You must be a moderator or an administrator to do that."
+      redirect_to root_url
+    end
   end
 end

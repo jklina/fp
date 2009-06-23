@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Pixelfuckers</title>
+  <%= stylesheet_link_tag "base" %>
+  <%= stylesheet_link_tag "screen" %>
+</head>
+<body>
+
+<div id="container">
+  <div id="wrapper">
+    <div id="header">
+      <input type="text" name="search" id="search" value="Search "/>
+      <a href="/"><h1>Pixelfuckers</h1></a>
+      <ul>
+        <li><%= link_to_unless_current "Home", root_path %></li>
+        <li><%= link_to_unless_current "Browse", :controller => "/browse" %></li>
+        <li><%= link_to "Forum", "http://gypsyspacemuffin.com/viewforum.php?id=25", :popup => true %></li>
+        <li><%= link_to "Chat", "irc://irc.freenode.net:6667/pixelfuckers" %></li>
+      </ul>
+      <div class="iconbar">
+        <%= link_to "New Submission", new_submission_path, :class => "icon app_get" %>
+        <% if logged_in? %><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon cog" %><% end -%>
+        <%= link_to "Help", "#", :class => "icon help" %>
+        <span class="right">
+        <% if logged_in? -%>
+          <%= link_to h(current_user.username), user_path(current_user) %> <strong>:</strong>
+          <% if moderator? -%>
+          <%= link_to "categories", categories_path %> |
+          <%= link_to "feature a submission", new_feature_path %> |
+	        <%= link_to "moderated submissions", moderated_submissions_path %> |
+	        <% end -%>
+	        <% if administrator? -%>
+          <%= link_to "users", users_path %> |
+          <% end -%>
+          <%= link_to "log out", logout_path %>
+        <% else -%>
+          <%= link_to "log in", login_path %> or
+          <%= link_to "register", register_path %>
+        <% end -%>
+        </span>
+      </div>
+    </div>
+    <div id="content">
+      <% if flash[:notice] -%><p class="notice"><%= flash[:notice] %></p><% end -%>
+      <% if flash[:warning] -%><p class="warning"><%= flash[:warning] %></p><% end -%>
+      <div id="submissions">
+        <%= yield -%>
+        <div class="clear" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  <%= link_to "New Submission", new_submission_path, :class => "icon app_get" %>
+  <% if logged_in? %><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon cog" %><% end -%>
+  <%= link_to "Help", "#", :class => "icon help" %>
+  <span class="right">
+    <span class="cr">&copy; Pixelfuckers.org &ndash; All rights reserved</span> |
+    <%= link_to "About Us", "#" %> |
+    <%= link_to "Contact", "#" %> |
+    <%= link_to "Privacy", "#" %> |
+    <%= link_to "Terms", "#" %> |
+  </span>
+</div>
+
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-9112137-1");
+    pageTracker._trackPageview();
+  } catch(err) { }
+</script>
+</body>
+</html>

@@ -1,13 +1,9 @@
 <h2>Listing Top Submissions</h2>
 
 <div class="form">
-<%= render(:partial => "filter_form") %>
+<%= render :partial => "form" %>
 </div>
 
-<% unless @submissions == nil  %>
-	<%= render(:partial => "shared/submission_preview", :collection => @submissions) %>
-<% end %>
+<%= render :partial => "submissions/submission", :collection => @submissions %>
 
 <%= will_paginate @submissions %>
-
-<br />

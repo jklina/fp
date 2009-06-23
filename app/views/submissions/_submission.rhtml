@@ -1,0 +1,11 @@
+<div class="thumb">
+    <div>
+    <%= link_to image_tag(submission.sub_image.public_filename(:tiny)), submission_path(submission) %>
+    <p class="description">
+        <%= link_to h(submission.title), submission_path(submission) %>
+        <% unless controller.controller_name == "users" -%>
+        by <%= submission.users.collect { |c| link_to h(c.username), user_path(c) }.to_sentence %>
+        <% end -%>
+    </p>
+    </div>
+</div>

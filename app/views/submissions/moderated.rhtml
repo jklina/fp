@@ -1,0 +1,5 @@
+<h2>Moderated submissions</h2>
+
+<%= render(:partial => "submissions/submission", :collection => @submissions) %>
+
+<%= will_paginate @submissions %>
