@@ -1,13 +1,13 @@
 class Submission < ActiveRecord::Base
   has_one 		:sub_image, :dependent => :destroy
   has_one 		:sub_file, 	:dependent => :destroy
-  has_many		:submission_associations
-  has_many		:users, 		:through =>   :submission_associations
+  has_many		:authorships
+  has_many		:users, 		:through =>   :authorships
   has_many		:comments
   has_many		:ratings
   has_many 		:raters,		:through =>		:ratings, :source => :user
   has_many		:featurings
-  has_many		:features, :through => 	:featurings
+  has_many		:features,  :through => 	:featurings
   belongs_to	:category
 
   validates_presence_of :title, :description, :sub_image

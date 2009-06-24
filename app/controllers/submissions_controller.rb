@@ -59,11 +59,11 @@ class SubmissionsController < ApplicationController
  
     respond_to do |format|
 	    if @submission.save
-	      submission_association = SubmissionAssociation.new
-        submission_association.submission = @submission
-        submission_association.user = current_user
+	      authorship = Authorship.new
+        authorship.submission = @submission
+        authorship.user = current_user
       
-	      if submission_association.save
+	      if authorship.save
 	        flash[:notice] = "Submission was successfully created."
 	        format.html { redirect_to submissions_url }
 	      else

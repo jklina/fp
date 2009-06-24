@@ -7,11 +7,11 @@ class User < ActiveRecord::Base
     REGULAR = 1
   end
 
-  has_many :submission_associations
+  has_many :authorships
   has_many :ratings
   has_many :features
   has_many :received_ratings, :class_name => "Rating", :foreign_key => "rated_user_id"
-  has_many :submissions, :through =>   :submission_associations
+  has_many :submissions, :through =>   :authorships
   has_many :comments,    :dependent => :destroy
   has_many :users,			 :through =>   :ratings
   has_one  :user_image,  :dependent => :destroy
