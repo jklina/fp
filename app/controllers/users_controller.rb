@@ -13,13 +13,13 @@ class UsersController < ApplicationController
   def show
 	  @submissions = @user.submissions.paginate :page => params[:page],
 	                                            :per_page => 6,
-	                                            :order => "created_on DESC",
+	                                            :order => "created_at DESC",
 	                                            :conditions => { :owner_trash => false,
 	                                                             :moderator_trash => false }
 
     @trash = @user.submissions.paginate :page => params[:page],
                                         :per_page => 6,
-                                        :order => "created_on DESC",
+                                        :order => "created_at DESC",
                                         :conditions => { :owner_trash => true,
                                                          :moderator_trash => false }
 	  respond_to do |format|

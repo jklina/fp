@@ -4,7 +4,7 @@ class FeaturesController < ApplicationController
   def show
 	  @submissions = @feature.submissions.paginate :page => params[:page],
 	                                                :per_page => 8,
-	                                                :order => "created_on DESC",
+	                                                :order => "created_at DESC",
 	                                                :conditions => { :owner_trash => false,
 	                                                                 :moderator_trash => false }
 	  respond_to do |format|

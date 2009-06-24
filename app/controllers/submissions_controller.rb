@@ -7,7 +7,7 @@ class SubmissionsController < ApplicationController
   def index
     @submissions = Submission.paginate :page => params[:page],
                                        :per_page => 8,
-                                       :order => "created_on DESC",
+                                       :order => "created_at DESC",
                                        :conditions => { :owner_trash => false,
                                                         :moderator_trash => false }
 
@@ -106,7 +106,7 @@ class SubmissionsController < ApplicationController
   def moderated
     @submissions = Submission.paginate :page => params[:page],
                                        :per_page => 8,
-                                       :order => "created_on DESC",
+                                       :order => "created_at DESC",
                                        :conditions => { :owner_trash => false,
                                                         :moderator_trash => true }
 

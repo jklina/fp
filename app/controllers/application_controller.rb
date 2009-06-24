@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def index
     @submissions = Submission.paginate  :page => params[:page],
                                         :per_page => 16,
-                                        :order => "created_on DESC",
+                                        :order => "created_at DESC",
                                         :conditions => { :owner_trash => false,
                                                          :moderator_trash => false }
 	  @feature = Feature.find(:last)
