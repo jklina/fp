@@ -1,7 +1,7 @@
 <h2>Featured</h2>
 
-<% if @featured %>
-<%= render :partial => "features/feature", :object => @featured %>
+<% if @feature %>
+<%= render :partial => "features/feature", :object => @feature %>
 <% end %>
 
 <%= render :partial => "submissions/submission", :collection => @submissions %>

@@ -6,8 +6,8 @@ class Submission < ActiveRecord::Base
   has_many		:comments
   has_many		:ratings
   has_many 		:raters,		:through =>		:ratings, :source => :user
-  has_many		:featured_associations
-  has_many		:featureds, :through => 	:featured_associations
+  has_many		:featurings
+  has_many		:features, :through => 	:featurings
   belongs_to	:category
 
   validates_presence_of :title, :description, :sub_image

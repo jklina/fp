@@ -1,6 +1,6 @@
-class FeaturedImage < ActiveRecord::Base
-  belongs_to :featured
-  
+class FeatureImage < ActiveRecord::Base
+  belongs_to :feature
+
   has_attachment  :storage => :file_system,
                   :content_type => :image,
                   :max_size => 30.megabytes,

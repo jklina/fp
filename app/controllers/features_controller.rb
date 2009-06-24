@@ -1,8 +1,8 @@
 class FeaturesController < ApplicationController
-  before_filter :find_featured, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :find_feature, :only => [ :show, :edit, :update, :destroy ]
 
   def show
-	  @submissions = @featured.submissions.paginate :page => params[:page],
+	  @submissions = @feature.submissions.paginate :page => params[:page],
 	                                                :per_page => 8,
 	                                                :order => "created_on DESC",
 	                                                :conditions => { :owner_trash => false,
@@ -13,14 +13,14 @@ class FeaturesController < ApplicationController
 	end
 
   def new
-    @featured = Featured.new
+    @feature = Feature.new
     @submissions = Submission.find(pending_featured_submissions)
   end
 
   def create
-    @featured = Featured.new(params[:featured])
-    @featured.user = current_user
-    @featured.featured_image = FeaturedImage.new(params[:featured_image]) if params[:featured_image] && params[:featured_image][:uploaded_data].size != 0
+    @feature = Feature.new(params[:feature])
+    @feature.user = current_user
+    @feature.feature_image = FeatureImage.new(params[:feature_image]) if params[:feature_image] && params[:feature_image][:uploaded_data].size != 0
 
     @submissions = Submission.find(pending_featured_submissions)
 
@@ -29,17 +29,17 @@ class FeaturesController < ApplicationController
   	    flash[:warning] = "You don't have any submissions to feature."
   	    format.html { render :action => "new" }
   	  elsif
-  	    @featured.save
+  	    @feature.save
         @submissions.each do |submission|
-	        @featured_association = FeaturedAssociation.new
-		      @featured_association.featured = @feature
-	        @featured_association.submission = submission
-		      @featured_association.save
+	        @featuring = Featuring.new
+		      @featuring.feature = @feature
+	        @featuring.submission = submission
+		      @featuring.save
 	      end
 
 	      pending_featured_submissions = []
-	      flash[:notice] = "Your featured was saved."
-	      format.html { redirect_to feature_url(@featured) }
+	      flash[:notice] = "Your feature was saved."
+	      format.html { redirect_to feature_url(@feature) }
 	    else
 	      flash[:warning] = "There was a problem saving your feature."
 	      format.html { render :action => "new" }
@@ -52,9 +52,9 @@ class FeaturesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @featured.update_attributes(params[:featured])
+      if @feature.update_attributes(params[:feature])
         flash[:notice] = "Your changes were saved."
-        format.html { redirect_to edit_feature_url(@featured) }
+        format.html { redirect_to edit_feature_url(@feature) }
       else
         flash[:warning] = "There was a problem saving your feature."
         format.html { render :action => "edit" }
@@ -63,7 +63,7 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    @featured.destroy
+    @feature.destroy
 
     respond_to do |format|
       flash[:notice] = "Feature successfully deleted."
@@ -81,9 +81,9 @@ class FeaturesController < ApplicationController
     %w(new create edit update destroy).include?(action_name)
   end
 
-  def find_featured
+  def find_feature
     begin
-      @featured = Featured.find(params[:id])
+      @feature = Feature.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       respond_to do |format|
         format.html { render :file => "public/404.html", :status => 404 }

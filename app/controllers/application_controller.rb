@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
                                         :order => "created_on DESC",
                                         :conditions => { :owner_trash => false,
                                                          :moderator_trash => false }
-	  @featured = Featured.find(:last)
+	  @feature = Feature.find(:last)
   end
 
   protected

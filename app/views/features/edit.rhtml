@@ -1,5 +1,5 @@
 <h3>Update Feature</h3>
-<% form_for :featured, :url => { :action => "update" }, :html => { :multipart => true, :method => :put } do |f| %>
+<% form_for @feature, :html => { :multipart => true, :method => :put } do |f| %>
 <%= render :partial => "form", :locals => { :f => f } %>
 <p><%= submit_tag 'Submit' %></p>
 <% end %>

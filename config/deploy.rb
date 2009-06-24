@@ -30,7 +30,7 @@ end
 
 task :after_update_code, :roles => :app do
   #Makes sure all the images for submissions, etc appear to be in the public folder. They're really symlinks to the Capistrano shared folder though ;)
-  %w{featured_images sub_files sub_images user_images}.each do |share|
+  %w{feature_images sub_files sub_images user_images}.each do |share|
     run "rm -rf #{release_path}/public/#{share}"
     run "mkdir -p #{shared_path}/system/#{share}"
     run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"

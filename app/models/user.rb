@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :submission_associations
   has_many :ratings
-  has_many :featureds
+  has_many :features
   has_many :received_ratings, :class_name => "Rating", :foreign_key => "rated_user_id"
   has_many :submissions, :through =>   :submission_associations
   has_many :comments,    :dependent => :destroy

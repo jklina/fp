@@ -39,8 +39,8 @@ class BrowseController < ApplicationController
     end
   end
   
-  def featureds
-    @featureds = Featured.paginate :page => params[:page],
+  def features
+    @features = Feature.paginate :page => params[:page],
                                    :per_page => 12,
                                    :order => "id #{params[:order]}"
 
@@ -61,15 +61,15 @@ class BrowseController < ApplicationController
   protected
   
   def populate_selection_box
-    @selection_box_items = [ ["Users", 'users'], ["Featureds", 'featureds'], ["------------", '#'], ["Categories", '#'], ["------------", '#'] ] + Category.find(:all, :order => "title").map {|c| [c.title, c.id]}
+    @selection_box_items = [ ["Users", 'users'], ["Features", 'features'], ["------------", '#'], ["Categories", '#'], ["------------", '#'] ] + Category.find(:all, :order => "title").map {|c| [c.title, c.id]}
   end
 
   def dispatch(selection, sort, order)
     case selection
 	    when "users"
 	      redirect_to :action => "users", :selection => selection, :sort => sort, :order => order
-	    when "featureds"
-	      redirect_to :action => "featureds", :selection => selection, :sort => sort, :order => order
+	    when "features"
+	      redirect_to :action => "features", :selection => selection, :sort => sort, :order => order
       when "#"
 	      flash[:warning] = "This is not a valid option. Please select a specific category below."
 	      redirect_to :action => "index"
