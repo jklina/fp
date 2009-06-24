@@ -22,11 +22,11 @@ class Submission < ActiveRecord::Base
   end
 
   def trashed?
-    self.owner_trash
+    self.owner_trash == true
   end
 
   def moderated?
-    self.moderator_trash
+    self.moderator_trash == true
   end
 
   def trash
