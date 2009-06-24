@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     if user = User.authenticate(params[:user][:username], params[:user][:password])
-	    if user.email_confirmation?
+	    if user.confirmed?
 	      session[:user] = user.id
 	      user.last_login_time = Time.now
 

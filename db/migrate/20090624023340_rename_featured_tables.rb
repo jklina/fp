@@ -7,7 +7,9 @@ class RenameFeaturedTables < ActiveRecord::Migration
     rename_table :featured_images, :feature_images
     rename_table :featureds, :features
 
-    File.rename("#{RAILS_ROOT}/public/featured_images", "#{RAILS_ROOT}/public/feature_images")
+    say_with_time "Moving featured images..." do
+      File.rename("#{RAILS_ROOT}/public/featured_images", "#{RAILS_ROOT}/public/feature_images")
+    end
   end
 
   def self.down
@@ -18,6 +20,8 @@ class RenameFeaturedTables < ActiveRecord::Migration
     rename_table :feature_images, :featured_images
     rename_table :features, :featureds
 
-    File.rename("#{RAILS_ROOT}/public/feature_images", "#{RAILS_ROOT}/public/featured_images")
+    say_with_time "Moving featured images..." do
+      File.rename("#{RAILS_ROOT}/public/feature_images", "#{RAILS_ROOT}/public/featured_images")
+    end
   end
 end

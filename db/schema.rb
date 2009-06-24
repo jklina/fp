@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090624033150) do
+ActiveRecord::Schema.define(:version => 20090624062859) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -141,9 +141,7 @@ ActiveRecord::Schema.define(:version => 20090624033150) do
     t.string   "password_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "email_confirmation",               :default => 0
-    t.string   "email_confirmation_salt"
-    t.string   "email_confirmation_hash"
+    t.string   "confirmation_token"
     t.string   "username"
     t.float    "average_rating"
     t.float    "average_rating_lower_bound"
@@ -151,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20090624033150) do
     t.float    "average_admin_rating"
     t.float    "average_admin_rating_lower_bound"
     t.float    "average_admin_rating_upper_bound"
+    t.boolean  "confirmed",                        :default => false
   end
 
 end

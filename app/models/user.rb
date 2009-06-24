@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email,                 :case_sensitive => false
   validates_format_of       :email, 				        :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
 
-  before_create :generate_confirmation_hash
+  before_create :generate_confirmation_token
   before_save :encrypt_password
 
   def self.authenticate(username, password)
@@ -36,10 +36,10 @@ class User < ActiveRecord::Base
     !user.nil? && (self.encrypt("#{user.password_salt}--#{password}") == user.password_hash) ? user : nil
   end
   
-   def self.confirm_email(hash)
-    if user = self.find_by_email_confirmation_hash(hash)
-      user.update_attribute(:email_confirmation, 1)
-    end	  
+  def self.confirm(token)
+    user = self.find_by_confirmation_token(token)
+    user.update_attribute(:confirmed, true) unless user.nil?
+    !user.nil?
   end
 
   def self.encrypt(string)
@@ -55,15 +55,14 @@ class User < ActiveRecord::Base
   def encrypt_password
     return if password.blank?
     self.password_salt = generate_salt if new_record?
-    self.password_hash = self.class.encrypt("#{self.password_salt}--#{password}") unless password.blank?
+    self.password_hash = self.class.encrypt("#{self.password_salt}--#{password}")
   end
 
-   def generate_confirmation_hash
-    self.email_confirmation_salt = generate_salt
-    self.email_confirmation_hash = self.class.encrypt("#{self.email_confirmation_salt}--#{email}")
+  def generate_confirmation_token
+    self.confirmation_token = self.class.encrypt("#{generate_salt}--#{email}")
   end
 
   def generate_salt
-    self.class.encrypt("#{Time.now.to_s.split(//).sort_by {rand}.join}--#{self.name}")
+    self.class.encrypt("#{Time.now.to_s.split(//).sort_by {rand}.join}")
   end
 end

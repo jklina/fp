@@ -8,7 +8,7 @@
 	<%= f.text_field :name %>
 </p>
 
-<% unless controller.action_name == "new" -%>
+<% unless %w(new create).include?(controller.action_name) -%>
 <p>
 	<%= f.label :location %><br/>
 	<%= f.text_field :location %>
@@ -25,7 +25,7 @@
 	<%= f.text_field :email %>
 </p>
 
-<% unless controller.action_name == "new" -%>
+<% unless %w(new create).include?(controller.action_name) -%>
 <p>
 	<%= f.label :aim %><br/>
 	<%= f.text_field :aim %>

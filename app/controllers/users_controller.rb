@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
 	    if @user.save
-	      confirmation_url = url_for :controller => "users", :action => "confirm", :code => @user.email_confirmation_hash
+	      confirmation_url = url_for :controller => "users", :action => "confirm", :token => @user.confirmation_token
 	      Mailer::deliver_confirmation_email(@user, confirmation_url)
 	      flash[:notice] = "Thanks for signing up! We've sent a confirmation email to #{@user.email} with instructions on how to activate your account."
 	      format.html { redirect_to submissions_url }
@@ -75,10 +75,10 @@ class UsersController < ApplicationController
 
   def confirm
     respond_to do |format|
-      if User.confirm_email(params[:code])
+      if User.confirm(params[:token])
 	      flash[:notice] = "E-mail confirmed, you may now log in!"
 	    else
-	      flash[:warning] = "Invalid confirmation code; please try again."
+	      flash[:warning] = "Invalid confirmation token; please try again."
 	    end
 
 	    format.html { redirect_to login_url }
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
   def authority_required?
     %w(index destroy).include?(action_name)
   end
-  
+
   def find_user
     begin
       @user = User.find(params[:id])
