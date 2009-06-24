@@ -1,5 +1,0 @@
-<div class="sub_preview">
-  <%= link_to image_tag(submission_preview.sub_image.public_filename(:tiny)), :controller => 'submission', :action => 'show', :id => submission_preview %>
-  <p class="sub_preview_text"><%= link_to (h(submission_preview.title), :controller => 'submission', :action => 'show', :id => submission_preview) %> by <%= submission_preview.users.collect { |c| link_to (h(c.username), :controller => 'user', :action => 'show', :id => c)}.to_sentence %> in <%= h(submission_preview.category.title) %></p>
-</div>
-  

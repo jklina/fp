@@ -28,7 +28,7 @@
           <%= link_to h(current_user.username), user_path(current_user) %> <strong>:</strong>
           <% if moderator? -%>
           <%= link_to "categories", categories_path %> |
-          <%= link_to "feature a submission", new_feature_path %> |
+          <%= link_to "pending featured submissions (#{pending_featured_submissions.size})", new_feature_path %> |
 	        <%= link_to "moderated submissions", moderated_submissions_path %> |
 	        <% end -%>
 	        <% if administrator? -%>

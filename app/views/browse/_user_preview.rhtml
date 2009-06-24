@@ -1,7 +1,0 @@
-<div class="user_preview">
-  <% unless user_preview.user_image == nil  %>
-    <%= link_to image_tag(user_preview.user_image.public_filename(:tiny)), :controller => 'user', :action => 'show', :id => user_preview %>
-  <% end %>
-  <p class="user_preview_text"><%= link_to (h(user_preview.username), :controller => 'user', :action => 'show', :id => user_preview) %></p>
-</div>
-  

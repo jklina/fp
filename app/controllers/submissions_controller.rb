@@ -197,7 +197,7 @@ class SubmissionsController < ApplicationController
     respond_to do |format|
       if pending_featured_submissions.delete(@submission.id)
         flash[:notice] = "Removed #{@submission.title} from pending featured submissions."
-        format.html { redirect_to submission_url(@submission) }
+        format.html { redirect_to new_feature_url }
       else
         flash[:warning] = "#{@submission.title} isn't a pending featured submission."
         format.html { redirect_to submission_url(@submission) }

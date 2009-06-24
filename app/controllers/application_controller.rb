@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?, :moderator?, :administrator?, :has_authority?
+  helper_method :current_user, :logged_in?,
+                :moderator?, :administrator?, :has_authority?,
+                :pending_featured_submissions
 
   before_filter :request_authentication_if_necessary
   before_filter :redirect_if_unauthorized

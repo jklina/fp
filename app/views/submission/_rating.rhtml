@@ -1,7 +1,0 @@
-<div class="rating">
-  <p>
-    <%= link_to h(rating.user.username), :controller => '/user', :action => 'show', :id => rating.user %> <%=h rating.rating %>
-    <% if @logged_in_user && @logged_in_user.is_authorative_user? %>
-      <%= link_to 'Delete Rating', :controller => '/admin/submission', :action => 'remove_rating', :id => rating %>
-  <% end %>
-</div>

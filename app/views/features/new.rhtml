@@ -3,7 +3,7 @@
 <%= render :partial => "submission", :collection => @submissions %>
 
 <h3>Submit Feature</h3>
-<% form_for :featured, :controller => "features", :action => "create", :html => { :multipart => true } do |f| %>
+<% form_for :featured, :url => { :action => "create" }, :html => { :multipart => true } do |f| %>
 <%= render :partial => "form", :locals => { :f => f } %>
 <p><%= submit_tag 'Submit' %></p>
 <% end %>

@@ -1,9 +1,0 @@
-<div class="thumb">
-    <div>
-    <%= link_to image_tag(submission_preview.sub_image.public_filename(:tiny)), :controller => 'submission', :action => 'show', :id => submission_preview %>
-    <p class="description">
-        <%= link_to (h(submission_preview.title), :controller => 'submission', :action => 'show', :id => submission_preview) %> by <%= submission_preview.users.collect { |c| link_to (h(c.username), :controller => 'user', :action => 'show', :id => c)}.to_sentence %>
-    </p>
-    </div>
-</div>
-  

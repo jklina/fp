@@ -20,7 +20,7 @@ class FeaturesController < ApplicationController
   def create
     @featured = Featured.new(params[:featured])
     @featured.user = current_user
-    @featured.featured_image = FeaturedImage.new(params[:featured_image]) if params[:featured_image][:uploaded_data].size != 0
+    @featured.featured_image = FeaturedImage.new(params[:featured_image]) if params[:featured_image] && params[:featured_image][:uploaded_data].size != 0
 
     @submissions = Submission.find(pending_featured_submissions)
 
@@ -52,7 +52,7 @@ class FeaturesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @featured.update_attributes(params[:feature])
+      if @featured.update_attributes(params[:featured])
         flash[:notice] = "Your changes were saved."
         format.html { redirect_to edit_feature_url(@featured) }
       else

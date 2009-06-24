@@ -1,4 +1,0 @@
-<% form_for	:comment, :url => { :controller => "comment", :action => "create", :id => @submission  } do |form| %>
-  <p>Comment: <%= form.text_area :comment %></p>
-  <p><%= submit_tag "Submit Comment" %></p>
-<% end %>
