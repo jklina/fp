@@ -17,8 +17,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @comment = @submission.comments.find_by_user_id(current_user) || Comment.new
-    @rating = @submission.ratings.find_by_user_id(current_user) || Rating.new
+    @review = @submission.reviews.find_last_by_user_id(current_user) || Review.new
 
     respond_to do |format|
       if @submission.trashed?

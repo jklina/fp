@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090624072159) do
+ActiveRecord::Schema.define(:version => 20090625202624) do
 
   create_table "authorships", :force => true do |t|
     t.integer  "submission_id"
@@ -23,13 +23,6 @@ ActiveRecord::Schema.define(:version => 20090624072159) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "comments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "submission_id"
-    t.text     "comment"
-    t.datetime "created_at"
   end
 
   create_table "feature_images", :force => true do |t|
@@ -60,14 +53,14 @@ ActiveRecord::Schema.define(:version => 20090624072159) do
     t.datetime "updated_at"
   end
 
-  create_table "ratings", :force => true do |t|
-    t.integer  "user_id"
+  create_table "reviews", :force => true do |t|
     t.integer  "submission_id"
+    t.integer  "user_id"
     t.integer  "rating"
-    t.integer  "admin"
+    t.text     "comment"
+    t.boolean  "by_administrator", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "rated_user_id"
   end
 
   create_table "sub_files", :force => true do |t|

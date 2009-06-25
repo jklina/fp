@@ -31,7 +31,7 @@
 <div id="artist_notes">
   <div id="meta">
     <p>Submitted: <%=h @submission.created_at %><br />
-        Comments: <%=h @submission.comments.count %><br />
+        Reviews: <%=h @submission.reviews.count %><br />
         Views: <%=h @submission.views %><br />
         Downloads: <%=h @submission.downloads %><br />
         Admin Rating: <%=h number_with_precision(@submission.average_admin_rating, :precision => 2) %><br />
@@ -42,19 +42,14 @@
 </div>
 
 <div id="comments">
-<%= render :partial => "comments/comment", :collection => @submission.comments %>
+<%= render :partial => "reviews/review", :collection => @submission.reviews %>
 </div>
 
 <% if logged_in? -%>
   <% unless @submission.authored_by?(current_user) -%>
-    <% form_for [@submission, @rating] do |f| -%>
-      <%= render :partial => "ratings/form", :locals => { :f => f } %>
-      <p><%= submit_tag "Submit Rating" %></p>
-    <% end -%>
-
-    <% form_for [@submission, @comment] do |f| -%>
-      <%= render :partial => "comments/form", :locals => { :f => f } %>
-      <p><%= submit_tag "Submit Comment" %></p>
+    <% form_for [@submission, @review] do |f| -%>
+      <%= render :partial => "reviews/form", :locals => { :f => f } %>
+      <p><%= submit_tag "Submit Review" %></p>
     <% end -%>
   <% end -%>
 <% else -%>

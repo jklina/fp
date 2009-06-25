@@ -3,8 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.moderated_submissions "submissions/moderated",      :controller => "submissions", :action => "moderated"
   map.resources :submissions do |submission|
-    submission.resources :comments
-    submission.resources :ratings
+    submission.resources :reviews
   end
   map.download_submission   "submissions/:id/download",   :controller => "submissions", :action => "download"
   map.trash_submission      "submissions/:id/trash",      :controller => "submissions", :action => "trash"
