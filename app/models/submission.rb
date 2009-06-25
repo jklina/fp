@@ -5,12 +5,9 @@ class Submission < ActiveRecord::Base
   has_one 		:sub_file, 	  :dependent => :destroy
   has_many		:authorships, :dependent => :destroy
   has_many		:users, 		  :through =>   :authorships
-  has_many		:comments
-  has_many		:ratings
-  has_many 		:raters,		  :through =>		:ratings, :source => :user
+  has_many    :reviews,     :dependent => :delete_all
   has_many		:featurings
   has_many		:features,    :through => 	:featurings
-  has_many    :reviews,     :dependent => :delete_all
   belongs_to	:category
 
   validates_presence_of :title, :description, :sub_image
