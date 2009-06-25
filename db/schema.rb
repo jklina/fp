@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090625202624) do
+ActiveRecord::Schema.define(:version => 20090625215618) do
 
   create_table "authorships", :force => true do |t|
     t.integer  "submission_id"
@@ -93,16 +93,16 @@ ActiveRecord::Schema.define(:version => 20090625202624) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "average_rating"
-    t.float    "average_rating_lower_bound"
-    t.float    "average_rating_upper_bound"
-    t.float    "average_admin_rating"
-    t.float    "average_admin_rating_lower_bound"
-    t.float    "average_admin_rating_upper_bound"
+    t.float    "user_rating"
+    t.float    "user_rating_lower_bound"
+    t.float    "user_rating_upper_bound"
+    t.float    "admin_rating"
+    t.float    "admin_rating_lower_bound"
+    t.float    "admin_rating_upper_bound"
     t.boolean  "owner_trash"
     t.boolean  "moderator_trash"
-    t.integer  "views",                            :default => 0
-    t.integer  "downloads",                        :default => 0
+    t.integer  "views",                    :default => 0
+    t.integer  "downloads",                :default => 0
   end
 
   create_table "user_images", :force => true do |t|
@@ -129,20 +129,20 @@ ActiveRecord::Schema.define(:version => 20090625202624) do
     t.string   "yahoo"
     t.string   "website"
     t.text     "current_projects"
-    t.integer  "access_level",                     :default => 1
+    t.integer  "access_level",             :default => 1
     t.string   "password_salt"
     t.string   "password_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "confirmation_token"
     t.string   "username"
-    t.float    "average_rating"
-    t.float    "average_rating_lower_bound"
-    t.float    "average_rating_upper_bound"
-    t.float    "average_admin_rating"
-    t.float    "average_admin_rating_lower_bound"
-    t.float    "average_admin_rating_upper_bound"
-    t.boolean  "confirmed",                        :default => false
+    t.float    "user_rating"
+    t.float    "user_rating_lower_bound"
+    t.float    "user_rating_upper_bound"
+    t.float    "admin_rating"
+    t.float    "admin_rating_lower_bound"
+    t.float    "admin_rating_upper_bound"
+    t.boolean  "confirmed",                :default => false
   end
 
 end

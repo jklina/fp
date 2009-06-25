@@ -49,12 +49,12 @@ class User < ActiveRecord::Base
     user_statistics = Calculations.statistics(self.user_ratings)
 
     attributes = {
-      :average_admin_rating =>             administrator_statistics[:mean],
-      :average_admin_rating_lower_bound => administrator_statistics[:lower_bound],
-      :average_admin_rating_upper_bound => administrator_statistics[:upper_bound], 
-      :average_rating =>                   user_statistics[:mean],
-      :average_rating_lower_bound =>       user_statistics[:lower_bound],
-      :average_rating_upper_bound =>       user_statistics[:upper_bound]
+      :admin_rating =>             administrator_statistics[:mean],
+      :admin_rating_lower_bound => administrator_statistics[:lower_bound],
+      :admin_rating_upper_bound => administrator_statistics[:upper_bound], 
+      :user_rating =>              user_statistics[:mean],
+      :user_rating_lower_bound =>  user_statistics[:lower_bound],
+      :user_rating_upper_bound =>  user_statistics[:upper_bound]
     }
 
     self.update_attributes!(attributes)

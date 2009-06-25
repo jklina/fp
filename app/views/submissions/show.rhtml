@@ -34,8 +34,8 @@
         Reviews: <%=h @submission.reviews.count %><br />
         Views: <%=h @submission.views %><br />
         Downloads: <%=h @submission.downloads %><br />
-        Admin Rating: <%=h number_with_precision(@submission.average_admin_rating, :precision => 2) %><br />
-		    Rating: <%=h number_with_precision(@submission.average_rating, :precision => 2) %><br /></p>
+        Admin Rating: <%=h number_with_precision(@submission.admin_rating, :precision => 2) %><br />
+		    User Rating: <%=h number_with_precision(@submission.user_rating, :precision => 2) %><br /></p>
   </div>
   <div id="description"><%= RedCloth.new(@submission.description).to_html %></div>
   <div class="clear"></div>

@@ -4,7 +4,7 @@ class BrowseController < ApplicationController
   def index
     @submissions = Submission.paginate :page => params[:page],
                                        :per_page => 12,
-                                       :order => "average_admin_rating_lower_bound DESC",
+                                       :order => "admin_rating_lower_bound DESC",
                                        :conditions => { :owner_trash => false,
                                                         :moderator_trash => false }
 
@@ -29,7 +29,7 @@ class BrowseController < ApplicationController
 	    @category = Category.find_by_id(params[:id])
 	    @submissions = @category.submissions.paginate :page => params[:page],
 	                                                  :per_page => 12,
-	                                                  :order => "average_admin_rating_lower_bound DESC",
+	                                                  :order => "admin_rating_lower_bound DESC",
 	                                                  :conditions => { :owner_trash => false,
 	                                                                   :moderator_trash => false }
 	  end
