@@ -53,10 +53,6 @@ class ApplicationController < ActionController::Base
     session[:pending_featured_submissions] ||= []
   end
 
-  def local_request?
-    false
-  end
-
   private
 
   def request_authentication_if_necessary
