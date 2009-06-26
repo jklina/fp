@@ -25,14 +25,14 @@ class SubmissionsController < ApplicationController
           flash[:notice] = "This submission has been trashed. Only you can see it."
   	      format.html
 	      else
-	        format.html { render :file => "public/404.html", :status => 404 }
+	        raise ActiveRecord::RecordNotFound
         end
       elsif @submission.moderated
         if has_authority?
           flash[:notice] = "This submission has been moderated. Only you and the other moderators can see it."
   	      format.html
         else
-          format.html { render :file => "public/404.html", :status => 404 }
+	        raise ActiveRecord::RecordNotFound
         end
 	    else
   	    @submission.views += 1
