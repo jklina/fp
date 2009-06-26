@@ -1,8 +1,6 @@
 require "calculations"
 
 class Submission < ActiveRecord::Base
-  has_one 		:sub_image,   :dependent => :destroy
-  has_one 		:sub_file, 	  :dependent => :destroy
   has_many		:authorships, :dependent => :destroy
   has_many		:users, 		  :through =>   :authorships
   has_many    :reviews,     :dependent => :delete_all
@@ -15,6 +13,7 @@ class Submission < ActiveRecord::Base
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL
 
+  validates_attachment_presence     :preview
   validates_attachment_size         :preview, :less_than => 5.megabytes
   validates_attachment_content_type :preview, :content_type => PAPERCLIP_IMAGE
 
@@ -24,8 +23,7 @@ class Submission < ActiveRecord::Base
 
   validates_attachment_size :file, :less_than => 30.megabytes
 
-  validates_presence_of :title, :description, :sub_image
-  validates_associated  :sub_image
+  validates_presence_of :title, :description
 
   after_destroy :update_users_statistics!
 

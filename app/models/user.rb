@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   has_many :submissions, :through =>   :authorships
   has_many :reviews,     :dependent => :destroy
   has_many :features
-  has_one  :user_image,  :dependent => :destroy
 
   has_attached_file :photo,
                     :styles => { :thumbnail => "194x122>", :avatar => "54x54#" },

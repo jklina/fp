@@ -9,9 +9,9 @@ class Feature < ActiveRecord::Base
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL
 
+  validates_attachment_presence     :preview
   validates_attachment_size         :preview, :less_than => 5.megabytes
   validates_attachment_content_type :preview, :content_type => PAPERCLIP_IMAGE
 
-  validates_presence_of :title, :comment, :feature_image
-  validates_associated  :feature_image
+  validates_presence_of :title, :comment
 end
