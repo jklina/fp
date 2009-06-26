@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
     @submissions = Submission.paginate  :page => params[:page],
                                         :per_page => 16,
                                         :order => "created_at DESC",
-                                        :conditions => { :owner_trash => false,
-                                                         :moderator_trash => false }
+                                        :conditions => { :trashed => false,
+                                                         :moderated => false }
 	  @feature = Feature.find(:last)
   end
 

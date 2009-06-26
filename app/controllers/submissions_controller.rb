@@ -8,8 +8,8 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.paginate :page => params[:page],
                                        :per_page => 8,
                                        :order => "created_at DESC",
-                                       :conditions => { :owner_trash => false,
-                                                        :moderator_trash => false }
+                                       :conditions => { :trashed => false,
+                                                        :moderated => false }
 
     respond_to do |format|
       format.html
@@ -20,14 +20,14 @@ class SubmissionsController < ApplicationController
     @review = @submission.reviews.find_last_by_user_id(current_user) || Review.new
 
     respond_to do |format|
-      if @submission.trashed?
+      if @submission.trashed
         if @submission.authored_by?(current_user)
           flash[:notice] = "This submission has been trashed. Only you can see it."
   	      format.html
 	      else
 	        format.html { render :file => "public/404.html", :status => 404 }
         end
-      elsif @submission.moderated?
+      elsif @submission.moderated
         if has_authority?
           flash[:notice] = "This submission has been moderated. Only you and the other moderators can see it."
   	      format.html
@@ -50,8 +50,8 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(params[:submission])
 
-	  @submission.owner_trash = false
-	  @submission.moderator_trash = false
+	  @submission.trashed = false
+	  @submission.moderated = false
     @submission.category = @category
 	  @submission.sub_file = SubFile.new(params[:sub_file]) if params[:sub_file] 
     @submission.sub_image = SubImage.new(params[:sub_image])  
@@ -106,8 +106,8 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.paginate :page => params[:page],
                                        :per_page => 8,
                                        :order => "created_at DESC",
-                                       :conditions => { :owner_trash => false,
-                                                        :moderator_trash => true }
+                                       :conditions => { :trashed => false,
+                                                        :moderated => true }
 
     respond_to do |format|
       format.html

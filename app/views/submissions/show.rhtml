@@ -17,7 +17,7 @@
     <%= link_to image_tag("silk/application_edit.gif"), edit_submission_path(@submission) %>
 		<%= link_to "Edit", :action => 'edit', :id => @submission %>
     <br />
-    <% if @submission.trashed? -%>
+    <% if @submission.trashed -%>
       <%= link_to image_tag("silk/application_add.gif"), untrash_submission_path(@submission) %>
 		  <%= link_to "Restore", untrash_submission_path(@submission) %>
 		<% else -%>
@@ -58,7 +58,7 @@
 
 <% if has_authority? -%>
   <%= link_to 'Feature this submission', feature_submission_path(@submission) %> |
-  <% if @submission.moderated? -%>
+  <% if @submission.moderated -%>
     <%= link_to 'Unmoderate this submission', unmoderate_submission_path(@submission) %> |
   <% else -%>
     <%= link_to 'Moderate this submission', moderate_submission_path(@submission) %> |

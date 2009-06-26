@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090625215618) do
+ActiveRecord::Schema.define(:version => 20090626003536) do
 
   create_table "authorships", :force => true do |t|
     t.integer  "submission_id"
@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20090625215618) do
     t.float    "admin_rating"
     t.float    "admin_rating_lower_bound"
     t.float    "admin_rating_upper_bound"
-    t.boolean  "owner_trash"
-    t.boolean  "moderator_trash"
+    t.boolean  "trashed",                  :default => false
+    t.boolean  "moderated",                :default => false
     t.integer  "views",                    :default => 0
     t.integer  "downloads",                :default => 0
   end

@@ -5,8 +5,8 @@ class FeaturesController < ApplicationController
 	  @submissions = @feature.submissions.paginate :page => params[:page],
 	                                                :per_page => 8,
 	                                                :order => "created_at DESC",
-	                                                :conditions => { :owner_trash => false,
-	                                                                 :moderator_trash => false }
+	                                                :conditions => { :trashed => false,
+	                                                                 :moderated => false }
 	  respond_to do |format|
       format.html
     end

@@ -24,28 +24,20 @@ class Submission < ActiveRecord::Base
     self.sub_file.nil? ? self.sub_image.full_filename : self.sub_file.full_filename
   end
 
-  def trashed?
-    self.owner_trash
-  end
-
-  def moderated?
-    self.moderator_trash
-  end
-
   def trash
-    self.update_attribute(:owner_trash, true)
+    self.update_attribute(:trashed, true)
   end
 
   def untrash
-    self.update_attribute(:owner_trash, false)
+    self.update_attribute(:trashed, false)
   end
 
   def moderate
-    self.update_attribute(:moderator_trash, true)
+    self.update_attribute(:moderated, true)
   end
 
   def unmoderate
-    self.update_attribute(:moderator_trash, false)
+    self.update_attribute(:moderated, false)
   end
 
   def update_statistics!

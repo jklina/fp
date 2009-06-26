@@ -5,8 +5,8 @@ class BrowseController < ApplicationController
     @submissions = Submission.paginate :page => params[:page],
                                        :per_page => 12,
                                        :order => "admin_rating_lower_bound DESC",
-                                       :conditions => { :owner_trash => false,
-                                                        :moderator_trash => false }
+                                       :conditions => { :trashed => false,
+                                                        :moderated => false }
 
     if params[:selection]
 	    dispatch(params[:selection], params[:sort], params[:order])
@@ -23,15 +23,15 @@ class BrowseController < ApplicationController
 	    @submissions = @category.submissions.paginate :page => params[:page],
 	                                                  :per_page => 12,
 	                                                  :order => "#{params[:sort].select{ |name| Submission.column_names.include?(name) }.join(',')} #{params[:order]}",
-	                                                  :conditions => { :owner_trash => false,
-	                                                                   :moderator_trash => false }
+	                                                  :conditions => { :trashed => false,
+	                                                                   :moderated => false }
 	  else
 	    @category = Category.find_by_id(params[:id])
 	    @submissions = @category.submissions.paginate :page => params[:page],
 	                                                  :per_page => 12,
 	                                                  :order => "admin_rating_lower_bound DESC",
-	                                                  :conditions => { :owner_trash => false,
-	                                                                   :moderator_trash => false }
+	                                                  :conditions => { :trashed => false,
+	                                                                   :moderated => false }
 	  end
 
     respond_to do |format|
