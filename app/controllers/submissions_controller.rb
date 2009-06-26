@@ -215,23 +215,11 @@ class SubmissionsController < ApplicationController
   end
 
   def find_submission
-    begin
-      @submission = Submission.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      respond_to do |format|
-        format.html { render :file => "public/404.html", :status => 404 }
-      end
-    end
+    @submission = Submission.find(params[:id])
   end
 
   def find_category
-    begin
-      @category = Category.find(params[:category][:id])
-    rescue ActiveRecord::RecordNotFound
-      respond_to do |format|
-        format.html { render :file => "public/404.html", :status => 404 }
-      end
-    end
+    @category = Category.find(params[:category][:id])
   end
 
   def find_categories

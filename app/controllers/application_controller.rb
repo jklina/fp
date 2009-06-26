@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging :password, :password_confirmation
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :respond_with_404
+
   def index
     @submissions = Submission.paginate  :page => params[:page],
                                         :per_page => 16,
@@ -51,6 +53,10 @@ class ApplicationController < ActionController::Base
     session[:pending_featured_submissions] ||= []
   end
 
+  def local_request?
+    false
+  end
+
   private
 
   def request_authentication_if_necessary
@@ -64,6 +70,12 @@ class ApplicationController < ActionController::Base
     if authority_required? && !has_authority?
       flash[:warning] = "You must be a moderator or an administrator to do that."
       redirect_to root_url
+    end
+  end
+
+  def respond_with_404
+    respond_to do |format|
+      format.html { render :file => "public/404.html", :status => 404 }
     end
   end
 end

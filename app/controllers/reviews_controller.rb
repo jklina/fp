@@ -42,22 +42,10 @@ class ReviewsController < ApplicationController
   end
 
   def find_review
-    begin
-      @review = Review.find(params[:id]) 
-    rescue ActiveRecord::RecordNotFound
-      respond_to do |format|
-        format.html { render :file => "public/404.html", :status => 404 }
-      end
-    end
+    @review = Review.find(params[:id]) 
   end
 
   def find_submission
-    begin
-      @submission = Submission.find(params[:submission_id])
-    rescue ActiveRecord::RecordNotFound
-      respond_to do |format|
-        format.html { render :file => "public/404.html", :status => 404 }
-      end
-    end
+    @submission = Submission.find(params[:submission_id])
   end
 end

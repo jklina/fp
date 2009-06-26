@@ -96,13 +96,7 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    begin
-      @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      respond_to do |format|
-        format.html { render :file => "public/404.html", :status => 404 }
-      end
-    end
+    @user = User.find(params[:id])
   end
 
   def require_self

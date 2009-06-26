@@ -67,12 +67,6 @@ class CategoriesController < ApplicationController
   end
 
   def find_category
-    begin
-      @category = Category.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      respond_to do |format|
-        format.html { render :file => "public/404.html", :status => 404 }
-      end
-    end
+    @category = Category.find(params[:id])
   end
 end

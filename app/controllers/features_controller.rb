@@ -82,12 +82,6 @@ class FeaturesController < ApplicationController
   end
 
   def find_feature
-    begin
-      @feature = Feature.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      respond_to do |format|
-        format.html { render :file => "public/404.html", :status => 404 }
-      end
-    end
+    @feature = Feature.find(params[:id])
   end
 end
