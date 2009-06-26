@@ -11,12 +11,8 @@
   <%= c.collection_select(:id, @categories, :id, :title) %>
 <% end -%></p>
 
-<p><label for="sub_image">Image Upload</label><br/>
-<% fields_for :sub_image do |si| %>
-	<%= si.file_field :uploaded_data %>
-<% end -%></p>
+<p><%= f.label :preview %><br/>
+<%= f.file_field :preview %></p>
 
-<p><label for="sub_file">File Upload</label><br/>
-<% fields_for :sub_file do |sf| %>
-	<%= sf.file_field :uploaded_data %>
-<% end -%></p>
+<p><%= f.label :file%><br/>
+<%= f.file_field :file %></p>

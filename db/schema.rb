@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090626003536) do
+ActiveRecord::Schema.define(:version => 20090626183543) do
 
   create_table "authorships", :force => true do |t|
     t.integer  "submission_id"
@@ -25,25 +25,16 @@ ActiveRecord::Schema.define(:version => 20090626003536) do
     t.datetime "updated_at"
   end
 
-  create_table "feature_images", :force => true do |t|
-    t.integer  "feature_id"
-    t.integer  "parent_id"
-    t.string   "content_type"
-    t.string   "filename"
-    t.string   "thumbnail"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "features", :force => true do |t|
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "title"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
   end
 
   create_table "featurings", :force => true do |t|
@@ -63,30 +54,6 @@ ActiveRecord::Schema.define(:version => 20090626003536) do
     t.datetime "updated_at"
   end
 
-  create_table "sub_files", :force => true do |t|
-    t.integer  "submission_id"
-    t.string   "filename"
-    t.string   "content_type"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
-    t.integer  "parent_id"
-    t.string   "thumbnail"
-    t.datetime "created_at"
-  end
-
-  create_table "sub_images", :force => true do |t|
-    t.integer  "submission_id"
-    t.string   "filename"
-    t.string   "content_type"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
-    t.integer  "parent_id"
-    t.string   "thumbnail"
-    t.datetime "created_at"
-  end
-
   create_table "submissions", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -103,18 +70,14 @@ ActiveRecord::Schema.define(:version => 20090626003536) do
     t.boolean  "moderated",                :default => false
     t.integer  "views",                    :default => 0
     t.integer  "downloads",                :default => 0
-  end
-
-  create_table "user_images", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "filename"
-    t.string   "content_type"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
-    t.integer  "parent_id"
-    t.string   "thumbnail"
-    t.datetime "created_at"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -143,6 +106,10 @@ ActiveRecord::Schema.define(:version => 20090626003536) do
     t.float    "admin_rating_lower_bound"
     t.float    "admin_rating_upper_bound"
     t.boolean  "confirmed",                :default => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
 end

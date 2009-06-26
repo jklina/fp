@@ -36,7 +36,7 @@ class SubmissionsController < ApplicationController
         end
 	    else
   	    @submission.views += 1
-  	    @submission.save
+#  	    @submission.save
 
         format.html
       end
@@ -49,12 +49,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(params[:submission])
-
-	  @submission.trashed = false
-	  @submission.moderated = false
     @submission.category = @category
-	  @submission.sub_file = SubFile.new(params[:sub_file]) if params[:sub_file] 
-    @submission.sub_image = SubImage.new(params[:sub_image])  
  
     respond_to do |format|
 	    if @submission.save
@@ -81,8 +76,6 @@ class SubmissionsController < ApplicationController
 
   def update
     @submission.category = @category
-    @submission.sub_image = SubImage.new(params[:sub_image]) if (params[:sub_image])
-    @submission.sub_file = SubFile.new(params[:sub_file]) if (params[:sub_file])
 
     respond_to do |format|
       if @submission.update_attributes(params[:submission])
@@ -118,7 +111,7 @@ class SubmissionsController < ApplicationController
     @submission.downloads += 1
 	  @submission.save
 
-    send_file @submission.download_filename
+    send_file @submission.download_url
   end
 
   def trash

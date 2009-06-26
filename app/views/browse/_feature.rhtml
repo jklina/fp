@@ -1,6 +1,6 @@
 <div class="featured_preview">
-  <% unless feature.feature_image.nil? %>
-    <%= link_to image_tag(feature.feature_image.public_filename(:tiny)), feature_path(feature) %>
+  <% if feature.preview %>
+    <%= link_to image_tag(feature.preview.url(:thumbnail)), feature_path(feature) %>
   <% end %>
   <p class="featured_preview_text"><%= link_to h(feature.user.username), feature_path(feature) %></p>
 </div>

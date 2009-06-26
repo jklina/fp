@@ -107,7 +107,7 @@ class RmagickTest < Test::Unit::TestCase
     
         assert_match /rails\.png$/,          attachment.full_filename
         assert_match /rails_geometry\.png$/, attachment.full_filename(:geometry)
-        assert_match /rails_thumb\.png$/,    attachment.full_filename(:thumb)
+        assert_match /rails_thumb\.png$/,    attachment.full_filename(:thumbnail)
       end
     end
     

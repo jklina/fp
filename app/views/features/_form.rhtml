@@ -9,8 +9,6 @@
 </p>
 
 <p>
-	<label for="feature_image">Image Upload</label><br/>
-	<% fields_for :feature_image do |fi| %>
-		<%= fi.file_field :uploaded_data %>
-	<% end -%>
+	<%= f.label :preview %>
+	<%= f.file_field :preview %>
 </p>

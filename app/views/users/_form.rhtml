@@ -57,10 +57,8 @@
 </p>
 
 <p>
-	<label for="user_image">Image Upload</label><br/>
-	<% fields_for :user_image do |user_image| %>
-		<%= user_image.file_field :uploaded_data %>
-	<% end -%>
+  <%= f.label :photo %>
+  <%= f.file_field :photo %>
 </p>
 
 <% end -%>

@@ -14,6 +14,14 @@ class User < ActiveRecord::Base
   has_many :features
   has_one  :user_image,  :dependent => :destroy
 
+  has_attached_file :photo,
+                    :styles => { :thumbnail => "194x122>", :avatar => "54x54#" },
+                    :path => PAPERCLIP_ASSET_PATH,
+                    :url => PAPERCLIP_ASSET_URL
+
+  validates_attachment_size         :photo, :less_than => 5.megabytes
+  validates_attachment_content_type :photo, :content_type => PAPERCLIP_IMAGE
+
   attr_accessor :password, :password_confirmation
 
   validates_presence_of     :name

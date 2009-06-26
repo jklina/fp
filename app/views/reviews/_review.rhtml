@@ -1,13 +1,13 @@
 <div class="comment">
-  <% if review.user.user_image && review.user.user_image.public_filename(:avatar) %>
-  <%= link_to image_tag(review.user.user_image.public_filename(:avatar)), user_path(review.user) %>
+  <% if review.user.photo %>
+  <%= link_to image_tag(review.user.photo.url(:avatar)), user_path(review.user) %>
   <% else %>
   <%= link_to image_tag("/images/default_avatar.gif"), user_path(review.user) %>
   <% end %>
   <div class="text">
   <strong><%= h(review.user.username) %><% if review.rating %> [<%= review.rating %>]<% end %></strong>: <%= h(review.comment) %>
   <% if has_authority? -%>
-    <%= link_to 'Delete this review', review_path(review), :method => :delete %>
+    <%= link_to 'Delete this review', submission_review_path(review), :method => :delete %>
   <% end -%>
   </div>
   <div class="clear"></div>

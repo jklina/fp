@@ -10,18 +10,31 @@ class Submission < ActiveRecord::Base
   has_many		:features,    :through => 	:featurings
   belongs_to	:category
 
+  has_attached_file :preview,
+                    :styles => { :large => "806x507>", :thumbnail => "194x122>" },
+                    :path => PAPERCLIP_ASSET_PATH,
+                    :url => PAPERCLIP_ASSET_URL
+
+  validates_attachment_size         :preview, :less_than => 5.megabytes
+  validates_attachment_content_type :preview, :content_type => PAPERCLIP_IMAGE
+
+  has_attached_file :file,
+                    :path => PAPERCLIP_ASSET_PATH,
+                    :url => PAPERCLIP_ASSET_URL
+
+  validates_attachment_size :file, :less_than => 30.megabytes
+
   validates_presence_of :title, :description, :sub_image
   validates_associated  :sub_image
 
-  after_save :update_users_statistics!
   after_destroy :update_users_statistics!
 
   def authored_by?(user)
     self.users.include?(user)
   end
 
-  def download_filename
-    self.sub_file.nil? ? self.sub_image.full_filename : self.sub_file.full_filename
+  def download_url
+    self.file.nil? ? self.preview.url : self.file.url
   end
 
   def trash
@@ -54,6 +67,7 @@ class Submission < ActiveRecord::Base
     }
 
     self.update_attributes!(attributes)
+    self.update_users_statistics!
   end
 
   protected
