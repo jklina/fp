@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Pixelfuckers</title>
+  <%= stylesheet_link_tag "screen" -%>
+</head>
+
+<body class="<%= controller.controller_name -%> <%= controller.action_name -%>">
+<div id="wrap">
+<div id="subwrap">
+<div id="head">
+  <h1><%= link_to "Pixelfuckers", root_path -%></h1>
+
+  <ul class="inline">
+    <li><%= link_to_unless_current "Home", root_path -%></li>
+    <li><%= link_to_unless_current "Browse", :controller => "browse" -%></li>
+    <li><%= link_to "Forum", "http://gypsyspacemuffin.com/viewforum.php?id=25", :popup => true -%></li>
+    <li><%= link_to "Chat", "http://webchat.freenode.net/?channels=pixelfuckers", :popup => true -%></li>
+  </ul>
+
+  <ul class="toolbar autoclear">
+    <li><%= link_to "New Submission", new_submission_path, :class => "icon app_get" -%></li>
+    <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon cog" -%></li><% end -%>
+    <li><%= link_to "Help", "#", :class => "icon help" -%></li>
+  </ul>
+
+  <ul class="actions">
+    <% if logged_in? -%>
+      <li><%= link_to h(current_user.username), user_path(current_user) -%></li>
+      <% if moderator? -%>
+      <li><%= link_to "categories", categories_path -%></li>
+      <li><%= link_to "pending featured submissions (#{pending_featured_submissions.size})", new_feature_path -%></li>
+      <li><%= link_to "moderated submissions", moderated_submissions_path -%></li>
+      <% end -%>
+      <% if administrator? -%>
+      <li><%= link_to "users", users_path -%></li>
+      <% end -%>
+      <li><%= link_to "log out", logout_path -%></li>
+    <% else -%>
+      <li><%= link_to "log in", login_path -%></li>
+      <li> or <%= link_to "register", register_path -%></li>
+    <% end -%>
+  </ul>
+
+  <hr class="invisible" />
+</div>
+
+<div id="body">
+  <% if flash[:notice] -%><p class="notice"><%= flash[:notice] -%></p><% end -%>
+  <% if flash[:warning] -%><p class="warning"><%= flash[:warning] -%></p><% end -%>
+
+  <%= yield -%>
+
+  <hr class="invisible" />
+</div>
+
+<div id="foot">
+  <ul class="toolbar autoclear">
+    <li><%= link_to "New Submission", new_submission_path, :class => "icon app_get" -%></li>
+    <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon cog" -%></li><% end -%>
+    <li><%= link_to "Help", "#", :class => "icon help" -%></li>
+  </ul>
+
+  <ul class="inline">
+    <li><%= link_to "About Us", "#" -%></li>
+    <li><%= link_to "Contact", "#" -%></li>
+    <li><%= link_to "Privacy", "#" -%></li>
+    <li><%= link_to "Terms", "#" -%></li>
+  </ul>
+
+  <p>&copy; Pixelfuckers.org &ndash; All rights reserved.</p>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript">
+  try {
+    var pageTracker = _gat._getTracker("UA-9112137-1");
+    pageTracker._trackPageview();
+  } catch(err) { }
+</script>
+
+</body>
+</html>

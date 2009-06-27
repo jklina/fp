@@ -1,9 +1,0 @@
-<h2>Featured</h2>
-
-<% if @feature %>
-<%= render :partial => "features/feature", :object => @feature %>
-<% end %>
-
-<%= render :partial => "submissions/submission", :collection => @submissions %>
-
-<%= will_paginate @submissions %>

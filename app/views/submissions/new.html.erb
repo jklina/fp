@@ -1,0 +1,6 @@
+<h2>New Submission</h2>
+
+<% form_for @submission, :html => {:multipart => true} do |f| -%>
+<%= render :partial => "form", :locals => { :f => f } -%>
+<p><%= submit_tag "Upload" -%></p>
+<% end %>

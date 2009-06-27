@@ -1,0 +1,16 @@
+<h2><%=h @feature.title -%></h2>
+
+<p><%= link_to image_tag(@feature.preview.url(:large)), @feature.preview.url -%></p>
+
+<%= render :partial => "submissions/submission", :collection => @submissions -%>
+
+<%= @feature.comment_html -%>
+
+<p class="meta">chosen by <%= link_to h(@feature.user.username), user_path(@feature.user) -%></p>
+
+<% if has_authority? -%>
+<ul>
+<li><%= link_to "Edit this feature", edit_feature_path(@feature) -%></li>
+<li><%= link_to "Delete this feature", feature_path(@feature), :method => :delete, :confirm => "Are you sure?" -%></li>
+</ul>
+<% end -%>

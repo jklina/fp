@@ -6,7 +6,7 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = Submission.paginate :page => params[:page],
-                                       :per_page => 8,
+                                       :per_page => 16,
                                        :order => "created_at DESC",
                                        :conditions => { :trashed => false,
                                                         :moderated => false }
@@ -36,7 +36,7 @@ class SubmissionsController < ApplicationController
         end
 	    else
   	    @submission.views += 1
-#  	    @submission.save
+  	    @submission.save
 
         format.html
       end
@@ -56,14 +56,10 @@ class SubmissionsController < ApplicationController
 	      authorship = Authorship.new
         authorship.submission = @submission
         authorship.user = current_user
-      
-	      if authorship.save
-	        flash[:notice] = "Submission was successfully created."
-	        format.html { redirect_to submissions_url }
-	      else
-	        flash[:warning] = "There was a problem saving your submission (association)."
-		      format.html { render :action => "new" }
-	      end
+        authorship.save!
+
+	      flash[:notice] = "Submission was successfully created."
+	      format.html { redirect_to submissions_url }
 	    else
 	      flash[:warning] = "There was a problem saving your submission."
 	      format.html { render :action => "new" }
@@ -103,7 +99,7 @@ class SubmissionsController < ApplicationController
                                                         :moderated => true }
 
     respond_to do |format|
-      format.html
+      format.html { render :action => "index" }
     end
   end
 

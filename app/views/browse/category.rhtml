@@ -1,7 +1,0 @@
-<h2>Listing Submissions In <%= h(@category.title) %></h2>
-
-<%= render :partial => "form" %>
-
-<%= render :partial => "submissions/submission", :collection => @submissions %>
-
-<%= will_paginate @submissions %>

@@ -1,0 +1,11 @@
+<h2>Featured</h2>
+
+<% if @feature -%>
+<p><%= link_to image_tag(@feature.preview.url(:large)), feature_path(@feature) %></p>
+<%= @feature.comment_html %>
+<p class="meta">chosen by <%= link_to h(@feature.user.username), user_path(@feature.user) %></p>
+<% end -%>
+
+<%= render :partial => "submissions/submission", :collection => @submissions -%>
+
+<p class="pagination"><%= will_paginate @submissions, :container => false -%></p>

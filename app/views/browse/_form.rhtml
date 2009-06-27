@@ -1,8 +1,0 @@
-<p>
-  <% form_tag(:action => :index) do %>
-    <%= select_tag(:selection, options_for_select(@selection_box_items, params[:selection].to_i)) %>
-	  <%= select_tag(:sort,   options_for_select([['Average Rating', 'user_rating'], ['Lower Bound', 'user_rating_lower_bound'], ['Upper Bound', 'user_rating_upper_bound']], params[:sort])) %>
-	  <%= select_tag(:order,   options_for_select([['Descending', 'DESC'], ['Ascending', 'ASC']], params[:order])) %>
-	  <%= submit_tag "Filter" %>
-  <% end %>
-</p>

@@ -1,0 +1,9 @@
+<div class="thumb">
+  <p class="preview"><%= link_to image_tag(submission.preview.url(:thumbnail)), submission_path(submission) -%></p>
+  <p class="meta">
+    <%= link_to h(submission.title), submission_path(submission) -%>
+    <% unless controller.controller_name == "users" -%>
+    by <%= submission.users.collect { |u| link_to h(u.username), user_path(u) }.to_sentence -%>
+    <% end -%>
+  </p>
+</div>

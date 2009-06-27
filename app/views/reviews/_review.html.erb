@@ -1,0 +1,7 @@
+<div class="review autoclear">
+  <p class="avatar"><%= link_to image_tag(review.user.photo.url(:avatar)), user_path(review.user) -%></p>
+  <div class="comment">
+    <p><strong><%=h review.user.username -%><% if review.rating -%> [<%=h review.rating -%>]<% end -%></strong> wrote:</p>
+    <%= review.comment_html -%>
+  </div>
+</div>

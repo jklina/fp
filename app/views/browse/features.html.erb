@@ -1,0 +1,7 @@
+<h2>Featured Submissions</h2>
+
+<%= render :partial => "form" -%>
+  
+<%= render :partial => "features/feature", :collection => @features -%>
+
+<p class="pagination"><%= will_paginate @features, :container => false -%></p>

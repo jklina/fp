@@ -1,0 +1,9 @@
+<%= error_messages_for :review -%>
+
+<dl>
+<dt><%= f.label :rating -%></dt>
+<dd><%= f.text_field :rating, :size => "3", :maxlength => "3" -%></dd>
+
+<dt><%= f.label :comment -%></dt>
+<dd><%= f.text_area :comment -%></dd>
+</dl>

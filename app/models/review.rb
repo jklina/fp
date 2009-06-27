@@ -21,6 +21,10 @@ class Review < ActiveRecord::Base
     self.comment.blank?
   end
 
+  def comment_html
+    RedCloth.new(self.comment).to_html
+  end
+
   protected
 
   def update_submission_statistics!

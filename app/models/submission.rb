@@ -68,6 +68,10 @@ class Submission < ActiveRecord::Base
     self.update_users_statistics!
   end
 
+  def description_html
+    RedCloth.new(self.description).to_html
+  end
+
   protected
 
   def admin_ratings

@@ -3,7 +3,7 @@ class BrowseController < ApplicationController
   
   def index
     @submissions = Submission.paginate :page => params[:page],
-                                       :per_page => 12,
+                                       :per_page => 16,
                                        :order => "admin_rating_lower_bound DESC",
                                        :conditions => { :trashed => false,
                                                         :moderated => false }
@@ -21,14 +21,14 @@ class BrowseController < ApplicationController
     if params[:selection]
 	    @category = Category.find_by_id(params[:selection])
 	    @submissions = @category.submissions.paginate :page => params[:page],
-	                                                  :per_page => 12,
+	                                                  :per_page => 16,
 	                                                  :order => "#{params[:sort].select{ |name| Submission.column_names.include?(name) }.join(',')} #{params[:order]}",
 	                                                  :conditions => { :trashed => false,
 	                                                                   :moderated => false }
 	  else
 	    @category = Category.find_by_id(params[:id])
 	    @submissions = @category.submissions.paginate :page => params[:page],
-	                                                  :per_page => 12,
+	                                                  :per_page => 16,
 	                                                  :order => "admin_rating_lower_bound DESC",
 	                                                  :conditions => { :trashed => false,
 	                                                                   :moderated => false }
@@ -41,8 +41,8 @@ class BrowseController < ApplicationController
   
   def features
     @features = Feature.paginate :page => params[:page],
-                                   :per_page => 12,
-                                   :order => "id #{params[:order]}"
+                                 :per_page => 16,
+                                 :order => "id #{params[:order]}"
 
     respond_to do |format|
       format.html
@@ -51,7 +51,7 @@ class BrowseController < ApplicationController
   
   def users
 	  @users = User.paginate :page => params[:page],
-	                         :per_page => 12,
+	                         :per_page => 16,
 	                         :order => "#{params[:sort].select{ |name| Submission.column_names.include?(name) }.join(',')} #{params[:order]}"
     respond_to do |format|
       format.html

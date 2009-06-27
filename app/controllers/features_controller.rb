@@ -2,11 +2,8 @@ class FeaturesController < ApplicationController
   before_filter :find_feature, :only => [ :show, :edit, :update, :destroy ]
 
   def show
-	  @submissions = @feature.submissions.paginate :page => params[:page],
-	                                                :per_page => 8,
-	                                                :order => "created_at DESC",
-	                                                :conditions => { :trashed => false,
-	                                                                 :moderated => false }
+	  @submissions = @feature.submissions
+
 	  respond_to do |format|
       format.html
     end
@@ -20,7 +17,6 @@ class FeaturesController < ApplicationController
   def create
     @feature = Feature.new(params[:feature])
     @feature.user = current_user
-    @feature.feature_image = FeatureImage.new(params[:feature_image]) if params[:feature_image] && params[:feature_image][:uploaded_data].size != 0
 
     @submissions = Submission.find(pending_featured_submissions)
 
@@ -28,13 +24,12 @@ class FeaturesController < ApplicationController
   	  if @submissions.empty?
   	    flash[:warning] = "You don't have any submissions to feature."
   	    format.html { render :action => "new" }
-  	  elsif
-  	    @feature.save
+  	  elsif @feature.save
         @submissions.each do |submission|
-	        @featuring = Featuring.new
-		      @featuring.feature = @feature
-	        @featuring.submission = submission
-		      @featuring.save
+	        featuring = Featuring.new
+		      featuring.feature = @feature
+	        featuring.submission = submission
+		      featuring.save!
 	      end
 
 	      pending_featured_submissions = []

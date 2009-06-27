@@ -14,4 +14,8 @@ class Feature < ActiveRecord::Base
   validates_attachment_content_type :preview, :content_type => PAPERCLIP_IMAGE
 
   validates_presence_of :title, :comment
+
+  def comment_html
+    RedCloth.new(self.comment).to_html
+  end
 end

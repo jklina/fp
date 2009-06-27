@@ -1,8 +1,0 @@
-<li>
-	<% if user.photo %>
-		<%= link_to image_tag(user.photo.url(:avatar)), user_path(user) %>
-	<% end %>
-	<%= link_to h(user.username), user_path(user) %>
-	<%= link_to "Delete", user_path(user), :method => :delete, :confirm => 'Are you sure?' %>
-	<%= link_to "Edit", edit_user_path(user) %>
-</li>

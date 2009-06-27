@@ -1,0 +1,35 @@
+<h2><%=h @user.username %></h2>
+
+<div class="autoclear">
+<p><%= link_to image_tag(@user.photo.url(:avatar)), @user.photo.url -%></p>
+</div>
+
+
+<h3>User Info<% if @user == current_user -%> (<%= link_to "Edit", edit_user_path(@user) -%>)<% end -%></h3>
+<dl class="info">
+  <dt>name:</dt>
+  <dd><%=h @user.name -%></dd>
+  <dt>location:</dt>
+  <dd><%=h @user.location -%></dd>
+  <dt>email:</dt>
+  <dd><%= mail_to @user.email, nil, :encode => "javascript" -%></dd>
+  <dt>url:</dt>
+  <dd><%= link_to h(@user.website), @user.website -%></dd>
+</dl>
+
+<h3>Recent Submissions</h3>
+<div class="autoclear">
+<%= render :partial => "submissions/submission", :collection => @submissions -%>
+</div>
+
+<h3>Recent Reviews</h3>
+<div class="autoclear">
+<%= render :partial => "review", :collection => @reviews -%>
+</div>
+
+<% if @user == current_user -%>
+<h3>Trashed Submissions (only you can see this)</h3>
+<div class="autoclear">
+<%= render :partial => "submissions/submission", :collection => @trash -%>
+</div>
+<% end -%>

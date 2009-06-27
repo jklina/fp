@@ -1,0 +1,6 @@
+<h2>Register</h2>
+
+<% form_for @user do |f| -%>
+<%= render :partial => "form", :locals => { :f => f } -%>
+<p><%= submit_tag "Sign me up!" -%></p>
+<% end %>

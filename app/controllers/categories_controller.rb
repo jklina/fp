@@ -2,15 +2,18 @@ class CategoriesController < ApplicationController
   before_filter :find_category, :only => [ :show, :edit, :update, :destroy ]
 
   def index
-    @categories = Category.paginate :page => params[:page],
-                                    :per_page => 15,
-                                    :order => "title DESC"
+    @categories = Category.find(:all)
+
     respond_to do |format|
       format.html
     end
   end
 
   def show
+    @submissions = @category.submissions.paginate :page => params[:page],
+                                                  :per_page => 16,
+                                                  :order => "created_at DESC"
+
     respond_to do |format|
       format.html
     end

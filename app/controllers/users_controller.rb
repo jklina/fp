@@ -11,17 +11,21 @@ class UsersController < ApplicationController
   end
 
   def show
-	  @submissions = @user.submissions.paginate :page => params[:page],
-	                                            :per_page => 6,
-	                                            :order => "submissions.created_at DESC",
-	                                            :conditions => { :trashed => false,
-	                                                             :moderated => false }
+	  @submissions = @user.submissions.find(:all,
+	                                        :limit => 4,
+	                                        :order => "submissions.created_at DESC",
+	                                        :conditions => { :trashed => false,
+	                                                         :moderated => false })
 
-    @trash = @user.submissions.paginate :page => params[:page],
-                                        :per_page => 6,
-                                        :order => "submissions.created_at DESC",
-                                        :conditions => { :trashed => true,
-                                                         :moderated => false }
+    @reviews = @user.reviews.find(:all,
+	                                :limit => 4,
+	                                :order => "reviews.created_at DESC")
+
+    @trash = @user.submissions.find(:all,
+                                    :limit => 4,
+                                    :order => "submissions.created_at DESC",
+                                    :conditions => { :trashed => true,
+                                                     :moderated => false })
 	  respond_to do |format|
 	    format.html
     end

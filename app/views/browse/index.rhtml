@@ -1,9 +1,0 @@
-<h2>Listing Top Submissions</h2>
-
-<div class="form">
-<%= render :partial => "form" %>
-</div>
-
-<%= render :partial => "submissions/submission", :collection => @submissions %>
-
-<%= will_paginate @submissions %>

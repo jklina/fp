@@ -1,0 +1,7 @@
+<h2>Users</h2>
+
+<%= render :partial => "form" -%>
+
+<%= render :partial => "users/user", :collection => @users -%>
+
+<p class="pagination"><%= will_paginate @users, :container => false -%></p>
