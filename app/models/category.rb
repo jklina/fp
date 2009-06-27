@@ -4,6 +4,6 @@ class Category < ActiveRecord::Base
   validates_presence_of :title
 
   def description_html
-    RedCloth.new(self.description).to_html
+    self.description ? RedCloth.new(self.description).to_html : ""
   end
 end

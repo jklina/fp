@@ -69,7 +69,11 @@ class Submission < ActiveRecord::Base
   end
 
   def description_html
-    RedCloth.new(self.description).to_html
+    self.description ? RedCloth.new(self.description).to_html : ""
+  end
+
+  def submitted_at
+    self.created_at.strftime("%m/%d/%Y")
   end
 
   protected

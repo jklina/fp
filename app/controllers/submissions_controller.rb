@@ -1,6 +1,5 @@
 class SubmissionsController < ApplicationController
   before_filter :find_submission, :except => [ :index, :new, :create, :moderated ]
-  before_filter :find_category, :only => [ :create, :update ]
   before_filter :find_categories, :only => [ :new, :create, :edit, :update ]
   before_filter :require_authorship, :only => [ :edit, :update, :destroy, :trash, :untrash ]
 
@@ -49,8 +48,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(params[:submission])
-    @submission.category = @category
- 
+
     respond_to do |format|
 	    if @submission.save
 	      authorship = Authorship.new
@@ -71,8 +69,6 @@ class SubmissionsController < ApplicationController
   end
 
   def update
-    @submission.category = @category
-
     respond_to do |format|
       if @submission.update_attributes(params[:submission])
         flash[:notice] = "Submission was successfully updated."
@@ -205,10 +201,6 @@ class SubmissionsController < ApplicationController
 
   def find_submission
     @submission = Submission.find(params[:id])
-  end
-
-  def find_category
-    @category = Category.find(params[:category][:id])
   end
 
   def find_categories
