@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL
 
+  validates_attachment_size         :banner, :less_than => 5.megabytes
+  validates_attachment_content_type :banner, :content_type => PAPERCLIP_IMAGE
+
   attr_accessor :password, :password_confirmation
 
   validates_presence_of     :name
