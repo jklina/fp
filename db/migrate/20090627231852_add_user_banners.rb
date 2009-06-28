@@ -1,4 +1,6 @@
 class AddUserBanners < ActiveRecord::Migration
+  include PaperclipMigrations
+
   def self.up
     add_paperclip_fields :users, :banner
   end

@@ -53,7 +53,6 @@ class User < ActiveRecord::Base
   def self.confirm(token)
     user = self.find_by_confirmation_token(token)
     user.update_attribute(:confirmed, true) unless user.nil?
-    !user.nil?
   end
 
   def self.encrypt(string)
@@ -74,6 +73,15 @@ class User < ActiveRecord::Base
     }
 
     self.update_attributes!(attributes)
+  end
+
+  def remember
+    token = self.class.encrypt("#{self.password_salt}--#{generate_salt}")
+    self.update_attribute(:authentication_token, token)
+  end
+
+  def forget
+    self.update_attribute(:authentication_token, nil)
   end
 
   protected

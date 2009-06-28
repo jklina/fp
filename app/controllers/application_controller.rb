@@ -56,9 +56,13 @@ class ApplicationController < ActionController::Base
   private
 
   def request_authentication_if_necessary
-    if authentication_required? && current_user.nil?
-      session[:destination] = request.request_uri
-      redirect_to login_url
+    if authentication_required? && !current_user
+      if cookies[:authentication_token] && (user = User.find_by_authentication_token(cookies[:authentication_token]))
+        session[:user] = user.id
+      else
+        session[:destination] = request.request_uri
+        redirect_to login_url
+      end
     end
   end
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090626183543) do
+ActiveRecord::Schema.define(:version => 20090628054309) do
 
   create_table "authorships", :force => true do |t|
     t.integer  "submission_id"
@@ -110,6 +110,11 @@ ActiveRecord::Schema.define(:version => 20090626183543) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
+    t.string   "authentication_token"
   end
 
 end
