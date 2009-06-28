@@ -13,19 +13,3 @@ atom_feed(:url => formatted_submissions_url(:atom)) do |feed|
     end
   end
 end
-
-# atom_feed do |feed|
-#   feed.title("My great blog!")
-#   feed.updated((@posts.first.created_at))
-# 
-#   for post in @posts
-#     feed.entry(post) do |entry|
-#       entry.title(post.title)
-#       entry.content(post.body, :type => 'html')
-# 
-#       entry.author do |author|
-#         author.name("DHH")
-#       end
-#     end
-#   end
-# end
