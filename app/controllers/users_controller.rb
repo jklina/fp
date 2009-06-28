@@ -45,7 +45,6 @@ class UsersController < ApplicationController
 	      flash[:notice] = "Thanks for signing up! We've sent a confirmation email to #{@user.email} with instructions on how to activate your account."
 	      format.html { redirect_to submissions_url }
 	    else
-	      flash[:warning] = "There was a problem saving your user."
 	      format.html { render :action => "new" }
 	    end
 	  end
@@ -59,10 +58,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:notice] = "User was successfully updated."
+        flash[:notice] = "Your changes were saved."
         format.html { redirect_to user_url(@user) }
       else
-        flash[:warning] = "There was a problem saving your user."
         format.html { render :action => "edit" }
       end
     end
@@ -72,7 +70,6 @@ class UsersController < ApplicationController
     @user.destroy
     
     respond_to do |format|
-      flash[:notice] = "User #{@user.name} deleted"
       format.html { redirect_to users_url }
     end
   end
@@ -80,7 +77,7 @@ class UsersController < ApplicationController
   def confirm
     respond_to do |format|
       if User.confirm(params[:token])
-	      flash[:notice] = "E-mail confirmed, you may now log in!"
+	      flash[:notice] = "E-mail confirmed, you're all clear to log in!"
 	    else
 	      flash[:warning] = "Invalid confirmation token; please try again."
 	    end

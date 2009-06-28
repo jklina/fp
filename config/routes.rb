@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :categories
   map.resources :features, :as => :featured
+  map.resources :announcements
 
   map.root :controller => "application"
 

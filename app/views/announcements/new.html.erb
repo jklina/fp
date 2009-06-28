@@ -1,0 +1,6 @@
+<h2>New Announcement</h2>
+
+<% form_for @announcement do |f| -%>
+<%= render :partial => "form", :locals => { :f => f } -%>
+<p><%= submit_tag "Publish this announcement" -%></p>
+<% end -%>

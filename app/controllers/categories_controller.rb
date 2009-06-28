@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_filter :find_category, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :find_category, :except => [ :index, :new, :create ]
 
   def index
     @categories = Category.find(:all)

@@ -18,6 +18,7 @@
     <li><%= link_to_unless_current "Browse", :controller => "browse" -%></li>
     <li><%= link_to "Forum", "http://gypsyspacemuffin.com/viewforum.php?id=25", :popup => true -%></li>
     <li><%= link_to "Chat", "http://webchat.freenode.net/?channels=pixelfuckers", :popup => true -%></li>
+    <li><%= link_to_unless_current "News", announcements_path -%></li>
   </ul>
 
   <ul class="toolbar autoclear">
@@ -30,6 +31,7 @@
     <% if logged_in? -%>
       <li><%= link_to h(current_user.username), user_path(current_user) -%></li>
       <% if moderator? -%>
+      <li><%= link_to "new announcement", new_announcement_path -%></li>
       <li><%= link_to "categories", categories_path -%></li>
       <li><%= link_to "pending featured submissions (#{pending_featured_submissions.size})", new_feature_path -%></li>
       <li><%= link_to "moderated submissions", moderated_submissions_path -%></li>

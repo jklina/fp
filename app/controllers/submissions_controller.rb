@@ -101,7 +101,7 @@ class SubmissionsController < ApplicationController
 
   def download
     @submission.downloads += 1
-	  @submission.save
+	  @submission.save!
 
     send_file @submission.download_url
   end

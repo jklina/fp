@@ -134,7 +134,8 @@ div.submission div.notes {
 
 div.submission div.meta { padding: 0 0 0 10px; }
 
-div.review {
+div.review,
+div.announcement {
 	border-bottom: 1px solid #e5e5e5;
 	margin: 0 0 1.3em;
 }
@@ -170,6 +171,7 @@ div#head h1 a {
 	height: 24px;
 	margin: 0 0 5px;
 	text-indent: -9999px;
+	width: 139px;
 }
 
 div#head ul.inline {

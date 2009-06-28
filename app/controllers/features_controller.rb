@@ -1,5 +1,5 @@
 class FeaturesController < ApplicationController
-  before_filter :find_feature, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :find_feature, :except => [ :new, :create ]
 
   def show
 	  @submissions = @feature.submissions

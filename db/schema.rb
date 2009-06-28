@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090628054309) do
+ActiveRecord::Schema.define(:version => 20090628064814) do
+
+  create_table "announcements", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authorships", :force => true do |t|
     t.integer  "submission_id"
