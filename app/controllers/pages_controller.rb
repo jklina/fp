@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def browse
-    @objects = [
+    @selectables = [
       [ "All Submissions", "submissions" ],
       [ "Featured Submissions", "featured" ],
       [ "Users",           "users" ],
@@ -40,36 +40,36 @@ class PagesController < ApplicationController
         order = "created_at DESC"
     end
 
-    case params[:items]
+    case params[:things]
       when nil, "submissions", "#"
-        @items = Submission.paginate :page => params[:page],
-                                     :per_page => 16,
-                                     :order => order,
-                                     :conditions => { :trashed => false,
-                                                      :moderated => false },
-                                     :include => :users
-        @klass = "submissions/submission"
+        @renderables = Submission.paginate :page => params[:page],
+                                           :per_page => 16,
+                                           :order => order,
+                                           :conditions => { :trashed => false,
+                                                            :moderated => false },
+                                           :include => :users
+        @fragment = "submissions/submission"
       when "featured"
-        @items = Submission.paginate :page => params[:page],
-                                     :per_page => 16,
-                                     :order => order,
-                                     :conditions => [ "trashed = ? AND moderated = ? AND featured_at != ?", false, false, "" ],
-                                     :include => :users
-        @klass = "submissions/submission"
+        @renderables = Submission.paginate :page => params[:page],
+                                           :per_page => 16,
+                                           :order => order,
+                                           :conditions => [ "trashed = ? AND moderated = ? AND featured_at != ?", false, false, "" ],
+                                           :include => :users
+        @fra = "submissions/submission"
       when "users"
-        @items = User.paginate :page => params[:page],
-                               :per_page => 16,
-                               :order => order
-        @klass = "users/user"
-      else
-        @items = Submission.paginate :page => params[:page],
+        @renderables = User.paginate :page => params[:page],
                                      :per_page => 16,
-                                     :order => order,
-                                     :conditions => { :trashed => false,
-                                                      :moderated => false,
-                                                      :category_id => params[:items].to_i },
-                                     :include => :users
-        @klass = "submissions/submission"
+                                     :order => order
+        @fragment = "users/user"
+      else
+        @renderables = Submission.paginate :page => params[:page],
+                                           :per_page => 16,
+                                           :order => order,
+                                           :conditions => { :trashed => false,
+                                                            :moderated => false,
+                                                            :category_id => params[:things].to_i },
+                                           :include => :users
+        @fragment = "submissions/submission"
     end
 
     respond_to do |format|
