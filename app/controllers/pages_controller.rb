@@ -55,7 +55,7 @@ class PagesController < ApplicationController
                                            :order => order,
                                            :conditions => [ "trashed = ? AND moderated = ? AND featured_at != ?", false, false, "" ],
                                            :include => :users
-        @fra = "submissions/submission"
+        @fragment = "submissions/submission"
       when "users"
         @renderables = User.paginate :page => params[:page],
                                      :per_page => 16,
