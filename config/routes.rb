@@ -18,8 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :features, :as => :featured
   map.resources :announcements
 
-  map.root :controller => "application"
-
+  map.root                 :controller => "pages",     :action => "root"
+  map.browse   "browse",   :controller => "pages",     :action => "browse"
   map.login    "login",    :controller => "sessions",  :action => "new"
   map.logout   "logout",   :controller => "sessions",  :action => "destroy"
   map.register "register", :controller => "users",     :action => "new"

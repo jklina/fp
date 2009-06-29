@@ -1,7 +1,7 @@
 <div class="review autoclear<% if review.by_administrator -%> moderator<% end -%>">
   <p class="avatar"><%= link_to image_tag(review.user.photo.url(:avatar)), user_path(review.user) -%></p>
   <div class="comment">
-    <p><strong><%=h review.user.username -%><% if review.rating -%> [<%=h review.rating -%>]<% end -%></strong> wrote:</p>
-    <%= review.comment_html -%>
+    <p><strong><%=h review.user.username -%><% if review.rating -%> [<%=h review.rating -%>]<% end -%></strong><% if review.comment -%> wrote: <% end -%></p>
+    <% if review.comment -%><%= review.comment_html -%><% end -%>
   </div>
 </div>

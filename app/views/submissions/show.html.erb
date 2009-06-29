@@ -24,12 +24,13 @@
   </div>
   <div class="meta">
     <ul>
-      <li>Submitted: <%=h @submission.submitted_at -%></li>
+      <li>Submitted: <%=h shortdate(@submission.created_at) -%></li>
       <li>Reviews: <%=h @submission.reviews.count -%></li>
       <li>Views: <%=h @submission.views -%></li>
       <li>Downloads: <%=h @submission.downloads -%></li>
       <li>Admin Rating: <%=h number_with_precision(@submission.admin_rating, :precision => 2) -%></li>
       <li>User Rating: <%=h number_with_precision(@submission.user_rating, :precision => 2) -%></li>
+      <% if @submission.featured_at -%><li>Featured: <%=h shortdate(@submission.featured_at) -%></li><% end -%>
     </ul>
   </div>
 </div>

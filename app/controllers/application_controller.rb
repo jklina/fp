@@ -13,17 +13,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :respond_with_404
   rescue_from ActionController::RedirectBackError, :with => :handle_referrerless_redirect
 
-  def index
-    @submissions = Submission.paginate :page => params[:page],
-                                       :per_page => 16,
-                                       :order => "created_at DESC",
-                                       :conditions => { :trashed => false,
-                                                        :moderated => false },
-                                       :include => :users
-
-	  @feature = Feature.find :last, :include => :user
-  end
-
   protected
 
   def authentication_required?

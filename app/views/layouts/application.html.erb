@@ -15,7 +15,6 @@
   <h1><%= link_to "Pixelfuckers", root_path -%></h1>
 
   <ul class="inline">
-    <li><%= link_to_unless_current "Home", root_path -%></li>
     <li><%= link_to_unless_current "Browse", :controller => "browse" -%></li>
     <li><%= link_to "Forum", "http://gypsyspacemuffin.com/viewforum.php?id=25", :popup => true -%></li>
     <li><%= link_to "Chat", "http://webchat.freenode.net/?channels=pixelfuckers", :popup => true -%></li>
@@ -30,7 +29,7 @@
 
   <ul class="actions">
     <% if logged_in? -%>
-      <li><%= link_to h(current_user.username), user_path(current_user) -%></li>
+      <li><%= link_to h(current_user.username), user_path(current_user) -%> :</li>
       <% if moderator? -%>
       <li><%= link_to "new announcement", new_announcement_path -%></li>
       <li><%= link_to "categories", categories_path -%></li>
