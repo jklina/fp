@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  extend ActiveSupport::Memoizable
+
   helper_method :current_user, :logged_in?,
                 :moderator?, :administrator?, :has_authority?,
                 :pending_featured_submissions
@@ -33,8 +35,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user])
+    User.find_by_id(session[:user])
   end
+  memoize :current_user
 
   def logged_in?
     current_user
