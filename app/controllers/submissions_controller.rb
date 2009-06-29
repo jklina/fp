@@ -217,4 +217,12 @@ class SubmissionsController < ApplicationController
       end
     end
   end
+
+  def page_title
+    case self.action_name
+      when "show" then "#{h(@submission.title)} by #{h(Object.new.extend(SubmissionsHelper).authors(@submission, false))}"
+      when "edit" then "Editing &ldquo;#{h(@submission.title)}&rdquo;"
+      else super
+    end
+  end
 end

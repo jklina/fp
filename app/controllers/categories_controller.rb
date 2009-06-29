@@ -10,9 +10,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @submissions = @category.submissions.paginate :page => params[:page],
-                                                  :per_page => 16,
-                                                  :order => "created_at DESC"
+    @submissions = Submission.paginate :page => params[:page],
+                                       :per_page => 16,
+                                       :order => "created_at DESC",
+                                       :conditions  => { :category_id => @category.id },
+                                       :include => :users
 
     respond_to do |format|
       format.html
@@ -71,5 +73,13 @@ class CategoriesController < ApplicationController
 
   def find_category
     @category = Category.find(params[:id])
+  end
+
+  def page_title
+    case self.action_name
+      when "show" then "#{h(@category.title.singularize)} Submissions"
+      when "edit" then "Editing &ldquo;#{h(@category.title)}&rdquo;"
+      else super
+    end
   end
 end

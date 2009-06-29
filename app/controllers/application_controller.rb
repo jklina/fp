@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
+  helper :submissions
+
   helper_method :current_user, :logged_in?,
                 :moderator?, :administrator?, :has_authority?,
-                :pending_featured_submissions
+                :pending_featured_submissions,
+                :page_title
 
   before_filter :request_authentication_if_necessary
   before_filter :redirect_if_unauthorized
@@ -43,6 +46,14 @@ class ApplicationController < ActionController::Base
 
   def pending_featured_submissions
     session[:pending_featured_submissions] ||= []
+  end
+
+  def page_title
+    case self.action_name
+      when "index" then "All #{self.controller_name.capitalize}"
+      when "new" then "New #{self.controller_name.capitalize.singularize}"
+      else nil
+    end
   end
 
   private

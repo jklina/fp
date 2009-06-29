@@ -3,7 +3,7 @@
   <p class="meta">
     <%= link_to h(submission.title), submission_path(submission) -%>
     <% unless controller.controller_name == "users" -%>
-    by <%= submission.users.collect { |u| link_to h(u.username), user_path(u) }.to_sentence -%>
+    by <%= authors(submission) -%>
     <% end -%>
   </p>
 </div>

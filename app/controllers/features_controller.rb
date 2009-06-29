@@ -88,4 +88,12 @@ class FeaturesController < ApplicationController
   def find_feature
     @feature = Feature.find(params[:id])
   end
+
+  def page_title
+    case self.action_name
+      when "show" then h(@feature.title)
+      when "edit" then "Editing &ldquo;#{h(@feature.title)}&rdquo;"
+      else super
+    end
+  end
 end

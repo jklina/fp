@@ -109,4 +109,13 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def page_title
+    case self.action_name
+      when "show" then @user == current_user ? "Your Profile" : h(@user.username)
+      when "new"  then "Sign up for an account"
+      when "edit" then "Editing your account"
+      else super
+    end
+  end
 end

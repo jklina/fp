@@ -74,4 +74,12 @@ class AnnouncementsController < ApplicationController
   def find_announcement
     @announcement = Announcement.find(params[:id])
   end
+
+  def page_title
+    case self.action_name
+      when "show" then h(@announcement.title)
+      when "edit" then "Editing &ldquo;#{h(@announcement.title)}&rdquo;"
+      else super
+    end
+  end
 end
