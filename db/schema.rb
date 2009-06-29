@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090629034309) do
+ActiveRecord::Schema.define(:version => 20090629195828) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(:version => 20090629034309) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "authorships", ["submission_id"], :name => "index_authorships_on_submission_id"
+  add_index "authorships", ["user_id"], :name => "index_authorships_on_user_id"
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -89,6 +92,8 @@ ActiveRecord::Schema.define(:version => 20090629034309) do
     t.datetime "featured_at"
   end
 
+  add_index "submissions", ["trashed", "moderated"], :name => "index_submissions_on_trashed_and_moderated"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.datetime "last_login_time"
@@ -125,5 +130,7 @@ ActiveRecord::Schema.define(:version => 20090629034309) do
     t.datetime "banner_updated_at"
     t.string   "authentication_token"
   end
+
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end

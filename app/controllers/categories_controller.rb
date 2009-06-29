@@ -13,7 +13,9 @@ class CategoriesController < ApplicationController
     @submissions = Submission.paginate :page => params[:page],
                                        :per_page => 16,
                                        :order => "created_at DESC",
-                                       :conditions  => { :category_id => @category.id },
+                                       :conditions  => { :trashed => false,
+                                                         :moderated => false,
+                                                         :category_id => @category.id },
                                        :include => :users
 
     respond_to do |format|
