@@ -1,10 +1,11 @@
 class AnnouncementsController < ApplicationController
-  before_filter :find_announcement, :except => [ :index, :new, :create ]
+  before_filter :find_announcement, :except => [ :index, :show, :new, :create ]
 
   def index
     @announcements = Announcement.paginate :page => params[:page],
                                            :per_page => 16,
-                                           :order => "created_at DESC"
+                                           :order => "created_at DESC",
+                                           :include => :user
 
     respond_to do |format|
       format.html
@@ -12,6 +13,8 @@ class AnnouncementsController < ApplicationController
   end
 
   def show
+    @announcement = Announcement.find(params[:id], :include => :user)
+
     respond_to do |format|
       format.html
     end

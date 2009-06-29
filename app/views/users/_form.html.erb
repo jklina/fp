@@ -7,20 +7,14 @@
 <dt><%= f.label :name -%></dt>
 <dd><%= f.text_field :name -%></dd>
 
-<% unless %w(new create).include?(controller.action_name) -%>
-
 <dt><%= f.label :location -%></dt>
 <dd><%= f.text_field :location -%></dd>
 
 <dt><%= f.label :country -%></dt>
 <dd><%= f.text_field :country -%></dd>
 
-<% end -%>
-
 <dt><%= f.label :email -%></dt>
 <dd><%= f.text_field :email -%></dd>
-
-<% unless %w(new create).include?(controller.action_name) -%>
 
 <dt><%= f.label :aim -%></dt>
 <dd><%= f.text_field :aim -%></dd>
@@ -42,8 +36,6 @@
 
 <dt><%= f.label :photo -%></dt>
 <dd><%= f.file_field :photo -%></dd>
-
-<% end -%>
 
 <dt><%= f.label :password -%></dt>
 <dd><%= f.password_field :password -%></dd>

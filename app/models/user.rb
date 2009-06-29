@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
   end
   
   def self.confirm(token)
-    user = self.find_by_confirmation_token(token)
-    user.update_attribute(:confirmed, true) unless user.nil?
+    user = self.find_by_confirmation_token(token) if token
+    user.update_attribute(:confirmed, true) if user
   end
 
   def self.encrypt(string)

@@ -1,7 +1,8 @@
 class ReviewsController < ApplicationController
-  before_filter :find_submission
+  before_filter :find_submission, :only => [ :update ]
 
   def create
+    @submission = Submission.find(params[:submission_id], :include => :users)
     @review = @submission.reviews.build(params[:review])
     @review.by_administrator = has_authority?
     @review.user = current_user
@@ -20,7 +21,7 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review = @submission.reviews.find_by_user_id(current_user.id)
+    @review = Review.find(:last, :conditions => { :submission_id => @submission.id, :user_id => current_user.id })
 
     respond_to do |format|
       if !@review.rating.blank? && @submission.authored_by?(current_user)
@@ -39,10 +40,6 @@ class ReviewsController < ApplicationController
 
   def authentication_required?
     true
-  end
-
-  def find_review
-    @review = Review.find(params[:id]) 
   end
 
   def find_submission

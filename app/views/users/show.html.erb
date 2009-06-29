@@ -24,7 +24,7 @@
 
 <h3>Recent Reviews</h3>
 <div class="autoclear">
-<%= render :partial => @reviews -%>
+<%= render :partial => "users/review", :collection => @reviews -%>
 </div>
 
 <% if @user == current_user -%>

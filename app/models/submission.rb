@@ -31,8 +31,8 @@ class Submission < ActiveRecord::Base
     self.users.include?(user)
   end
 
-  def download_url
-    self.file.nil? ? self.preview.url : self.file.url
+  def download_path
+    self.file.path ? self.file.path : self.preview.path
   end
 
   def trash

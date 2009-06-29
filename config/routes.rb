@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.confirm_user "users/confirm", :controller => "users", :action => "confirm"
   map.resources :users
 
   map.moderated_submissions "submissions/moderated",      :controller => "submissions", :action => "moderated"

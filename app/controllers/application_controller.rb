@@ -16,8 +16,10 @@ class ApplicationController < ActionController::Base
                                        :per_page => 16,
                                        :order => "created_at DESC",
                                        :conditions => { :trashed => false,
-                                                        :moderated => false }
-	  @feature = Feature.find(:last)
+                                                        :moderated => false },
+                                       :include => :users
+
+	  @feature = Feature.find :last, :include => :user
   end
 
   protected

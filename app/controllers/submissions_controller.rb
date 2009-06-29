@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_filter :find_submission, :except => [ :index, :new, :create, :moderated ]
+  before_filter :find_submission, :except => [ :index, :show, :new, :create, :moderated ]
   before_filter :find_categories, :only => [ :new, :create, :edit, :update ]
   before_filter :require_authorship, :only => [ :edit, :update, :destroy, :trash, :untrash ]
 
@@ -8,7 +8,8 @@ class SubmissionsController < ApplicationController
                                        :per_page => 16,
                                        :order => "created_at DESC",
                                        :conditions => { :trashed => false,
-                                                        :moderated => false }
+                                                        :moderated => false },
+                                       :include => :users
 
     respond_to do |format|
       format.html
@@ -17,6 +18,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
+    @submission = Submission.find(params[:id], :include => [ :users, { :reviews => :user }, :category ])
     @review = @submission.reviews.find_last_by_user_id(current_user) || Review.new
 
     respond_to do |format|
@@ -103,7 +105,7 @@ class SubmissionsController < ApplicationController
     @submission.downloads += 1
 	  @submission.save!
 
-    send_file @submission.download_url
+    send_file @submission.download_path
   end
 
   def trash

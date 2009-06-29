@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :find_user, :except => [ :index, :new, :create ]
+  before_filter :find_user, :except => [ :index, :show, :new, :create, :confirm ]
   before_filter :require_self, :only => [ :edit, :update, :destroy ]
 
   def index
@@ -11,15 +11,17 @@ class UsersController < ApplicationController
   end
 
   def show
-	  @submissions = @user.submissions.find(:all,
+    @user = User.find(params[:id], :include => [ :submissions,  { :reviews => [ :user, :submission ] } ])
+
+    @submissions = @user.submissions.find(:all,
 	                                        :limit => 4,
 	                                        :order => "submissions.created_at DESC",
 	                                        :conditions => { :trashed => false,
 	                                                         :moderated => false })
 
-    @reviews = @user.reviews.find(:all,
+    @reviews = @user.reviews.find :all,
 	                                :limit => 4,
-	                                :order => "reviews.created_at DESC")
+	                                :order => "reviews.created_at DESC"
 
     @trash = @user.submissions.find(:all,
                                     :limit => 4,
@@ -54,8 +56,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.user_image = UserImage.new(params[:user_image]) if (params[:user_image]) 
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = "Your changes were saved."

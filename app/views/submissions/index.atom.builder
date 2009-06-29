@@ -1,4 +1,4 @@
-atom_feed(:url => formatted_submissions_url(:atom)) do |feed|
+atom_feed(:url => submissions_url(:atom)) do |feed|
   feed.title "Pixelfuckers.org - 16 Newest Submissions"
   feed.updated @submissions.first.created_at
 

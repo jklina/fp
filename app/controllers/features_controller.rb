@@ -1,10 +1,11 @@
 class FeaturesController < ApplicationController
-  before_filter :find_feature, :except => [ :index, :new, :create ]
+  before_filter :find_feature, :except => [ :index, :show, :new, :create ]
 
   def index
     @features = Feature.paginate :page => params[:page],
                                  :per_page => 16,
-                                 :order => "created_at DESC"
+                                 :order => "created_at DESC",
+                                 :include => :user
 
     respond_to do |format|
       format.html
@@ -12,6 +13,8 @@ class FeaturesController < ApplicationController
   end
 
   def show
+    @feature = Feature.find(params[:id], :include => [ :user, { :submissions => :users } ])
+
 	  respond_to do |format|
       format.html
     end
