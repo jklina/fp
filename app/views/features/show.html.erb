@@ -2,7 +2,9 @@
 
 <p><%= link_to image_tag(@feature.preview.url(:large)), @feature.preview.url -%></p>
 
-<%= render :partial => "submissions/submission", :collection => @submissions -%>
+<%= render :partial => "submissions/submission", :collection => @feature.submissions -%>
+
+<hr class="invisible" />
 
 <%= @feature.comment_html -%>
 

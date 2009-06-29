@@ -36,7 +36,7 @@ class SubmissionsController < ApplicationController
         end
 	    else
   	    @submission.views += 1
-  	    @submission.save
+  	    @submission.save!
 
         format.html
       end
@@ -57,10 +57,9 @@ class SubmissionsController < ApplicationController
         authorship.user = current_user
         authorship.save!
 
-	      flash[:notice] = "Submission was successfully created."
-	      format.html { redirect_to submissions_url }
+	      flash[:notice] = "Successfully created your submission!"
+	      format.html { redirect_to submission_url(@submission) }
 	    else
-	      flash[:warning] = "There was a problem saving your submission."
 	      format.html { render :action => "new" }
 	    end
     end
@@ -72,8 +71,8 @@ class SubmissionsController < ApplicationController
   def update
     respond_to do |format|
       if @submission.update_attributes(params[:submission])
-        flash[:notice] = "Submission was successfully updated."
-        format.html { redirect_to submission_url(@submission) }
+        flash[:notice] = "Your changes were saved."
+        format.html { redirect_to edit_submission_url(@submission) }
       else
         format.html { render :action => "edit" }
       end
@@ -111,15 +110,15 @@ class SubmissionsController < ApplicationController
     respond_to do |format|
       if @submission.authored_by?(current_user) 
         if @submission.trash
-	        flash[:notice] = "Your submission #{@submission.title} has been moved to your trash. It is not viewable by the public."
+	        flash[:notice] = "&ldquo;#{@submission.title}&rdquo; has been moved to your trash. Only you can see it now."
           format.html { redirect_to submission_url(@submission) }
 	      else
-	        flash[:warning] = "There was a problem trashing your submission. Please contact the staff."
-          format.html { redirect_to submission_url(@submission) }
+	        flash[:warning] = "Couldn&rsquo;t trash your submission. Please contact a moderator."
+          format.html { render :action => "show", :id => @submission }
         end
       else
-        flash[:warning] = "You must be the submission's author to trash it."
-        format.html { redirect_to submission_url(@submission) }
+        flash[:warning] = "You must be the submission&rsquo;s author to trash it."
+        format.html { render :action => "show", :id => @submission }
 	    end
     end
   end
@@ -128,15 +127,15 @@ class SubmissionsController < ApplicationController
     respond_to do |format|
       if @submission.authored_by?(current_user)
 	      if @submission.untrash
-	        flash[:notice] = "Your submission #{@submission.title} has been removed from your trash. It is now viewable by the public."
+	        flash[:notice] = "&ldquo;#{@submission.title}&rdquo; has been removed from your trash. Everyone can see it now."
 	        format.html { redirect_to submission_url(@submission) }
 	      else
-	        flash[:warning] = "There was a problem restoring your submission. Please contact the staff."
-	        format.html { redirect_to submission_url(@submission) }
+	        flash[:warning] = "Couldn&rsquo;t restore your submission. Please contact a moderator."
+          format.html { render :action => "show", :id => @submission }
 	      end
       else
-        flash[:warning] = "You must be the submission's author to restore it."
-        format.html { redirect_to submission_url(@submission) }
+        flash[:warning] = "You must be the submission&rsquo;s author to restore it."
+        format.html { render :action => "show", :id => @submission }
       end
     end
   end
@@ -144,11 +143,11 @@ class SubmissionsController < ApplicationController
   def moderate
     respond_to do |format|
       if @submission.moderate
-	      flash[:notice] = "#{@submission.title} has been moderated. It is not viewable by the public."
+	      flash[:notice] = "&ldquo;#{@submission.title}&rdquo; has been moderated. Only you and the other moderators can see it now."
 	      format.html { redirect_to submission_url(@submission) }
 	    else
-	      flash[:warning] = "There was a problem trashing your submission. Please contact the staff."
-	      format.html { redirect_to submission_url(@submission) }
+	      flash[:warning] = "Couldn&rsquo;t moderate &ldquo;#{@submission.title}&rdquo;."
+	      format.html { render :action => "show", :id => @submission }
 	    end
     end
   end
@@ -156,11 +155,11 @@ class SubmissionsController < ApplicationController
   def unmoderate
     respond_to do |format|
       if @submission.unmoderate
-	      flash[:notice] = "#{@submission.title} has been unmoderated. It is now viewable by the public."
+	      flash[:notice] = "#{@submission.title} has been restored. Everyone can see it now."
 	      format.html { redirect_to submission_url(@submission) }
 	    else
-	      flash[:warning] = "There was a problem trashing your submission. Please contact the staff."
-	      format.html { redirect_to submission_url(@submission) }
+	      flash[:warning] = "Couldn&rsquo;t restore &ldquo;#{@submission.title}&rdquo;."
+	      format.html { render :action => "show", :id => @submission }
 	    end
     end
   end
@@ -169,7 +168,7 @@ class SubmissionsController < ApplicationController
     respond_to do |format|
       if pending_featured_submissions.include?(@submission.id)
         flash[:warning] = "#{@submission.title} is already waiting to be featured."
-        format.html { redirect_to submission_url(@submission) }
+        format.html { render :action => "show", :id => @submission }
       else
         pending_featured_submissions << @submission.id
         flash[:notice] = "Added #{@submission.title} to pending featured submissions."
@@ -185,7 +184,7 @@ class SubmissionsController < ApplicationController
         format.html { redirect_to new_feature_url }
       else
         flash[:warning] = "#{@submission.title} isn't a pending featured submission."
-        format.html { redirect_to submission_url(@submission) }
+        format.html { render :template => "features/new" }
       end
     end
   end
@@ -193,7 +192,7 @@ class SubmissionsController < ApplicationController
   protected
 
   def authentication_required?
-    %w(new create edit update destroy trash untrash moderate unmoderate feature unfeature).include?(action_name)
+    !%w(index show).include?(action_name)
   end
 
   def authority_required?
@@ -211,7 +210,9 @@ class SubmissionsController < ApplicationController
   def require_authorship
     unless @submission.authored_by?(current_user)
       flash[:warning] = "You must be the author of the submission to do that."
-      redirect_to submission_url(@submission)
+      respond_to do |format|
+        format.html { render :action => "show", :id => @submission }
+      end
     end
   end
 end

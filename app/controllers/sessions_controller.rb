@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
           redirect_to root_url
         end
 	    else
-	      flash[:warning] = "Please confirm your email address."
+	      flash[:warning] = "Woah there&mdash;you still need to confirm your email address."
         render :action => "new"
 	    end
     else
@@ -34,6 +34,6 @@ class SessionsController < ApplicationController
     cookies.delete :authentication_token if cookies[:authentication_token]
     reset_session
     flash[:notice] = "You are now logged out."
-    redirect_to root_url
+    redirect_to :back
   end
 end

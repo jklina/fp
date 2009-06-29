@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        flash[:notice] = "Category was successfully created."
+        flash[:notice] = "Successfully created your category!"
         format.html { redirect_to categories_url }
       else
         format.html { render :action => "new" }
@@ -42,7 +42,7 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update_attributes(params[:category])
-        flash[:notice] = 'Category was successfully updated.'
+        flash[:notice] = "Your changes were saved."
         format.html { redirect_to edit_category_url(@category) }
       else
         format.html { render :action => "edit" }
@@ -54,7 +54,7 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
-      flash[:notice] = 'Category was successfully deleted.'
+      flash[:notice] = "Category deleted."
       format.html { redirect_to categories_url }
 	  end
   end
@@ -62,11 +62,11 @@ class CategoriesController < ApplicationController
   protected
 
   def authentication_required?
-    true
+    authority_required?
   end
 
   def authority_required?
-    true
+    %w(new create edit update destroy).include?(action_name)
   end
 
   def find_category

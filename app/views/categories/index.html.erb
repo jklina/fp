@@ -4,4 +4,6 @@
 <%= render :partial => "category", :collection => @categories -%>
 </ul>
 
+<% if has_authority? -%>
 <%= link_to 'New category', new_category_path -%>
+<% end -%>

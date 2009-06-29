@@ -8,11 +8,11 @@
   <li><%= link_to "Download", download_submission_path(@submission), :class => "tile app_get" -%></li>
   <% if @submission.authored_by?(current_user) -%>
   <li><%= link_to "Edit", edit_submission_path(@submission), :class => "tile app_edit" -%></li>
-  <% if @submission.trashed -%>
+    <% if @submission.trashed -%>
   <li><%= link_to "Untrash", trash_submission_path(@submission), :class => "tile app_add" -%></li>
-  <% else -%>
+    <% else -%>
   <li><%= link_to "Trash", trash_submission_path(@submission), :class => "tile app_delete" -%></li>
-  <% end -%>
+    <% end -%>
   <% end -%>
 </ul>
 
@@ -38,19 +38,19 @@
 <%= render :partial => "reviews/review", :collection => @submission.reviews -%>
 
 <% if logged_in? %>
-<% unless @submission.authored_by?(current_user) -%>
-<% if @review.new_record? -%>
+  <% unless @submission.authored_by?(current_user) -%>
+    <% if @review.new_record? -%>
 <% form_for [@submission, @review] do |f| -%>
 <%= render :partial => "reviews/form", :locals => { :f => f } -%>
 <p><%= submit_tag "Submit Review" -%></p>
 <% end -%>
-<% else -%>
+    <% else -%>
 <% form_for [@submission, @review], :html => { :method => :put } do |f| -%>
 <%= render :partial => "reviews/form", :locals => { :f => f } -%>
 <p><%= submit_tag "Submit Review" -%></p>
 <% end -%>
-<% end -%>
-<% end -%>
+    <% end -%>
+  <% end -%>
 <% else -%>
 <p><%= link_to "Log in", login_path -%> or <%= link_to "register", register_path -%> to post comments and rate submissions!</p>
 <% end -%>

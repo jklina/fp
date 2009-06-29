@@ -9,13 +9,14 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   rescue_from ActiveRecord::RecordNotFound, :with => :respond_with_404
+  rescue_from ActionController::RedirectBackError, :with => :handle_referrerless_redirect
 
   def index
-    @submissions = Submission.paginate  :page => params[:page],
-                                        :per_page => 16,
-                                        :order => "created_at DESC",
-                                        :conditions => { :trashed => false,
-                                                         :moderated => false }
+    @submissions = Submission.paginate :page => params[:page],
+                                       :per_page => 16,
+                                       :order => "created_at DESC",
+                                       :conditions => { :trashed => false,
+                                                        :moderated => false }
 	  @feature = Feature.find(:last)
   end
 
@@ -34,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    !current_user.nil?
+    current_user
   end
 
   def moderator?
@@ -60,22 +61,32 @@ class ApplicationController < ActionController::Base
       if cookies[:authentication_token] && (user = User.find_by_authentication_token(cookies[:authentication_token]))
         session[:user] = user.id
       else
-        session[:destination] = request.request_uri
-        redirect_to login_url
+        respond_to do |format|
+          session[:destination] = request.request_uri
+          format.html { redirect_to login_url }
+        end
       end
     end
   end
 
   def redirect_if_unauthorized
     if authority_required? && !has_authority?
-      flash[:warning] = "You must be a moderator or an administrator to do that."
-      redirect_to root_url
+      respond_to do |format|
+        flash[:warning] = "You must be a moderator or an administrator to do that."
+        format.html { redirect_to :back }
+      end
     end
   end
 
   def respond_with_404
     respond_to do |format|
       format.html { render :file => "public/404.html", :status => 404 }
+    end
+  end
+
+  def handle_referrerless_redirect
+    respond_to do |format|
+      format.html { redirect_to root_url }
     end
   end
 end

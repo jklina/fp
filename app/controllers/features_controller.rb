@@ -1,9 +1,17 @@
 class FeaturesController < ApplicationController
-  before_filter :find_feature, :except => [ :new, :create ]
+  before_filter :find_feature, :except => [ :index, :new, :create ]
+
+  def index
+    @features = Feature.paginate :page => params[:page],
+                                 :per_page => 16,
+                                 :order => "created_at DESC"
+
+    respond_to do |format|
+      format.html
+    end
+  end
 
   def show
-	  @submissions = @feature.submissions
-
 	  respond_to do |format|
       format.html
     end
@@ -33,10 +41,9 @@ class FeaturesController < ApplicationController
 	      end
 
 	      pending_featured_submissions = []
-	      flash[:notice] = "Your feature was saved."
+	      flash[:notice] = "Successfully featured your submissions!"
 	      format.html { redirect_to feature_url(@feature) }
 	    else
-	      flash[:warning] = "There was a problem saving your feature."
 	      format.html { render :action => "new" }
 	    end
     end
@@ -51,7 +58,6 @@ class FeaturesController < ApplicationController
         flash[:notice] = "Your changes were saved."
         format.html { redirect_to edit_feature_url(@feature) }
       else
-        flash[:warning] = "There was a problem saving your feature."
         format.html { render :action => "edit" }
       end
     end
@@ -61,15 +67,15 @@ class FeaturesController < ApplicationController
     @feature.destroy
 
     respond_to do |format|
-      flash[:notice] = "Feature successfully deleted."
-      format.html { redirect_to root_url }
+      flash[:notice] = "Feature deleted."
+      format.html { redirect_to features_url }
     end
   end
 
   protected
 
   def authentication_required?
-    %w(new create edit update destroy).include?(action_name)
+    authority_required?
   end
 
   def authority_required?

@@ -53,6 +53,7 @@ class AnnouncementsController < ApplicationController
     @announcement.destroy
     
     respond_to do |format|
+      flash[:notice] = "Announcement deleted."
       format.html
     end
   end
@@ -60,7 +61,7 @@ class AnnouncementsController < ApplicationController
   protected
 
   def authentication_required?
-    %w(new create edit update destroy).include?(action_name)
+    authority_required?
   end
 
   def authority_required?

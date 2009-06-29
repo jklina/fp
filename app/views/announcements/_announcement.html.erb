@@ -1,5 +1,5 @@
 <div class="announcement">
-<h2><%=h announcement.title -%></h2>
+<h2><%= link_to h(announcement.title), announcement_path(announcement) -%></h2>
 <p>by <%= link_to h(announcement.user.username), user_path(announcement.user) -%> on <%= announcement.published_at -%></p>
 
 <%= announcement.body_html -%>

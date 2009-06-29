@@ -78,22 +78,22 @@ class UsersController < ApplicationController
     respond_to do |format|
       if User.confirm(params[:token])
 	      flash[:notice] = "E-mail confirmed, you're all clear to log in!"
+	      format.html { redirect_to login_url }
 	    else
 	      flash[:warning] = "Invalid confirmation token; please try again."
+	      format.html { render :template => "sessions/new" }
 	    end
-
-	    format.html { redirect_to login_url }
 	  end
   end
 
   protected
 
   def authentication_required?
-    %w(index edit update destroy).include?(action_name)
+    %w(edit update destroy).include?(action_name)
   end
 
   def authority_required?
-    %w(index destroy).include?(action_name)
+    %w(destroy).include?(action_name)
   end
 
   def find_user
@@ -101,10 +101,12 @@ class UsersController < ApplicationController
   end
 
   def require_self
-    unless @user == current_user
-      session[:destination] = request.request_uri
-      flash[:warning] = "You aren't authorized to do that."
-      redirect_to user_url(@user)
+    respond_to do |format|
+      unless @user == current_user
+        session[:destination] = request.request_uri
+        flash[:warning] = "You aren't authorized to do that."
+        format.html { render :action => "show", :id => @user }
+      end
     end
   end
 end
