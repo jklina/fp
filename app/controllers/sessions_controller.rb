@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    session[:destination] = request.referer
   end
 
   def create
