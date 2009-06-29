@@ -29,15 +29,11 @@ class PagesController < ApplicationController
       [ "Lowest user rating first", 3 ]
     ]
 
-    case params[:order].to_i
-      when 1
-        order = "created_at ASC"
-      when 2
-        order = "user_rating DESC"
-      when 3
-        order = "user_rating ASC"
-      else
-        order = "created_at DESC"
+    order = case params[:order].to_i
+      when 1 then "created_at ASC"
+      when 2 then "user_rating DESC"
+      when 3 then "user_rating ASC"
+      else "created_at DESC"
     end
 
     case params[:things]

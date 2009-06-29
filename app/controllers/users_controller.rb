@@ -42,9 +42,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
 	    if @user.save
-	      confirmation_url = url_for :controller => "users", :action => "confirm", :token => @user.confirmation_token
-	      Mailer::deliver_confirmation_email(@user, confirmation_url)
-	      flash[:notice] = "Thanks for signing up! We've sent a confirmation email to #{@user.email} with instructions on how to activate your account."
+	      flash[:notice] = "Thanks for signing up! We've sent a confirmation email to #{h(@user.email)} with instructions on how to activate your account."
 	      format.html { redirect_to submissions_url }
 	    else
 	      format.html { render :action => "new" }

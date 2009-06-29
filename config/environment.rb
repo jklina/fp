@@ -39,20 +39,21 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-end
 
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-   :address        => "secure813.hostgator.com",
-   :port           => 26,
-   :domain	       => "pixelfuckers.org",
-   :authentication => :login,    # Don't change this one.
-   :user_name      => "robot@pixelfuckers.org",
-   :password       => "79spitfire"
-}
-ActionMailer::Base.perform_deliveries = true
-ActionMailer::Base.raise_delivery_errors = true
-ActionMailer::Base.default_charset = "utf-8"
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+     :address        => "secure813.hostgator.com",
+     :port           => 26,
+     :domain	       => "pixelfuckers.org",
+     :authentication => :login,    # Don't change this one.
+     :user_name      => "robot@pixelfuckers.org",
+     :password       => "79spitfire"
+  }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_charset = "utf-8"
+  config.action_mailer.default_url_options = { :host => "www.pixelfuckers.org" }
+end
 
 PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
 PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
