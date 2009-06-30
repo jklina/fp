@@ -96,16 +96,19 @@ div.thumb {
 	width: 197px;
 }
 
-div.thumb p.meta { font-size: 1.1em; }
-
 p.preview {
-  display: table-cell;
-  height: 122px;
-  vertical-align: middle;
-  width: 194px;
+	display: table-cell;
+	height: 122px;
+	vertical-align: middle;
+	width: 194px;
 }
 
-p.preview img {  }
+p.preview img {
+	background: transparent url('/images/shadow.gif') no-repeat bottom right;
+	padding: 0 2px 3px 0;
+}
+
+div.thumb p.meta { font-size: 1.1em; }
 
 p.pagination { clear: left; }
 
