@@ -9,7 +9,7 @@
 </head>
 
 <body class="<%= controller.controller_name -%> <%= controller.action_name -%>">
-<% if @announcement -%><p id="headline"><%= link_to "#{h(@announcement.title)} &raquo;", announcement_path(@announcement) -%></p><% end -%>
+<% if @headline -%><p id="headline"><%= link_to "#{h(@headline.title)} &raquo;", announcement_path(@headline) -%></p><% end -%>
 <div id="wrap">
 <div id="subwrap">
 <div id="head">

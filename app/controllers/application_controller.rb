@@ -95,6 +95,6 @@ class ApplicationController < ActionController::Base
   
   def find_recent_announcement
     a = Announcement.last
-    @announcement = a && a.created_at > 7.days.ago ? a : nil
+    @headline = a && a.created_at > 7.days.ago ? a : nil
   end
 end
