@@ -103,7 +103,8 @@ p.preview {
 	width: 194px;
 }
 
-p.preview img {
+p.preview img,
+p.shadow img {
 	background: transparent url('/images/shadow.gif') no-repeat bottom right;
 	padding: 0 2px 3px 0;
 }

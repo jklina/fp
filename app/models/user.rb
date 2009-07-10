@@ -75,6 +75,14 @@ class User < ActiveRecord::Base
     self.update_attributes!(attributes)
   end
 
+  def admin_ratings
+    self.submissions.map { |s| s.reviews.map { |r| r.rating if r.by_administrator } }.flatten.compact
+  end
+
+  def user_ratings
+    self.submissions.map { |s| s.reviews.map { |r| r.rating unless r.by_administrator } }.flatten.compact
+  end
+
   def remember
     token = self.class.encrypt("#{self.password_salt}--#{generate_salt}")
     self.update_attribute(:authentication_token, token)
@@ -102,13 +110,5 @@ class User < ActiveRecord::Base
 
   def generate_salt
     self.class.encrypt("#{Time.now.to_s.split(//).sort_by {rand}.join}")
-  end
-
-  def admin_ratings
-    self.submissions.map { |s| s.reviews.map { |r| r.rating if r.by_administrator } }.flatten.compact
-  end
-
-  def user_ratings
-    self.submissions.map { |s| s.reviews.map { |r| r.rating unless r.by_administrator } }.flatten.compact
   end
 end

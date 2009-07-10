@@ -72,8 +72,6 @@ class Submission < ActiveRecord::Base
     self.description ? RedCloth.new(self.description).to_html : ""
   end
 
-  protected
-
   def admin_ratings
     self.reviews.map { |r| r.rating if r.by_administrator }.compact
   end
