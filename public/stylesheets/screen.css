@@ -190,6 +190,13 @@ div.textile emphasis { font-style: italic; }
 
 
 
+p#headline {
+	background: #e9e9e9;
+	margin: 0 auto;
+	padding: 1em 97px;
+	width: 806px;
+}
+
 div#wrap {
 	margin: 0 auto;
 	min-height: 100%;

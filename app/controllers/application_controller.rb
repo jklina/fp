@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :request_authentication_if_necessary
   before_filter :redirect_if_unauthorized
+  before_filter :find_recent_announcement
 
   filter_parameter_logging :password, :password_confirmation
 
@@ -90,5 +91,10 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html { redirect_to root_url }
     end
+  end
+  
+  def find_recent_announcement
+    a = Announcement.last
+    @announcement = a && a.created_at > 7.days.ago ? a : nil
   end
 end
