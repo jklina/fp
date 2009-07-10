@@ -5,7 +5,7 @@
 <div class="textile">
 <%= @feature.comment_html -%>
 </div>
-<p class="meta">chosen by <%= link_to h(@feature.user.username), user_path(@feature.user) -%></p>
+<p class="meta">&mdash; chosen by <%= link_to h(@feature.user.username), user_path(@feature.user) -%></p>
 <% end -%>
 
 <h2>Recent Submissions</h2>
