@@ -214,22 +214,52 @@ div#head h1 a {
 	width: 139px;
 }
 
-div#head ul.inline {
+div#head ul.nav {
 	border-bottom: 1px solid #e5e5e5;
 	margin: 0 0 5px 0;
 	padding: 0 0 25px 0;
 }
 
-div#head ul.inline li { padding: 0 0.75em 0 0; }
+div#head ul.nav li {
+	float: left;
+	padding: 0 0.75em 0 0;
+}
 
-div#head ul.inline li a:link,
-div#head ul.inline li a:visited {
+div#head ul.nav li a:link,
+div#head ul.nav li a:visited {
 	color: #000;
 	font-weight: bold;
 }
 
-div#head ul.inline li a:hover,
-div#head ul.inline li a:active { color: #97481d; }
+div#head ul.nav li a:hover,
+div#head ul.nav li a:active { color: #97481d; }
+
+div#head ul.nav ul {
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	position: absolute;
+	left: -999em;
+}
+
+div#head ul.nav li:hover ul { left: auto; }
+
+div#head ul.nav ul li {
+	display: block;
+	float: none;
+	font-size: 1em;
+}
+
+div#head ul.nav ul li a {
+	display: block;
+	line-height: 1.5;
+	padding: 0 .5em;
+}
+
+li.administrator {
+	color: #000;
+	cursor: pointer;
+	font-weight: bold;
+}
 
 div#body {
 	border-bottom: 1px solid #e5e5e5;
