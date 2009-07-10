@@ -1,1 +1,8 @@
 <%= render :partial => @announcement -%>
+
+<% if has_authority? -%>
+<ul>
+<li><%= link_to 'Edit this announcement', edit_announcement_path(@announcement) -%></li>
+<li><%= link_to 'Delete this announcement', announcement_path(@announcement), :method => :delete -%></li>
+</ul>
+<% end -%>
