@@ -17,6 +17,8 @@
   <dd><%= link_to h(@user.website), @user.website -%></dd>
 </dl>
 
+<hr class="invisible" />
+
 <h3>Recent Submissions</h3>
 <div class="autoclear">
 <%= render :partial => "submissions/submission", :collection => @submissions -%>

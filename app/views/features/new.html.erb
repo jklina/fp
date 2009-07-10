@@ -2,6 +2,8 @@
 
 <%= render :partial => @submissions -%>
 
+<hr class="invisible" />
+
 <h3>Submit Feature</h3>
 <% form_for @feature, :html => { :multipart => true } do |f| -%>
 <%= render :partial => "form", :locals => { :f => f } -%>
