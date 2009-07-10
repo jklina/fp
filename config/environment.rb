@@ -53,10 +53,11 @@ Rails::Initializer.run do |config|
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_charset = "utf-8"
   config.action_mailer.default_url_options = { :host => "www.pixelfuckers.org" }
+
+  PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
+  PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
+
+  # Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
+  PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
 end
 
-PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
-PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
-
-# Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
-PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
