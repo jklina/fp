@@ -29,14 +29,17 @@ class PagesController < ApplicationController
       [ "Lowest user rating first", 3 ]
     ]
 
-    order = case params[:order].to_i
+    session[:order_filter]  = params[:order] if params[:order]
+    session[:things_filter] = params[:things] if params[:things]
+
+    order = case session[:order_filter].to_i
       when 1 then "created_at ASC"
       when 2 then "user_rating DESC"
       when 3 then "user_rating ASC"
       else "created_at DESC"
     end
 
-    case params[:things]
+    case session[:things_filter]
       when nil, "submissions", "#"
         @renderables = Submission.paginate :page => params[:page],
                                            :per_page => 16,
