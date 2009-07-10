@@ -8,15 +8,16 @@ module Calculations
       :upper_bound => nil
     }
 
+    mean = self.mean(values)
+    statistics[:mean] = mean
+
     return statistics if values.size <= 1
 
     count = values.size
-    mean = self.mean(values)
     std_dev = self.standard_deviation(values)
     tvalue = Statistics2.ptdist(count - 1, 0.05)
 
     statistics[:lower_bound] = mean + tvalue * std_dev / Math.sqrt(count)
-    statistics[:mean]        = mean
     statistics[:upper_bound] = mean - tvalue * std_dev / Math.sqrt(count)
 
     statistics
