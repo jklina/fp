@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    session[:destination] = request.referer
+    session[:destination] = request.referer unless session[:destination]
   end
 
   def create

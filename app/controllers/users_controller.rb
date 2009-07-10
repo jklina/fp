@@ -100,12 +100,9 @@ class UsersController < ApplicationController
 
   def require_self
     respond_to do |format|
-      unless @user == current_user
-        session[:destination] = request.request_uri
-        flash[:warning] = "You aren't authorized to do that."
-        format.html { render :action => "show", :id => @user }
-      end
-    end
+      flash[:warning] = "You aren't authorized to do that."
+      format.html { render :action => "show", :id => @user }
+    end unless @user == current_user
   end
 
   def page_title
