@@ -2,9 +2,7 @@
   <p class="preview"><%= link_to image_tag(review.submission.preview.url(:thumbnail)), submission_path(review.submission) -%></p>
   <p class="meta">
     <%= link_to h(review.submission.title), submission_path(review.submission) -%>
-    <% unless controller.controller_name == "users" -%>
     by <%= review.submission.users.collect { |u| link_to h(u.username), user_path(u) }.to_sentence -%>
-    <% end -%>
   </p>
-  <p class="comment"><span><%=h review.user.username -%></span><% if review.rating -%> [<%=h review.rating -%>]<% end -%> wrote: <%= truncate(h(review.comment)) -%></p>
+  <p class="comment"><span><%=h review.user.username -%></span><% if review.rating -%> [<%=h review.rating -%>]<% end -%><% if review.comment -%> wrote: <%= truncate(h(review.comment)) -%><% end -%></p>
 </div>

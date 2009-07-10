@@ -1,12 +1,12 @@
 <h2><%=h @user.username %></h2>
 
 <div class="autoclear">
-<p><%= link_to image_tag(@user.photo.url(:avatar)), @user.photo.url -%></p>
+<p class="shadow"><%= link_to image_tag(@user.photo.url(:avatar)), @user.photo.url -%></p>
 <p><%= link_to image_tag(@user.banner.url(:large)), @user.banner.url -%></p>
 </div>
 
 <h3>User Info<% if @user == current_user -%> (<%= link_to "Edit", edit_user_path(@user) -%>)<% end -%></h3>
-<dl class="info">
+<dl class="info autoclear">
   <dt>name:</dt>
   <dd><%=h @user.name -%></dd>
   <dt>location:</dt>
@@ -16,8 +16,6 @@
   <dt>url:</dt>
   <dd><%= link_to h(@user.website), @user.website -%></dd>
 </dl>
-
-<hr class="invisible" />
 
 <h3>Recent Submissions</h3>
 <div class="autoclear">
