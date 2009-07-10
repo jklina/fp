@@ -154,15 +154,35 @@ div.announcement {
 }
 
 div.review p.avatar {
-  float: left;
-  width: 54px;
+	float: left;
+	width: 54px;
 }
 
 div.review div.comment {
-  float: right;
-  width: 742px;
+	float: right;
+	width: 742px;
 }
 
+div.textile h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+	margin: 0 0 1em 0;
+}
+
+div.textile h1 { font-size: 2.6em;}
+div.textile h2 { font-size: 2.1em;}
+div.textile h3 { font-size: 1.6em;}
+div.textile h4,
+div.textile h5,
+div.textile h6 { font-size: 1.3em;}
+
+div.textile ul,
+div.textile ol { margin: 0 0 1em 0; }
+
+div.textile ul li { list-style-type: disc; }
+div.textile ol li { list-style-type: decimal; }
+
+div.textile strong { font-weight: bold; }
+div.textile emphasis { font-style: italic; }
 
 
 
@@ -197,8 +217,8 @@ div#head ul.inline li { padding: 0 0.75em 0 0; }
 
 div#head ul.inline li a:link,
 div#head ul.inline li a:visited {
-  color: #000;
-  font-weight: bold;
+	color: #000;
+	font-weight: bold;
 }
 
 div#head ul.inline li a:hover,
@@ -231,23 +251,23 @@ body.users.show dl.info dt {
 }
 
 body.users.show div.review {
-  border: 0;
-  float: left;
-  height: 172px;
-  margin: 0 4px 45px 0;
-  text-align: center;
-  width: 197px;
+	border: 0;
+	float: left;
+	height: 172px;
+	margin: 0 4px 45px 0;
+	text-align: center;
+ 	width: 197px;
 }
 
 body.users.show div.review p.meta,
 body.users.show div.review p.comment { font-size: 1.1em; }
 
 body.users.show div.review p.comment {
-  border-left: 1px solid #c8c8c8;
-  margin: 0 0 0 8px;
-  padding: 4px;
-  text-align: left;
-  width: 70%;
+	border-left: 1px solid #c8c8c8;
+	margin: 0 0 0 8px;
+	padding: 4px;
+	text-align: left;
+	width: 70%;
 }
 
 body.users.show div.review p.comment span { color: #97481d; }

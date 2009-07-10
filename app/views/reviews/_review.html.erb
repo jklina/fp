@@ -2,6 +2,10 @@
   <p class="avatar"><%= link_to image_tag(review.user.photo.url(:avatar)), user_path(review.user) -%></p>
   <div class="comment">
     <p><strong><%=h review.user.username -%><% if review.rating -%> [<%=h review.rating -%>]<% end -%></strong><% if review.comment -%> wrote: <% end -%></p>
-    <% if review.comment -%><%= review.comment_html -%><% end -%>
+    <% if review.comment -%>
+    <div class="textile">
+      <%= review.comment_html -%>
+    </div>
+    <% end -%>
   </div>
 </div>

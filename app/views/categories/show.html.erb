@@ -1,6 +1,8 @@
-<h2><%=h @category.title %></h2>
+<h2><%=h @category.title -%></h2>
 
-<%= @category.description_html %>
+<div class="textile">
+<%= @category.description_html -%>
+</div>
 
 <%= render :partial => "submissions/submission", :collection => @submissions -%>
 
