@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def root
     @submissions = Submission.paginate :page => params[:page],
-                                       :per_page => 16,
+                                       :per_page => 12,
                                        :order => "created_at DESC",
                                        :conditions => { :trashed => false,
                                                         :moderated => false },
