@@ -54,6 +54,8 @@ Rails::Initializer.run do |config|
   config.action_mailer.default_charset = "utf-8"
   config.action_mailer.default_url_options = { :host => "www.pixelfuckers.org" }
 
+  config.active_record.observers = :user_observer
+
   PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
   PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
 
