@@ -1,12 +1,15 @@
+<% if @feature -%>
+<div class="feature">
 <h2>Featured</h2>
 
-<% if @feature -%>
 <p class="preview"><%= link_to image_tag(@feature.preview.url(:large)), feature_path(@feature) -%></p>
 <div class="textile">
 <%= @feature.comment_html -%>
 </div>
 <p class="meta">&mdash; chosen by <%= link_to h(@feature.user.username), user_path(@feature.user) -%></p>
+</div>
 <% end -%>
+
 
 <h2>Recent Submissions</h2>
 <%= render :partial => "submissions/submission", :collection => @submissions -%>
