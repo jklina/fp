@@ -11,23 +11,26 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id], :include => [ :submissions,  { :reviews => [ :user, :submission ] } ])
+    @user = User.find(params[:id])
 
     @submissions = @user.submissions.find(:all,
 	                                        :limit => 4,
 	                                        :order => "submissions.created_at DESC",
 	                                        :conditions => { :trashed => false,
-	                                                         :moderated => false })
+	                                                         :moderated => false },
+	                                        :include => :users)
 
     @reviews = @user.reviews.find :all,
 	                                :limit => 4,
-	                                :order => "reviews.created_at DESC"
+	                                :order => "reviews.created_at DESC",
+	                                :include => [ :user, { :submission => :users } ]
 
     @trash = @user.submissions.find(:all,
                                     :limit => 4,
                                     :order => "submissions.created_at DESC",
                                     :conditions => { :trashed => true,
-                                                     :moderated => false })
+                                                     :moderated => false },
+                                    :include => :users)
 	  respond_to do |format|
 	    format.html
     end

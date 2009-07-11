@@ -155,7 +155,7 @@ div.announcement {
 
 div.review p.avatar {
 	float: left;
-	width: 54px;
+	width: 58px;
 }
 
 div.review div.comment {
@@ -289,12 +289,24 @@ div#foot ul.inline li {
 
 
 
-body.sessions.new form dt,
-body.users.show dl.info dt {
+body.sessions.new form dt {
 	clear: left;
 	float: left;
 	width: 8em;
 }
+
+body.users.show dl.info {
+  width: 194px;
+}
+
+body.users.show dl.info dt,
+body.users.show dl.info dd {
+  float: left;
+  font-size: 1.1em;
+}
+
+body.users.show dl.info dt { width: 51px; }
+body.users.show dl.info dd { width: 143px; }
 
 body.users.show div.review {
 	border: 0;
@@ -317,3 +329,6 @@ body.users.show div.review p.comment {
 }
 
 body.users.show div.review p.comment span { color: #97481d; }
+
+body.users.show p.photo { float: left; }
+body.users.show p.banner { float: right; }

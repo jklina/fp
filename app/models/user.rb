@@ -14,16 +14,16 @@ class User < ActiveRecord::Base
   has_many :features
 
   has_attached_file :photo,
-                    :styles => { :thumbnail => "194x122>", :avatar => "54x54#" },
+                    :styles => { :thumbnail => "194x122>", :avatar => "58x58#" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL,
-                    :default_url => "/images/avatar.gif"
+                    :default_url => "/images/avatar.png"
 
   validates_attachment_size         :photo, :less_than => 5.megabytes
   validates_attachment_content_type :photo, :content_type => PAPERCLIP_IMAGE
 
   has_attached_file :banner,
-                    :styles => { :large => "736x58>" },
+                    :styles => { :large => "736x58#" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL,
                     :default_url => "/images/banner.png"
