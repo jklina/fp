@@ -13,7 +13,9 @@ class AnnouncementsController < ApplicationController
   end
 
   def show
-    @announcement = Announcement.find(params[:id], :include => :user)
+    @announcement = Announcement.find(params[:id], :include => [ :user, { :comments => :user }])
+    @comments = @announcement.comments.find(:all, :include => :user)
+    @comment = Comment.new
 
     respond_to do |format|
       format.html

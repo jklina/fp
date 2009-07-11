@@ -20,10 +20,10 @@ class UsersController < ApplicationController
 	                                                         :moderated => false },
 	                                        :include => :users)
 
-    @reviews = @user.reviews.find :all,
+    @reviews = @user.reviews.find(:all,
 	                                :limit => 4,
 	                                :order => "reviews.created_at DESC",
-	                                :include => [ :user, { :submission => :users } ]
+	                                :include => [ :user, { :submission => :users } ])
 
     @trash = @user.submissions.find(:all,
                                     :limit => 4,
@@ -31,6 +31,12 @@ class UsersController < ApplicationController
                                     :conditions => { :trashed => true,
                                                      :moderated => false },
                                     :include => :users)
+
+    @comments = @user.comments.find(:all,
+                                    :limit => 3,
+                                    :order => "comments.created_at DESC",
+                                    :include => :user)
+    @comment = Comment.new
 	  respond_to do |format|
 	    format.html
     end

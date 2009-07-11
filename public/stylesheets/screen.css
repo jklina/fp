@@ -49,6 +49,10 @@ a:active { text-decoration: underline; }
 form dt { line-height: 1.5; }
 form dd { margin: 0 0 1.5em; }
 
+strong a:link,
+strong a:visited { color: #474646; }
+
+strong a:hover { color: #97481d; }
 
 
 
@@ -148,17 +152,20 @@ div.submission div.notes {
 div.submission div.meta { padding: 0 0 0 10px; }
 
 div.review,
-div.announcement {
+div.announcement,
+div.comment {
 	border-bottom: 1px solid #e5e5e5;
 	margin: 0 0 1.3em;
 }
 
-div.review p.avatar {
+div.review p.avatar,
+div.comment p.avatar {
 	float: left;
 	width: 58px;
 }
 
-div.review div.comment {
+div.review div.text,
+div.comment div.text {
 	float: right;
 	width: 742px;
 }
@@ -295,18 +302,23 @@ body.sessions.new form dt {
 	width: 8em;
 }
 
-body.users.show dl.info {
+body.users.show dl.info,
+body.users.show dl.stats {
   width: 194px;
 }
 
 body.users.show dl.info dt,
-body.users.show dl.info dd {
+body.users.show dl.info dd,
+body.users.show dl.stats dt,
+body.users.show dl.stats dd {
   float: left;
   font-size: 1.1em;
 }
 
 body.users.show dl.info dt { width: 51px; }
 body.users.show dl.info dd { width: 143px; }
+
+body.users.show dl.stats dt { width: 113px; }
 
 body.users.show div.review {
 	border: 0;

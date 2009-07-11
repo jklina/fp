@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   map.confirm_user "users/confirm", :controller => "users", :action => "confirm"
-  map.resources :users
+  map.resources :users do |user|
+    user.resources :comments
+  end
 
   map.moderated_submissions "submissions/moderated",      :controller => "submissions", :action => "moderated"
   map.resources :submissions do |submission|
@@ -16,7 +18,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :categories
   map.resources :features, :as => :featured
-  map.resources :announcements
+  map.resources :announcements do |announcement|
+    announcement.resources :comments
+  end
 
   map.root                 :controller => "pages",     :action => "root"
   map.browse   "browse",   :controller => "pages",     :action => "browse"

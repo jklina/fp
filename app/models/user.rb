@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :submissions, :through =>   :authorships
   has_many :reviews,     :dependent => :destroy
   has_many :features
+  has_many :announcements
+  has_many :remarks,     :class_name => "Comment", :dependent => :destroy
+  has_many :comments,    :as => :commentable,      :dependent => :destroy
 
   has_attached_file :photo,
                     :styles => { :thumbnail => "194x122>", :avatar => "58x58#" },

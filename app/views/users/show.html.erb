@@ -21,6 +21,14 @@
   <% end -%>
 </dl>
 
+<h3>User Stats</h3>
+<dl class="stats autoclear">
+  <dt>average admin rating:</dt>
+  <dd><%=h number_with_precision(@user.admin_rating, :precision => 2) -%></dd>
+  <dt>average user rating:</dt>
+  <dd><%=h number_with_precision(@user.user_rating, :precision => 2) -%></dd>
+</dl>
+
 <h3>Recent Submissions</h3>
 <div class="autoclear">
 <%= render :partial => "submissions/submission", :collection => @submissions -%>
@@ -36,4 +44,16 @@
 <div class="autoclear">
 <%= render :partial => "submissions/submission", :collection => @trash -%>
 </div>
+<% end -%>
+
+<h3>User Comments</h3>
+<%= render :partial => "comments/comment", :collection => @comments -%>
+
+<% if logged_in? -%>
+<% form_for @comment, :url => commentable_url(@user) do |f| -%>
+<%= render :partial => "comments/form", :locals => { :f => f } -%>
+<p><%= submit_tag "Publish your comment" %></p>
+<% end -%>
+<% else -%>
+<p><%= link_to "Log in", login_path -%> or <%= link_to "register", register_path -%> to post comments!</p>
 <% end -%>
