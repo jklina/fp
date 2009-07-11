@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
   has_attached_file :banner,
                     :styles => { :large => "736x58>" },
                     :path => PAPERCLIP_ASSET_PATH,
-                    :url => PAPERCLIP_ASSET_URL
+                    :url => PAPERCLIP_ASSET_URL,
+                    :default_url => "/images/banner.png"
 
   validates_attachment_size         :banner, :less_than => 5.megabytes
   validates_attachment_content_type :banner, :content_type => PAPERCLIP_IMAGE
