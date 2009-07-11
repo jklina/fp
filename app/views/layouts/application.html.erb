@@ -9,6 +9,7 @@
 </head>
 
 <body class="<%= controller.controller_name -%> <%= controller.action_name -%>">
+<div id="superwrap">
 <% if @headline -%><p id="headline"><%= link_to "#{h(@headline.title)} &raquo;", announcement_path(@headline) -%></p><% end -%>
 <div id="wrap">
 <div id="subwrap">
@@ -79,6 +80,7 @@
   </ul>
 
   <p>&copy; Pixelfuckers.org &ndash; All rights reserved.</p>
+</div>
 </div>
 </div>
 </div>
