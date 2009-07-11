@@ -194,7 +194,7 @@ class SubmissionsController < ApplicationController
   protected
 
   def authentication_required?
-    !%w(index show).include?(action_name)
+    !%w(index show download).include?(action_name)
   end
 
   def authority_required?
