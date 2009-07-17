@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         } if params[:user][:remember_me] == "1" && user.remember
         
         session[:user] = user.id
-	      user.last_login_time = Time.now
+	      user.update_attribute(:last_login_time, Time.now)
 
         if session[:destination]
           redirect_to session[:destination]

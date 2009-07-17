@@ -6,9 +6,10 @@ class ApplicationController < ActionController::Base
                 :pending_featured_submissions,
                 :page_title
 
+  before_filter :authenticate_by_token_if_present
   before_filter :request_authentication_if_necessary
   before_filter :redirect_if_unauthorized
-  before_filter :find_recent_announcement
+  before_filter :find_headline
 
   filter_parameter_logging :password, :password_confirmation
 
@@ -59,15 +60,18 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def authenticate_by_token_if_present
+    if !current_user && cookies[:authentication_token]
+      u = User.find_by_authentication_token(cookies[:authentication_token])
+      session[:user] = u.id if u
+    end
+  end
+
   def request_authentication_if_necessary
     if authentication_required? && !current_user
-      if cookies[:authentication_token] && (user = User.find_by_authentication_token(cookies[:authentication_token]))
-        session[:user] = user.id
-      else
-        respond_to do |format|
-          session[:destination] = request.request_uri
-          format.html { redirect_to login_url }
-        end
+      respond_to do |format|
+        session[:destination] = request.request_uri
+        format.html { redirect_to login_url }
       end
     end
   end
@@ -93,7 +97,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def find_recent_announcement
+  def find_headline
     a = Announcement.last
     @headline = a && a.created_at > 7.days.ago ? a : nil
   end
