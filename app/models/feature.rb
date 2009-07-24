@@ -6,6 +6,7 @@ class Feature < ActiveRecord::Base
 
   has_attached_file :preview,
                     :styles => { :large => "806x218>", :thumbnail => "194x122>" },
+					:convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL
 

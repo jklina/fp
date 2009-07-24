@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :photo,
                     :styles => { :thumbnail => "194x122>", :avatar => "58x58#" },
+					:convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL,
                     :default_url => "/images/avatar.png"
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :banner,
                     :styles => { :large => "736x58#" },
+					:convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL,
                     :default_url => "/images/banner.png"
