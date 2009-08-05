@@ -237,13 +237,15 @@ div#head ul.nav {
 }
 
 div#head ul.nav li {
+	color: #97481d;
+	font-weight: bold;
 	float: left;
 	padding: 0 0.75em 0 0;
 }
 
 div#head ul.nav li a:link,
 div#head ul.nav li a:visited {
-	color: #000;
+	color: #464646;
 	font-weight: bold;
 }
 
@@ -272,7 +274,7 @@ div#head ul.nav ul li a {
 }
 
 li.administrator {
-	color: #000;
+	color: #464646;
 	cursor: pointer;
 	font-weight: bold;
 }
