@@ -29,7 +29,7 @@ role :db,  domain, :primary => true
 
 task :after_update_code, :roles => :app do
   #Makes sure all the images for submissions, etc appear to be in the public folder. They're really symlinks to the Capistrano shared folder though ;)
-  %w{feature_images sub_files sub_images user_images}.each do |share|
+  %w{assets}.each do |share|
     run "rm -rf #{release_path}/public/#{share}"
     run "mkdir -p #{shared_path}/system/#{share}"
     run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
@@ -63,17 +63,18 @@ namespace :deploy do
  
   desc "Redefine deploy:start"
   task :start, :roles => :app do
-    invoke_command "LD_LIBRARY_PATH=/home/#{rackspace_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib:/home/#{rackspace_username}/lib /home/#{rackspace_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails start -c #{deploy_to}/current -d -e production -P /home/#{rackspace_username}/webapps/#{application}/log/mongrel.pid -p #{rackspace_port}", :via => run_method
+    invoke_command " /etc/init.d/nginx start", :via => run_method
   end
  
   desc "Redefine deploy:restart"
   task :restart, :roles => :app do
-    invoke_command "LD_LIBRARY_PATH=/home/#{rackspace_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib:/home/#{rackspace_username}/lib /home/#{rackspace_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails restart -c #{deploy_to}/current -P /home/#{rackspace_username}/webapps/#{application}/log/mongrel.pid", :via => run_method
+    invoke_command " /etc/init.d/nginx stop", :via => run_method
+	invoke_command " /etc/init.d/nginx start", :via => run_method
   end
  
   desc "Redefine deploy:stop"
   task :stop, :roles => :app do
-    invoke_command "LD_LIBRARY_PATH=/home/#{rackspace_username}/ruby1.8/lib/ruby/gems/1.8/gems/rmagick-2.9.1/lib:/home/#{rackspace_username}/lib /home/#{rackspace_username}/ruby1.8/lib/ruby/gems/1.8/bin/mongrel_rails stop -c #{deploy_to}/current -P /home/#{rackspace_username}/webapps/#{application}/log/mongrel.pid", :via => run_method
+    invoke_command " /etc/init.d/nginx stop", :via => run_method  
   end
 end
 

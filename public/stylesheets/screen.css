@@ -273,7 +273,7 @@ div#head ul.nav ul li a {
 	padding: 0 .5em;
 }
 
-li.administrator {
+div#head ul.nav li.administrator {
 	color: #464646;
 	cursor: pointer;
 	font-weight: bold;
