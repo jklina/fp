@@ -195,10 +195,6 @@ div.feature div.textile p,
 div.feature div.textile li,
 div.feature p.meta { font-size: 1.1em; }
 
-
-
-
-
 div#superwrap {
 	background: transparent url('/images/bg.png') top center repeat-y;
 	margin: 0 auto;
@@ -285,6 +281,8 @@ div#body {
 	padding: 25px 0 50px;
 }
 
+div#body div.feature div.textile p {float: left;}
+
 div#foot ul.inline,
 div#foot p { float: right; }
 
@@ -293,9 +291,6 @@ div#foot ul.inline li {
 	margin: 0 0 0 0.375em;
 	padding: 0 0 0 0.375em;
 }
-
-
-
 
 
 body.sessions.new form dt {
