@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
 
   attr_accessor :password, :password_confirmation
 
-  validates_presence_of     :name
   validates_presence_of     :username
   validates_presence_of     :password,              :if => :password_required_or_present?
   validates_presence_of     :password_confirmation, :if => :password_required_or_present?
