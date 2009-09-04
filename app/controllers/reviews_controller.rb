@@ -10,12 +10,12 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       if !@review.unrated? && @submission.authored_by?(current_user)
         flash[:warning] = "Nice try, pal."
-        format.html { render :controller => "submissions", :action => "show", :id  => @submission }
+        format.html { redirect_to(@submission) }
       elsif @review.save
-        format.html { redirect_to submission_url(@submission) }
+        format.html { redirect_to(@submission) }
       else
         flash[:warning] = "Couldn't save your review. Please try again."
-        format.html { render :controller => "submissions", :action => "show", :id  => @submission }
+        format.html { redirect_to(@submission) }
       end
     end
   end
@@ -24,15 +24,15 @@ class ReviewsController < ApplicationController
     @review = Review.find(:last, :conditions => { :submission_id => @submission.id, :user_id => current_user.id })
 
     respond_to do |format|
-      if !@review.rating.blank? && @submission.authored_by?(current_user)
+      if !@review.unrated? && @submission.authored_by?(current_user)
         flash[:warning] = "Nice try, pal."
-        format.html { render :controller => "submissions", :action => "show", :id  => @submission }
+        format.html { redirect_to(@submission) }
       elsif @review.update_attributes(params[:review])
-        format.html { redirect_to submission_url(@submission) }
+        format.html { redirect_to(@submission) }
       else
         flash[:warning] = "Couldn't update your review. Please try again."
-        format.html { render :controller => "submissions", :action => "show", :id  => @submission }
-      end
+        format.html { redirect_to(@submission) }   
+	  end
     end
   end
 
