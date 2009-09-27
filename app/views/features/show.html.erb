@@ -2,15 +2,13 @@
 
 <p class="preview"><%= link_to image_tag(@feature.preview.url(:large)), @feature.preview.url -%></p>
 
+<div class="textile">
+<%= RedCloth.new(@feature.comment + " &mdash; chosen by #{link_to h(@feature.user.username), user_path(@feature.user)}").to_html -%>
+</div>
+
 <div class="autoclear">
 <%= render :partial => "submissions/submission", :collection => @feature.submissions -%>
 </div>
-
-<div class="textile">
-<%= @feature.comment_html -%>
-</div>
-
-<p class="meta">chosen by <%= link_to h(@feature.user.username), user_path(@feature.user) -%></p>
 
 <% if has_authority? -%>
 <ul>

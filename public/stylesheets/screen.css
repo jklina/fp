@@ -1,4 +1,4 @@
-html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,dfn,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,dfn,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
 
 html,
 body {
@@ -49,6 +49,11 @@ a:active { text-decoration: underline; }
 form dt { line-height: 1.5; }
 form dd { margin: 0 0 1.5em; }
 
+form label span.reminder {
+	color: #979696;
+	font-style: italic;
+}
+
 strong a:link,
 strong a:visited { color: #474646; }
 
@@ -91,6 +96,12 @@ a.app_get { background-image: url('/images/silk/application_get.gif'); }
 a.cog { background-image: url('/images/silk/cog.gif'); }
 a.help { background-image: url('/images/silk/help.gif'); }
 a.zoom { background-image: url('/images/silk/magnifier_zoom_in.gif'); }
+
+a.download { background-image: url('/images/download.png'); }
+a.upload { background-image: url('/images/upload.png'); }
+a.help { background-image: url('/images/help.png'); }
+a.settings { background-image: url('/images/settings.png'); }
+a.zoom { background-image: url('/images/zoom.png'); }
 
 div.thumb {
 	float: left;
@@ -280,8 +291,6 @@ div#body {
 	margin: 0 0 5px 0;
 	padding: 25px 0 50px;
 }
-
-div#body div.feature div.textile p {float: left;}
 
 div#foot ul.inline,
 div#foot p { float: right; }

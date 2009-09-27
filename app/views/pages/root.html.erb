@@ -3,10 +3,11 @@
 <h2>Featured</h2>
 
 <p class="preview"><%= link_to image_tag(@feature.preview.url(:large)), feature_path(@feature) -%></p>
+
 <div class="textile">
-<%= @feature.comment_html -%>
+<%= RedCloth.new(@feature.comment + " &mdash; chosen by #{link_to h(@feature.user.username), user_path(@feature.user)}").to_html %>
 </div>
-<p class="meta">&nbsp&mdash; chosen by <%= link_to h(@feature.user.username), user_path(@feature.user) -%></p>
+
 </div>
 <% end -%>
 

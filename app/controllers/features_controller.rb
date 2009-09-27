@@ -14,6 +14,11 @@ class FeaturesController < ApplicationController
 
   def show
     @feature = Feature.find(params[:id], :include => [ :user, { :submissions => :users } ])
+    
+    if (@feature.submissions.size == 1)
+      redirect_to submission_url(@feature.submissions.first)
+      return
+    end
 
 	  respond_to do |format|
       format.html

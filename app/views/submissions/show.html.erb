@@ -5,9 +5,9 @@
 
 <ul class="toolbar">
   <li><%= link_to "View Original Image", @submission.preview.url, :class => "tile zoom" -%></li>
-  <li><%= link_to "Download", download_submission_path(@submission), :class => "tile app_get" -%></li>
+  <li><%= link_to "Download", download_submission_path(@submission), :class => "tile download" -%></li>
   <% if @submission.authored_by?(current_user) -%>
-  <li><%= link_to "Edit", edit_submission_path(@submission), :class => "tile app_edit" -%></li>
+  <li><%= link_to "Edit", edit_submission_path(@submission), :class => "tile settings" -%></li>
     <% if @submission.trashed -%>
   <li><%= link_to "Untrash", trash_submission_path(@submission), :class => "tile app_add" -%></li>
     <% else -%>
