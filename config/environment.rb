@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
+#RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -41,14 +41,9 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-     :address        => "secure813.hostgator.com",
-     :port           => 26,
-     :domain	       => "pixelfuckers.org",
-     :authentication => :login,    # Don't change this one.
-     :user_name      => "robot@pixelfuckers.org",
-     :password       => "79spitfire"
-  }
+  
+  ActionMailer::Base.smtp_settings = File.expand_path(File.join(RAILS_ROOT, 'config', 'actionmailer.yml'))
+  
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_charset = "utf-8"
