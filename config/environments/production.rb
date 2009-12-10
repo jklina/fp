@@ -26,3 +26,14 @@ config.action_view.cache_template_loading            = true
 
 # Enable threaded mode
 # config.threadsafe!
+
+# Mail settings
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = true
+config.action_mailer.default_charset = "utf-8"
+config.action_mailer.default_url_options = { :host => "www.pixelfuckers.org" }
+
+ActionMailer::Base.delivery_method = :smtp  
+mailer_config = File.open("#{RAILS_ROOT}/config/actionmailer.yml")
+mailer_options = YAML.load(mailer_config)
+ActionMailer::Base.smtp_settings = mailer_options

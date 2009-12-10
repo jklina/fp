@@ -13,6 +13,13 @@ config.action_controller.consider_all_requests_local = true
 config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
-# Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
-config.action_mailer.default_url_options = { :host => "localhost:3000" }
+# Mail settings
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = true
+config.action_mailer.default_charset = "utf-8"
+config.action_mailer.default_url_options = { :host => "www.pixelfuckers.org" }
+
+ActionMailer::Base.delivery_method = :smtp  
+mailer_config = File.open("#{RAILS_ROOT}/config/actionmailer.yml")
+mailer_options = YAML.load(mailer_config)
+ActionMailer::Base.smtp_settings = mailer_options

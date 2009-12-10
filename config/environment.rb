@@ -39,15 +39,8 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+  
 
-  config.action_mailer.delivery_method = :smtp
-  
-  ActionMailer::Base.smtp_settings = File.expand_path(File.join(RAILS_ROOT, 'config', 'actionmailer.yml'))
-  
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_charset = "utf-8"
-  config.action_mailer.default_url_options = { :host => "www.pixelfuckers.org" }
 
   config.active_record.observers = :user_observer
 
@@ -57,4 +50,3 @@ Rails::Initializer.run do |config|
   # Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
   PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
 end
-

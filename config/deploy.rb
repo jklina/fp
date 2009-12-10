@@ -58,13 +58,11 @@ namespace :deploy do
  
     put YAML::dump(db_config), "#{release_path}/config/database.yml", :mode => 0664
   end
-  
-  after "deploy:update_code", "deploy:create_database_configuration"
 	
   #For the action mailer settings in environment.rb
   desc "Generate actionmailer.yml file" 
   task :generate_actionmailer_yml, :roles=>:app do
-    secret_password = Capistrano::CLI.ui.ask "Enter your secret mail password:"
+    password = Capistrano::CLI.ui.ask "Enter your secret mail password:"
 
     template = File.read("config/deploy/actionmailer.yml.erb")
     buffer = ERB.new(template).result(binding)
@@ -76,8 +74,9 @@ namespace :deploy do
     run "rm -f #{current_path}/config/actionmailer.yml && ln -s #{shared_path}/config/actionmailer.yml #{current_path}/config/actionmailer.yml"
   end
  
-
-  after "deploy:finalize_update", "deploy:link_actionmailer_yml"
+  after "deploy:update_code", "deploy:create_database_configuration"
+  after "deploy:create_database_configuration", "deploy:generate_actionmailer_yml"
+  after "deploy:generate_actionmailer_yml", "deploy:link_actionmailer_yml"
  
   desc "Redefine deploy:start"
   task :start, :roles => :app do
