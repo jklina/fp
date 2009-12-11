@@ -66,7 +66,7 @@ namespace :deploy do
 
     template = File.read("config/deploy/actionmailer.yml.erb")
     buffer = ERB.new(template).result(binding)
-    put buffer, "#{shared_path}/config/actionmailer.yml"
+    put YAML::dump(buffer), "#{shared_path}/config/actionmailer.yml", :mode => 0664
   end
 
   desc "Link actionmailer.yml from shared" 
