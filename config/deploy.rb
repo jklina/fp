@@ -33,6 +33,7 @@ task :after_update_code, :roles => :app do
     run "rm -rf #{release_path}/public/#{share}"
     run "mkdir -p #{shared_path}/system/#{share}"
     run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
+    run "rm -f #{release_path}/config/actionmailer.yml && ln -s #{shared_path}/config/actionmailer.yml #{release_path}/config/actionmailer.yml"
   end
 end
 
@@ -67,8 +68,6 @@ namespace :deploy do
     template = File.read("config/deploy/actionmailer.yml.erb")
     buffer = ERB.new(template).result(binding)
     put  buffer, "#{shared_path}/config/actionmailer.yml"
-	
-	run "rm -f #{current_path}/config/actionmailer.yml && ln -s #{shared_path}/config/actionmailer.yml #{current_path}/config/actionmailer.yml"
   end
  
   after "deploy:update_code", "deploy:create_database_configuration"
