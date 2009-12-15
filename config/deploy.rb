@@ -66,17 +66,13 @@ namespace :deploy do
 
     template = File.read("config/deploy/actionmailer.yml.erb")
     buffer = ERB.new(template).result(binding)
-    put YAML::dump(buffer), "#{shared_path}/config/actionmailer.yml", :mode => 0664
-  end
-
-  desc "Link actionmailer.yml from shared" 
-  task :link_actionmailer_yml, :roles=>:app do
-    run "rm -f #{current_path}/config/actionmailer.yml && ln -s #{shared_path}/config/actionmailer.yml #{current_path}/config/actionmailer.yml"
+    put  buffer, "#{shared_path}/config/actionmailer.yml"
+	
+	run "rm -f #{current_path}/config/actionmailer.yml && ln -s #{shared_path}/config/actionmailer.yml #{current_path}/config/actionmailer.yml"
   end
  
   after "deploy:update_code", "deploy:create_database_configuration"
   after "deploy:create_database_configuration", "deploy:generate_actionmailer_yml"
-  after "deploy:generate_actionmailer_yml", "deploy:link_actionmailer_yml"
  
   desc "Redefine deploy:start"
   task :start, :roles => :app do
