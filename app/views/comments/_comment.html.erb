@@ -1,7 +1,7 @@
 <div class="comment autoclear">
   <p class="avatar shadow"><%= link_to image_tag(comment.user.photo.url(:avatar)), user_path(comment.user) -%></p>
   <div class="text">
-    <p><strong><%= link_to h(comment.user.username), user_path(comment.user) -%></strong> wrote:</p>
+    <p><strong><%= link_to h(comment.user.username), user_path(comment.user) -%></strong> <% if comment.body -%>wrote:<% end -%></p>
     <div class="textile">
       <%= comment.body_html -%>
     </div>
