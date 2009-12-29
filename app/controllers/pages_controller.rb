@@ -66,7 +66,7 @@ class PagesController < ApplicationController
                                            :order => order,
                                            :conditions => { :trashed => false,
                                                             :moderated => false,
-                                                            :category_id => params[:things].to_i },
+                                                            :category_id => session[:things_filter].to_i },
                                            :include => :users
         @fragment = "submissions/submission"
     end
