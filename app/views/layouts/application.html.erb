@@ -31,6 +31,7 @@
         <li><%= link_to "moderated submissions", moderated_submissions_path -%></li>
         <% if administrator? -%>
         <li><%= link_to "users", users_path -%></li>
+		<li><%= link_to "pages", static_pages_path -%></li>
         <% end -%>
       </ul>
     </li>

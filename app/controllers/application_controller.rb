@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   helper :submissions
 
   helper_method :current_user, :logged_in?,
-                :moderator?, :administrator?, :has_authority?,
+                :moderator?, :administrator?, :has_authority?, :has_admin_authority?,
                 :pending_featured_submissions,
                 :page_title
 
@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
   def authority_required?
     false
   end
+  
+  def admin_authority_required?
+    false
+  end
 
   def current_user
     @current_user ||= User.find_by_id(session[:user])
@@ -44,6 +48,10 @@ class ApplicationController < ActionController::Base
 
   def has_authority?
     moderator? || administrator?
+  end
+  
+  def has_admin_authority?
+    administrator?
   end
 
   def pending_featured_submissions
@@ -82,7 +90,12 @@ class ApplicationController < ActionController::Base
         flash[:warning] = "You must be a moderator or an administrator to do that."
         format.html { redirect_to :back }
       end
-    end
+	elsif admin_authority_required? && !has_admin_authority?
+      respond_to do |format|
+        flash[:warning] = "You must be an administrator to do that."
+        format.html { redirect_to :back }
+      end
+	end
   end
 
   def respond_with_404

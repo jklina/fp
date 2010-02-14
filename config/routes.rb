@@ -15,6 +15,15 @@ ActionController::Routing::Routes.draw do |map|
   map.unmoderate_submission "submissions/:id/unmoderate", :controller => "submissions", :action => "unmoderate"
   map.feature_submission    "submissions/:id/feature",    :controller => "submissions", :action => "feature"
   map.unfeature_submission  "submissions/:id/unfeature",  :controller => "submissions", :action => "unfeature"
+  
+  #Will work on this later. 
+  #map.user "users/:username", :controller => "users", action => "show"
+  
+  #map.page "page",	:controller => "static_page", :action => "show"
+  
+  map.resources :static_pages do |static_page|
+    static_page.resources  :comments
+  end
 
   map.resources :categories
   map.resources :features, :as => :featured
