@@ -41,7 +41,7 @@
   <ul class="toolbar autoclear">
     <li><%= link_to "New Submission", new_submission_path, :class => "icon upload" -%></li>
     <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon settings" -%></li><% end -%>
-    <li><%= link_to "Help", "#", :class => "icon help" -%></li>
+    <li><%= link_to "Help", "/static_pages/help", :class => "icon help" -%></li>
   </ul>
 
   <ul class="actions">
@@ -70,14 +70,14 @@
   <ul class="toolbar autoclear">
     <li><%= link_to "New Submission", new_submission_path, :class => "icon upload" -%></li>
     <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon settings" -%></li><% end -%>
-    <li><%= link_to "Help", "#", :class => "icon help" -%></li>
+    <li><%= link_to "Help", "/static_pages/help", :class => "icon help" -%></li>
   </ul>
 
   <ul class="inline">
-    <li><%= link_to "About Us", "#" -%></li>
-    <li><%= link_to "Contact", "#" -%></li>
-    <li><%= link_to "Privacy", "#" -%></li>
-    <li><%= link_to "Terms", "#" -%></li>
+    <li><%= link_to "About Us", "/static_pages/about_us" -%></li>
+    <li><%= link_to "Contact", "/static_pages/contact" -%></li>
+    <li><%= link_to "Privacy", "/static_pages/privacy" -%></li>
+    <li><%= link_to "Terms", "/static_pages/terms" -%></li>
   </ul>
 
   <p>&copy; Pixelfuckers.org &ndash; All rights reserved.</p>
