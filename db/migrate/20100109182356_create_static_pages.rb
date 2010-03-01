@@ -3,7 +3,7 @@ class CreateStaticPages < ActiveRecord::Migration
     create_table :static_pages do |t|
 	  t.string		"title"
 	  t.string		"slug"
-	  t.string		"body"
+	  t.text		"body"
 	  t.string		"published"
 
       t.timestamps
