@@ -381,7 +381,7 @@ body.users.show div.review p.comment {
 	margin: 0 0 0 8px;
 	padding: 4px;
 	text-align: left;
-	width: 70%;
+	width: 100%;
 }
 
 body.users.show div.review p.comment span { color: #97481d; }
