@@ -11,19 +11,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id])  
+    @submissions = @user.submissions.paginate    :page => params[:submission_page],
+                                          :per_page => 4,
+                                          :order => "created_at DESC",
+                                          :conditions => { :trashed => false,
+                                                            :moderated => false },
+                                          :include => :users
 
-    @submissions = @user.submissions.find(:all,
-	                                        :limit => 4,
-	                                        :order => "submissions.created_at DESC",
-	                                        :conditions => { :trashed => false,
-	                                                         :moderated => false },
-	                                        :include => :users)
-
-    @reviews = @user.reviews.find(:all,
-	                                :limit => 4,
-	                                :order => "reviews.created_at DESC",
-	                                :include => [ :user, { :submission => :users } ])
+    @reviews = @user.reviews.paginate    :page => params[:review_page],
+                                          :per_page => 4,
+                                          :order => "created_at DESC",
+                                          :include => [ :user, { :submission => :users } ]
 
     @trash = @user.submissions.find(:all,
                                     :limit => 4,

@@ -32,11 +32,13 @@
 <h3>Recent Submissions</h3>
 <div class="autoclear">
 <%= render :partial => "submissions/submission", :collection => @submissions -%>
+<p class="pagination"><%= will_paginate @submissions, :param_name => 'submission_page', :container => false -%></p>
 </div>
 
 <h3>Recent Reviews</h3>
 <div class="autoclear">
 <%= render :partial => "users/review", :collection => @reviews -%>
+<p class="pagination"><%= will_paginate @reviews, :param_name => 'review_page', :container => false -%></p>
 </div>
 
 <% if @user == current_user -%>

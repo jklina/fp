@@ -102,6 +102,8 @@ thead tr:hover {
 
 *.autoclear { overflow: hidden; }
 
+*.autoclear p.pagination { float:right; }
+
 *.invisible {
 	border: 0;
 	clear: both;
