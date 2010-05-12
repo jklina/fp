@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :find_commentable
+  before_filter :find_commentable, :except => [:destroy]
 
   def create
     @comment = @commentable.comments.build(params[:comment])
@@ -14,11 +14,26 @@ class CommentsController < ApplicationController
       end
     end
   end
+  
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+
+    respond_to do |format|
+      flash[:notice] = "Comment deleted."
+      #hack to redirect back
+      format.html { redirect_to :back}
+	  end
+  end
 
   protected
 
   def authentication_required?
     true
+  end
+  
+  def authority_required?
+    %w(delete).include?(action_name)
   end
 
   def find_commentable

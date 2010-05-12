@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :categories
+  map.resources :comments, :only => [:destroy]
   map.resources :features, :as => :featured
   map.resources :announcements do |announcement|
     announcement.resources :comments
