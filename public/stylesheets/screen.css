@@ -54,6 +54,11 @@ form label span.reminder {
 	font-style: italic;
 }
 
+form .example {
+	color: #8c8c8c;
+	font-style: italic;
+}
+
 strong a:link,
 strong a:visited { color: #474646; }
 
