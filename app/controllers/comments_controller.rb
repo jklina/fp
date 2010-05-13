@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   end
   
   def authority_required?
-    %w(delete).include?(action_name)
+    %w(destroy).include?(action_name)
   end
 
   def find_commentable

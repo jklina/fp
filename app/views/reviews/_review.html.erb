@@ -1,7 +1,8 @@
 <div class="review autoclear<% if review.by_administrator -%> moderator<% end -%>">
   <p class="avatar shadow"><%= link_to image_tag(review.user.photo.url(:avatar)), user_path(review.user) -%></p>
   <div class="text">
-    <p><strong><%= link_to h(review.user.username), user_path(review.user) -%><% if review.rating -%> [<%=h review.rating -%>]<% end -%></strong><% unless review.uncommented? -%> wrote: <% end -%></p>
+    <p><strong><%= link_to h(review.user.username), user_path(review.user) -%><% if review.rating -%> [<%=h review.rating -%>]<% end -%></strong><% unless review.uncommented? -%> wrote:
+      <%= link_to_if moderator?, "Moderate this review", review_path(review), :method => :delete, :class => "moderate_comment", :confirm => "Are you sure? This will permanently delete the review and rating." %><% end -%></p>
     <% if review.comment -%>
     <div class="textile">
       <%= review.comment_html -%>

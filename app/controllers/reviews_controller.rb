@@ -36,10 +36,25 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+
+    respond_to do |format|
+      flash[:notice] = "Review deleted."
+      #hack to redirect back
+      format.html { redirect_to :back}
+	  end
+  end
+
   protected
 
   def authentication_required?
     true
+  end
+  
+  def authority_required?
+    %w(destroy).include?(action_name)
   end
 
   def find_submission
