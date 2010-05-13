@@ -47,7 +47,7 @@
     <% else -%>
 <% form_for [@submission, @review], :html => { :method => :put } do |f| -%>
 <%= render :partial => "reviews/form", :locals => { :f => f } -%>
-<p><%= submit_tag "Submit Review" -%></p>
+<p><%= submit_tag "Edit Review" -%></p>
 <% end -%>
   <% end -%>
 <% else -%>
