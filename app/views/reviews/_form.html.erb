@@ -2,7 +2,8 @@
 
 <dl>
 <dt><%= f.label :rating -%></dt>
-<dd><%= f.text_field :rating, :size => "3", :maxlength => "3" -%></dd>
+
+<dd><%= tag(:input, {:type => :number, :id => 'rating', :name => 'review[rating]', :placeholder => '100', :value => f.object.rating, :size => "3", :maxlength => "3"}) -%></dd>
 
 <dt><%= f.label :comment -%></dt>
 <dd><%= f.text_area :comment -%></dd>

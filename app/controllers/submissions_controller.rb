@@ -53,17 +53,17 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(params[:submission])
 
     respond_to do |format|
-	    if @submission.save
-	      authorship = Authorship.new
+      if @submission.save
+	authorship = Authorship.new
         authorship.submission = @submission
         authorship.user = current_user
         authorship.save!
 
-	      flash[:notice] = "Successfully created your submission!"
-	      format.html { redirect_to submission_url(@submission) }
-	    else
-	      format.html { render :action => "new" }
-	    end
+	flash[:notice] = "Successfully created your submission!"
+	format.html { redirect_to submission_url(@submission) }
+      else
+	format.html { render :action => "new" }
+      end
     end
   end
 
