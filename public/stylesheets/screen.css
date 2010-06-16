@@ -226,7 +226,7 @@ div.comment div.text {
 	width: 742px;
 }
 
-div.text .moderate_comment {
+.moderate_comment {
   float: right;
 }
 
