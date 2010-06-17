@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100109182356) do
+ActiveRecord::Schema.define(:version => 20100617175205) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -64,6 +64,27 @@ ActiveRecord::Schema.define(:version => 20100109182356) do
     t.datetime "updated_at"
   end
 
+  create_table "forum_groups", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forums", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forum_group_id"
+  end
+
+  create_table "posts", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "thread_id"
+  end
+
   create_table "reviews", :force => true do |t|
     t.integer  "submission_id"
     t.integer  "user_id"
@@ -111,6 +132,15 @@ ActiveRecord::Schema.define(:version => 20100109182356) do
   end
 
   add_index "submissions", ["trashed", "moderated"], :name => "index_submissions_on_trashed_and_moderated"
+
+  create_table "threads", :force => true do |t|
+    t.string   "title"
+    t.integer  "last_poster_id"
+    t.datetime "last_post_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "forum_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
