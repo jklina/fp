@@ -1,11 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :forum_groups
 
-  map.resources :posts
-
-  map.resources :threads
-
-  map.resources :forums
+  map.resources :forums, :has_many => :topics
+  map.resources :topics, :has_many => :posts
 
   map.confirm_user "users/confirm", :controller => "users", :action => "confirm"
   map.resources :users do |user|

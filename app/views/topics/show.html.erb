@@ -1,0 +1,28 @@
+<div id="breadcrumb">
+  <%= link_to @topic.forum.forum_group.title, forums_path() %> >> <%= link_to @topic.forum.title, forum_path(@topic.forum) %> >> <%=h @topic.title %>
+</div>
+
+<div id="firstpost" class="post">
+  <h3>
+    <span>
+      <%=h @topic.created_at.to_formatted_s(:forum) %>
+    </span>
+  </h3>
+  <div class="box">
+    <div class=post-left>
+      <%= link_to @topic.user.username, user_path(@topic.user), :class => "username" %>
+      <div class="clear"></div>
+      <%= link_to image_tag(@topic.user.photo.url(:avatar)), @topic.user.photo.url, :class => "user-avatar" %>
+    </div>
+    <div class="post-right">
+      <%=h @topic.content %>
+    </div>
+  </div>
+</div>
+
+<%= render(:partial => "posts/post", :collection => @posts) %>
+
+<% form_for [@topic, @post] do |f| -%>
+<%= render :partial => "posts/form", :locals => { :f => f } -%>
+<p><%= submit_tag "Post Response" -%></p>
+<% end %>

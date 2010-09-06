@@ -18,7 +18,7 @@
 
   <ul class="nav autoclear">
     <li><%= link_to_unless_current "Browse", :controller => "browse" -%></li>
-    <li><%= link_to "Forum", "http://gypsyspacemuffin.com/viewforum.php?id=25", :popup => true -%></li>
+    <li><%= link_to "Forums", forums_path -%></li>
     <li><%= link_to "Chat", "http://webchat.freenode.net/?channels=pixelfuckers", :popup => true -%></li>
     <li><%= link_to_unless_current "News", announcements_path -%></li>
     <% if moderator? -%>
@@ -31,7 +31,9 @@
         <li><%= link_to "moderated submissions", moderated_submissions_path -%></li>
         <% if administrator? -%>
         <li><%= link_to "users", users_path -%></li>
-		<li><%= link_to "pages", static_pages_path -%></li>
+	<li><%= link_to "pages", static_pages_path -%></li>
+	<li><%= link_to 'New Forum Group', new_forum_group_path %></li>
+	<li><%= link_to 'New Forum', new_forum_path %></li>
         <% end -%>
       </ul>
     </li>

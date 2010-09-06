@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100906145157
+#
+# Table name: featurings
+#
+#  id            :integer         not null, primary key
+#  submission_id :integer
+#  feature_id    :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class Featuring < ActiveRecord::Base
   belongs_to :feature
   belongs_to :submission

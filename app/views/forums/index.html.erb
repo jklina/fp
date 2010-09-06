@@ -1,22 +1,50 @@
-<h1>The Forums</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-  </tr>
-
-<% @forums.each do |forum| %>
-  <tr>
-    <td><%=h forum.title %></td>
-    <td><%=h forum.description %></td>
-    <td><%= link_to 'Show', forum %></td>
-    <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
-    <td><%= link_to 'Destroy', forum, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% @forum_groups.each do |forum_group| %>
+  <table id="forums">
+    <colgroup>
+      <col id="title" />
+      <col id="topics" />
+      <col id="posts" />
+      <col id="last-post" />
+      <% if administrator? -%>
+      <col id="edit" />
+      <col id="delete" />
+      <% end -%>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="left-align"><%=h forum_group.title %></th>
+        <th>Topics</th>
+        <th>Posts</th>
+        <th class="left-align">Last Post</th>
+        <% if administrator? -%>
+        <th><%= link_to 'Edit', edit_forum_group_path(forum_group) %></th>
+        <th><%= link_to 'Delete', forum_group, :confirm => 'Are you sure? All forum group forums will be orphaned.', :method => :delete %></th>
+        <% end -%>
+      </tr>
+    </thead>
+    <% forum_group.forums.each do |forum| %>
+      <tr>
+        <td class="left-align">
+          <div class="group-info">
+            <%= link_to forum.title, forum_path(forum) %><br />
+            <%=h forum.description %>
+          </div>
+        </td>
+        <td><%=h forum.topics.count %></td>
+        <td><%=h forum.posts.count %></td>
+        <td class="left-align">
+          <% if forum.posts.last.blank? -%>
+          No Posts Yet!
+          <% else -%>
+          <%=h forum.posts.last.created_at.to_formatted_s(:forum) %> by  <%= link_to forum.posts.last.user.username, user_path(forum.posts.last.user) %>
+          <% end %>
+        </td>
+        <% if administrator? -%>
+        <td><%= link_to 'Edit', edit_forum_path(forum) %></td>
+        <td><%= link_to 'Delete', forum, :confirm => 'Are you sure? All forum posts will be deleted.', :method => :delete %></td>
+      </tr>
+      <% end -%>
+      
+    <% end %>
+  </table>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New forum', new_forum_path %>

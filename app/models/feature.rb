@@ -1,3 +1,20 @@
+# == Schema Information
+# Schema version: 20100906145157
+#
+# Table name: features
+#
+#  id                   :integer         not null, primary key
+#  comment              :text
+#  created_at           :datetime
+#  updated_at           :datetime
+#  user_id              :integer
+#  title                :string(255)
+#  preview_file_name    :string(255)
+#  preview_content_type :string(255)
+#  preview_file_size    :integer
+#  preview_updated_at   :datetime
+#
+
 class Feature < ActiveRecord::Base
   has_many    :featurings
   has_many    :submissions,   :through =>   :featurings

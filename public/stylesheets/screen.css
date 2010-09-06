@@ -115,6 +115,10 @@ thead tr:hover {
 	height: 0;
 }
 
+.button-to{
+	margin: 20px 0;
+}
+
 ul.toolbar { float: left; }
 ul.actions { float: right; }
 
@@ -399,3 +403,102 @@ body.users.show div.review p.comment span { color: #97481d; }
 
 body.users.show p.photo { float: left; }
 body.users.show p.banner { float: right; }
+
+/* Forums */
+
+#breadcrumb {
+	margin-bottom:20px;
+}
+
+.post {
+	padding:20px 0;
+	vertical-align:text-top;
+	clear:both;
+	min-height: 80px;
+}
+.post-left {
+	width:120px;
+	float:left;
+}
+.post-right{
+	float:left;
+	width:670px;
+}
+
+.post h3{
+	background:#E5E5E5;
+	padding:5px;
+}
+
+#firstpost{
+	padding-top: 0px;
+}
+
+table#forums .group-info a{
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+table#forums .group-info{
+	margin-left: 15px;
+}
+
+table#forums col#title {
+	width:420px;
+}
+
+table#forums col#topics {
+	width:70px;
+}
+
+table#forums col#posts {
+	width:70px;
+}
+
+table#forums col#edit {
+	width:40px;
+}
+
+table#forums col#delete {
+	width:40px;
+}
+
+table#topics {
+	margin-bottom: 15px;
+}
+
+table#topics thead, table#forums thead tr{
+	height:35px;
+	background:#ebebe5;
+	font-size:1.3em;
+}
+
+table#topics, table#forums{
+	border:none;
+	text-align:center;
+}
+
+table#topics th, table#forums th {
+	text-align:center;
+}
+
+table#topics th.left-align, table#forums th.left-align, .left-align {
+	text-align:left;
+}
+
+table#topics col{
+	border-right:1px solid #ebebe5;
+}
+
+table#topics col#last-post, table#forums col#last-post {
+	border-right:none;
+}
+
+table#topics tr{
+	height:40px;
+}
+
+table#forums tr{
+	height:75px;
+}
+

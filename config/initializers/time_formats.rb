@@ -1,0 +1,1 @@
+Date::DATE_FORMATS[:forum] = Time::DATE_FORMATS[:forum] = "%b %e, %Y %l:%M %p"

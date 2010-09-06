@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100617175205) do
+ActiveRecord::Schema.define(:version => 20100906213500) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20100617175205) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "weight",     :default => 0, :null => false
   end
 
   create_table "forums", :force => true do |t|
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20100617175205) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "forum_group_id"
+    t.integer  "weight",         :default => 0, :null => false
   end
 
   create_table "posts", :force => true do |t|
@@ -83,6 +85,9 @@ ActiveRecord::Schema.define(:version => 20100617175205) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "thread_id"
+    t.integer  "forum_id"
+    t.integer  "topic_id"
+    t.integer  "user_id"
   end
 
   create_table "reviews", :force => true do |t|
@@ -133,13 +138,16 @@ ActiveRecord::Schema.define(:version => 20100617175205) do
 
   add_index "submissions", ["trashed", "moderated"], :name => "index_submissions_on_trashed_and_moderated"
 
-  create_table "threads", :force => true do |t|
+  create_table "topics", :force => true do |t|
     t.string   "title"
     t.integer  "last_poster_id"
     t.datetime "last_post_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "forum_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.integer  "view",           :default => 0, :null => false
   end
 
   create_table "users", :force => true do |t|

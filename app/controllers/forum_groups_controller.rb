@@ -44,7 +44,7 @@ class ForumGroupsController < ApplicationController
 
     respond_to do |format|
       if @forum_group.save
-        format.html { redirect_to(@forum_group, :notice => 'ForumGroup was successfully created.') }
+        format.html { redirect_to(forums_path, :notice => 'ForumGroup was successfully created.') }
         format.xml  { render :xml => @forum_group, :status => :created, :location => @forum_group }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class ForumGroupsController < ApplicationController
 
     respond_to do |format|
       if @forum_group.update_attributes(params[:forum_group])
-        format.html { redirect_to(@forum_group, :notice => 'ForumGroup was successfully updated.') }
+        format.html { redirect_to(forums_path, :notice => 'ForumGroup was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -80,4 +80,11 @@ class ForumGroupsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+  
+  def admin_authority_required?
+    %w(new create edit update destroy).include?(action_name)
+  end
+
 end

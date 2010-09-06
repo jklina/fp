@@ -1,8 +1,9 @@
 class ForumsController < ApplicationController
   # GET /forums
   # GET /forums.xml
+  before_filter :find_forum_groups, :only => [ :new, :create, :edit, :update, :index ]
+  
   def index
-    @forums = Forum.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class ForumsController < ApplicationController
   # GET /forums/1.xml
   def show
     @forum = Forum.find(params[:id])
+    @topics = @forum.topics.paginate :page => params[:page], :per_page => 1
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,7 +46,7 @@ class ForumsController < ApplicationController
 
     respond_to do |format|
       if @forum.save
-        format.html { redirect_to(@forum, :notice => 'Forum was successfully created.') }
+        format.html { redirect_to(forums_path, :notice => 'Forum was successfully created.') }
         format.xml  { render :xml => @forum, :status => :created, :location => @forum }
       else
         format.html { render :action => "new" }
@@ -60,7 +62,7 @@ class ForumsController < ApplicationController
 
     respond_to do |format|
       if @forum.update_attributes(params[:forum])
-        format.html { redirect_to(@forum, :notice => 'Forum was successfully updated.') }
+        format.html { redirect_to(forums_path, :notice => 'Forum was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -80,4 +82,11 @@ class ForumsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+  
+  def find_forum_groups
+    @forum_groups = ForumGroup.find(:all, :order => "weight ASC")
+  end
+  
 end
