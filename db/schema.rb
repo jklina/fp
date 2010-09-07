@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100906213500) do
+ActiveRecord::Schema.define(:version => 20100907023412) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(:version => 20100906213500) do
     t.integer  "banner_file_size"
     t.datetime "banner_updated_at"
     t.string   "authentication_token"
+    t.string   "time_zone"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"

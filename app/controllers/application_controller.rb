@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :request_authentication_if_necessary
   before_filter :redirect_if_unauthorized
   before_filter :find_headline
+  before_filter :set_user_time_zone
 
   filter_parameter_logging :password, :password_confirmation
 
@@ -67,6 +68,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  
+  def set_user_time_zone
+    Time.zone = current_user.time_zone if logged_in?
+  end
 
   def authenticate_by_token_if_present
     if !current_user && cookies[:authentication_token]

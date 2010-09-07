@@ -40,6 +40,9 @@
 <dt><%= f.label :banner, 'Banner <span class="reminder">(should be 736x58)</span>' -%></dt>
 <dd><%= f.file_field :banner -%></dd>
 
+<dt><%= f.label :time_zone %></dt>
+<dd><%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+
 <dt><%= f.label :password -%></dt>
 <dd><%= f.password_field :password -%></dd>
 
