@@ -18,7 +18,7 @@
 class Topic < ActiveRecord::Base
   belongs_to :forum
   belongs_to :user
-  has_many :posts, :dependent => :destroy, :order => 'updated_at DESC'
+  has_many :posts, :dependent => :destroy
   
   def content_html
     if self.content

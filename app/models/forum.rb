@@ -14,7 +14,7 @@
 
 class Forum < ActiveRecord::Base
   belongs_to :forum_group
-  has_many :topics, :dependent => :destroy
+  has_many :topics, :dependent => :destroy, :order => 'updated_at DESC'
   has_many :posts, :dependent => :destroy
   
   validates_presence_of :title, :weight
