@@ -94,7 +94,7 @@ class TopicsController < ApplicationController
   end
   
   def authority_required?
-    %w(edit update destroy new create).include?(action_name)
+    %w(edit update destroy).include?(action_name)
   end
   
   def find_forum
