@@ -416,6 +416,11 @@ body.users.show p.banner { float: right; }
 	clear:both;
 	min-height: 80px;
 }
+
+.post img {
+	max-width: 100%;
+}
+
 .post-left {
 	width:120px;
 	float:left;
