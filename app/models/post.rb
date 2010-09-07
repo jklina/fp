@@ -18,6 +18,8 @@ class Post < ActiveRecord::Base
   belongs_to :forum
   belongs_to :user
   
+  validates_presence_of :content
+  
   def content_html
     if self.content
       RedCloth.new(self.content).to_html

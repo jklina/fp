@@ -50,7 +50,7 @@ class PostsController < ApplicationController
         format.html { redirect_to(forum_topic_path(@topic.forum, @topic), :notice => 'Post was successfully created.') }
         format.xml  { render :xml => @topic, :status => :created, :location => @post }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to forum_topic_path(@topic.forum, @topic) }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
       end
     end
