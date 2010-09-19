@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100906145157
+# Schema version: 20100918195633
 #
 # Table name: users
 #
@@ -38,6 +38,7 @@
 #  banner_file_size         :integer
 #  banner_updated_at        :datetime
 #  authentication_token     :string(255)
+#  time_zone                :string(255)
 #
 
 require "digest/sha2"

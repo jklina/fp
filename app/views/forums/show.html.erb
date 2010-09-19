@@ -30,7 +30,7 @@
       <td><%=h topic.view %></td>
       <td class="left-align">
         <% unless topic.posts.empty? %>
-        <%=h topic.posts.last.created_at.to_formatted_s(:forum) %> by
+        <%=h topic.last_post_created_at.to_formatted_s(:forum) %> by
         <%= link_to topic.posts.last.user.username, user_path(topic.posts.last.user) %>
         <% end %>
       </td>
