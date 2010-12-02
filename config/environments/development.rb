@@ -1,25 +1,32 @@
-# Settings specified here will take precedence over those in config/environment.rb
+Fixelpuckers::Application.configure do
+  # Settings specified here will take precedence over those in config/environment.rb
 
-# In the development environment your application's code is reloaded on
-# every request.  This slows down response time but is perfect for development
-# since you don't have to restart the webserver when you make code changes.
-config.cache_classes = false
+  # In the development environment your application's code is reloaded on
+  # every request.  This slows down response time but is perfect for development
+  # since you don't have to restart the webserver when you make code changes.
+  config.cache_classes = false
 
-# Log error messages when you accidentally call methods on nil.
-config.whiny_nils = true
+  # Log error messages when you accidentally call methods on nil.
+  config.whiny_nils = true
 
-# Show full error reports and disable caching
-config.action_controller.consider_all_requests_local = true
-config.action_view.debug_rjs                         = true
-config.action_controller.perform_caching             = false
+  # Show full error reports and disable caching
+  config.consider_all_requests_local       = true
+  config.action_view.debug_rjs             = true
+  config.action_controller.perform_caching = false
 
-# Mail settings
-config.action_mailer.perform_deliveries = true
-config.action_mailer.raise_delivery_errors = true
-config.action_mailer.default_charset = "utf-8"
-config.action_mailer.default_url_options = { :host => "www.pixelfuckers.org" }
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = false
 
-ActionMailer::Base.delivery_method = :smtp  
-mailer_config = File.open("#{RAILS_ROOT}/config/actionmailer.yml")
-mailer_options = YAML.load(mailer_config)
-ActionMailer::Base.smtp_settings = mailer_options
+  # Print deprecation notices to the Rails logger
+  config.active_support.deprecation = :log
+
+  # Only use best-standards-support built into browsers
+  config.action_dispatch.best_standards_support = :builtin
+  
+PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
+PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
+
+# Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
+PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
+end
+
