@@ -33,16 +33,16 @@
 require "calculations"
 
 class Submission < ActiveRecord::Base
-  has_many		:authorships, :dependent => :destroy
-  has_many		:users, 		  :through =>   :authorships
-  has_many    :reviews,     :dependent => :delete_all
+  has_many		:authorships, 	:dependent => :destroy
+  has_many		:users,		:through =>   :authorships
+  has_many    		:reviews,     	:dependent => :delete_all
   has_many		:featurings
-  has_many		:features,    :through => 	:featurings
-  belongs_to	:category
+  has_many		:features,    	:through => 	:featurings
+  belongs_to		:category
 
   has_attached_file :preview,
                     :styles => { :large => "806x507>", :thumbnail => "194x122>" },
-					:convert_options => { :all => "-quality 100 -strip" },
+		    :convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL
 

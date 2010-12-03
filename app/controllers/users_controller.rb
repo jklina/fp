@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
   def index
 	  @users = User.find(:all)
-
 	  respond_to do |format|
 	    format.html
     end
@@ -19,8 +18,8 @@ class UsersController < ApplicationController
                                                             :moderated => false },
                                           :include => :users
 
-    @reviews = @user.reviews.paginate    :page => params[:review_page],
-                                          :per_page => 4,
+    @reviews = @user.reviews.paginate 		:page => params[:review_page],
+					  :per_page => 4,
                                           :order => "created_at DESC",
                                           :include => [ :user, { :submission => :users } ]
 
@@ -36,8 +35,8 @@ class UsersController < ApplicationController
                                     :order => "comments.created_at DESC",
                                     :include => :user)
     @comment = Comment.new
-	  respond_to do |format|
-	    format.html
+    respond_to do |format|
+        format.html
     end
   end
 

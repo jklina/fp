@@ -22,26 +22,25 @@ class SubmissionsController < ApplicationController
     @review = @submission.reviews.find_last_by_user_id(current_user) || Review.new
 
     respond_to do |format|
-      if @submission.trashed
-        if @submission.authored_by?(current_user)
-          flash[:notice] = "This submission has been trashed. Only you can see it."
-  	      format.html
-	      else
-	        raise ActiveRecord::RecordNotFound
-        end
-      elsif @submission.moderated
-        if has_authority?
-          flash[:notice] = "This submission has been moderated. Only you and the other moderators can see it."
-  	      format.html
+        if @submission.trashed
+            if @submission.authored_by?(current_user)
+                flash[:notice] = "This submission has been trashed. Only you can see it."
+                format.html
+            else
+                raise ActiveRecord::RecordNotFound
+            end
+        elsif @submission.moderated
+            if has_authority?
+                flash[:notice] = "This submission has been moderated. Only you and the other moderators can see it."
+                format.html
+            else
+                raise ActiveRecord::RecordNotFound
+            end
         else
-	        raise ActiveRecord::RecordNotFound
+            @submission.views += 1
+            @submission.save!
+            format.html
         end
-	    else
-  	    @submission.views += 1
-  	    @submission.save!
-
-        format.html
-      end
     end
   end
 
