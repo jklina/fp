@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_filter :find_submission, :only => [ :update ]
 
   def create
-    @submission = Submission.find(params[:submission_id], :include => :users)
+    @submission = Submission.find(params[:submission_id])
     @review = @submission.reviews.build(params[:review])
     @review.by_administrator = has_authority?
     @review.user = current_user

@@ -86,7 +86,7 @@ class ForumsController < ApplicationController
   protected
   
   def find_forum_groups
-    @forum_groups = ForumGroup.find(:all, :order => "weight ASC")
+    @forum_groups = ForumGroup.order("weight ASC")
   end
   
 end

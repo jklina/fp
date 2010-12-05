@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_filter :find_category, :except => [ :index, :new, :create ]
 
   def index
-    @categories = Category.find(:all)
+    @categories = Category.all
 
     respond_to do |format|
       format.html

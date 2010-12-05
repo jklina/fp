@@ -7,7 +7,9 @@ class PagesController < ApplicationController
                                                         :moderated => false },
                                        :include => :users
 
-	  @feature = Feature.find :last, :include => :user
+    if Feature.last	  
+      @feature = Feature.last
+    end
 
     respond_to do |format|
       format.html
@@ -20,7 +22,7 @@ class PagesController < ApplicationController
       [ "Featured Submissions", "featured" ],
       [ "Users",           "users" ],
       [ "--------------------", "#"]
-    ] + Category.find(:all, :order => "title").map { |c| [ c.title, c.id ] }
+    ] + Category.order("title").map { |c| [ c.title, c.id ] }
 
     @orders = [
       [ "Newest first", 0 ],

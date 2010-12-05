@@ -3,9 +3,9 @@ class UsersController < ApplicationController
   before_filter :require_self, :only => [ :edit, :update, :destroy ]
 
   def index
-	  @users = User.find(:all)
-	  respond_to do |format|
-	    format.html
+    @users = User.all
+    respond_to do |format|
+      format.html
     end
   end
 

@@ -205,7 +205,7 @@ class SubmissionsController < ApplicationController
   end
 
   def find_categories
-    @categories = Category.find(:all)
+    @categories = Category.all
   end
 
   def require_authorship

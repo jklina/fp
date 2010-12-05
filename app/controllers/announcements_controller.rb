@@ -13,8 +13,8 @@ class AnnouncementsController < ApplicationController
   end
 
   def show
-    @announcement = Announcement.find(params[:id], :include => [ :user, { :comments => :user }])
-    @comments = @announcement.comments.find(:all, :include => :user)
+    @announcement = Announcement.find(params[:id])
+    @comments = @announcement.comments.all
     @comment = Comment.new
 
     respond_to do |format|
