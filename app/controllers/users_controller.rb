@@ -23,17 +23,10 @@ class UsersController < ApplicationController
                                           :order => "created_at DESC",
                                           :include => [ :user, { :submission => :users } ]
 
-    @trash = @user.submissions.find(:all,
-                                    :limit => 4,
-                                    :order => "submissions.created_at DESC",
-                                    :conditions => { :trashed => true,
-                                                     :moderated => false },
-                                    :include => :users)
+    @trash = @user.submissions.where(:trashed => true, :moderated => false).order("submissions.created_at DESC").limit(4).includes(:users)
 
-    @comments = @user.comments.find(:all,
-                                    :limit => 3,
-                                    :order => "comments.created_at DESC",
-                                    :include => :user)
+    @comments = @user.comments.order("comments.created_at DESC").limit(3).includes(:user)
+
     @comment = Comment.new
     respond_to do |format|
         format.html
