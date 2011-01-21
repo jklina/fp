@@ -17,7 +17,7 @@
   <h1><%= link_to "Pixelfuckers", root_path -%></h1>
 
   <ul class="nav autoclear">
-    <li><%= link_to_unless_current "Browse", :controller => "browse" -%></li>
+    <li><%= link_to_unless_current "Browse", browse_path -%></li>
     <li><%= link_to "Forums", forums_path -%></li>
     <li><%= link_to "Chat", "http://webchat.freenode.net/?channels=pixelfuckers", :popup => true -%></li>
     <li><%= link_to_unless_current "News", announcements_path -%></li>

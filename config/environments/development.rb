@@ -23,19 +23,19 @@ Fixelpuckers::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
   
-PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
-PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
-
-# Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
-PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
-
-ActionMailer::Base.delivery_method = :smtp  
-mailer_config = File.open("#{Rails.root.to_s}/config/actionmailer.yml")
-mailer_options = YAML.load(mailer_config)
-ActionMailer::Base.smtp_settings = mailer_options
-
-config.action_mailer.default_url_options = {
-  :host => 'localhost',
-}
+  PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
+  PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
+  
+  # Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
+  PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
+  
+  ActionMailer::Base.delivery_method = :smtp  
+  mailer_config = File.open("#{Rails.root.to_s}/config/actionmailer.yml")
+  mailer_options = YAML.load(mailer_config)
+  ActionMailer::Base.smtp_settings = mailer_options
+  
+  config.action_mailer.default_url_options = {
+    :host => 'localhost',
+  }
 end
 

@@ -41,6 +41,5 @@ module Fixelpuckers
     config.filter_parameters += [:password]
     
     config.active_record.observers = :user_observer
-    
   end
 end
