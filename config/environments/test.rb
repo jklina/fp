@@ -38,4 +38,13 @@ Fixelpuckers::Application.configure do
   
   # Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
   PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
+  
+  ActionMailer::Base.delivery_method = :smtp  
+  mailer_config = File.open("#{Rails.root.to_s}/config/actionmailer.yml")
+  mailer_options = YAML.load(mailer_config)
+  ActionMailer::Base.smtp_settings = mailer_options
+  
+  config.action_mailer.default_url_options = {
+    :host => 'localhost',
+  }
 end
