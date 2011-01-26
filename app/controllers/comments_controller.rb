@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to :controller => kontroller, :action => "show", :id => @commentable }
       else
-        format.html { render :controller => kontroller, :action => "show", :id => @commentable }
+        format.html { render :action => "#{kontroller}/show", :id => @commentable }
       end
     end
   end

@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
   before_filter :find_headline
   before_filter :set_user_time_zone
 
-  filter_parameter_logging :password, :password_confirmation
-
   rescue_from ActiveRecord::RecordNotFound, :with => :respond_with_404
   rescue_from ActionController::RedirectBackError, :with => :handle_referrerless_redirect
 

@@ -19,7 +19,7 @@
   <ul class="nav autoclear">
     <li><%= link_to_unless_current "Browse", browse_path -%></li>
     <li><%= link_to "Forums", forums_path -%></li>
-    <li><%= link_to "Chat", "http://webchat.freenode.net/?channels=pixelfuckers", :popup => true -%></li>
+    <li><%= link_to "Chat", "http://webchat.freenode.net/?channels=pixelfuckers" -%></li>
     <li><%= link_to_unless_current "News", announcements_path -%></li>
     <% if moderator? -%>
     <li class="administrator">
@@ -27,7 +27,7 @@
       <ul>
         <li><%= link_to "new announcement", new_announcement_path -%></li>
         <li><%= link_to "categories", categories_path -%></li>
-        <li><%= link_to "pending featured submissions (#{pending_featured_submissions.size})", new_feature_path -%></li>
+        <li><%= link_to "pending featured submissions (#{pending_featured_submissions.size})", new_featured_path -%></li>
         <li><%= link_to "moderated submissions", moderated_submissions_path -%></li>
         <% if administrator? -%>
         <li><%= link_to "users", users_path -%></li>

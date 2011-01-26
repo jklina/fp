@@ -54,5 +54,5 @@ Fixelpuckers::Application.routes.draw do
   match "logout", :to => "sessions#destroy"
   match "register", :to => "users#new"
 
-  match ":controller/:action/:id(.:format)"
+  match ":controller/:action/(:id(.:format))"
 end

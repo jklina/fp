@@ -11,7 +11,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+ gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug'
@@ -31,3 +31,7 @@ gem "paperclip", :git => 'git://github.com/thoughtbot/paperclip.git'
 # group :development, :test do
 #   gem 'webrat'
 # end
+group :test do
+  gem 'factory_girl_rails'
+  gem 'shoulda'
+end

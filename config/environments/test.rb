@@ -32,4 +32,10 @@ Fixelpuckers::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  PAPERCLIP_ASSET_PATH = ":rails_root/public/assets/:class/:attachment/:id/:style/:basename.:extension"
+  PAPERCLIP_ASSET_URL  = "/assets/:class/:attachment/:id/:style/:basename.:extension"
+  
+  # Lifted from http://github.com/thoughtbot/paperclip/issues/#issue/33
+  PAPERCLIP_IMAGE = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
 end
