@@ -19,6 +19,6 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body
 
   def body_html
-    RedCloth.new(self.body).to_html
+    RedCloth.new(self.body).to_html.html_safe
   end
 end

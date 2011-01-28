@@ -37,7 +37,7 @@ class Review < ActiveRecord::Base
   end
 
   def comment_html
-    self.comment ? RedCloth.new(self.comment).to_html : ""
+    self.comment ? RedCloth.new(self.comment).to_html.html_safe : ""
   end
 
   protected

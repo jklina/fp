@@ -34,6 +34,6 @@ class Feature < ActiveRecord::Base
   validates_presence_of :title, :comment
 
   def comment_html
-    self.comment ? RedCloth.new(self.comment).to_html : ""
+    self.comment ? RedCloth.new(self.comment).to_html.html_safe : ""
   end
 end

@@ -1,7 +1,7 @@
 <h2>Register</h2>
 
 <% form_for @user do |f| -%>
-<%= error_messages_for :user -%>
+<%= render "shared/error_messages", :target => @user %>
 
   <dl>
     <dt><%= f.label :username -%></dt>

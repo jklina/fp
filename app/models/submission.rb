@@ -102,7 +102,7 @@ class Submission < ActiveRecord::Base
   end
 
   def description_html
-    self.description ? RedCloth.new(self.description).to_html : ""
+    self.description ? RedCloth.new(self.description).to_html.html_safe : ""
   end
 
   def admin_ratings

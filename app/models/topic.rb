@@ -23,7 +23,7 @@ class Topic < ActiveRecord::Base
   
   def content_html
     if self.content
-      RedCloth.new(self.content).to_html
+      RedCloth.new(self.content).to_html.html_safe
     end
   end
   
