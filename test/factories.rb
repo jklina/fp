@@ -9,6 +9,11 @@ Factory.define(:category) do |c|
   c.description { Faker::Lorem.sentences.join(" ") }
 end
 
+Factory.define(:forum_group) do |f|
+  f.title  { Faker::Lorem.sentence.chomp(".") }
+  f.weight { rand(101) }
+end
+
 Factory.define :user do |f|
   f.username "foo"
   f.password "foobar"
