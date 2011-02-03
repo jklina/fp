@@ -21,6 +21,13 @@ Factory.define(:forum) do |f|
   f.association :forum_group
 end
 
+Factory.define(:post) do |p|
+  p.content     { Faker::Lorem.sentences.join(" ") }
+  p.association :forum
+  p.association :topic
+  p.association :user
+end
+
 Factory.define(:static_page) do |p|
   p.title { Faker::Lorem.sentence.chomp(".") }
   p.body  { Faker::Lorem.sentences.join(" ") }
@@ -35,9 +42,9 @@ Factory.define(:topic) do |t|
   t.association :user
 end
 
-Factory.define :user do |f|
-  f.username "foo"
-  f.password "foobar"
-  f.password_confirmation { |u| u.password }
-  f.email "foo@foobar.com"
+Factory.define(:user) do |u|
+  u.username              { Faker::Lorem.words.first }
+  u.password              { Faker::Lorem.sentence.gsub(/[^\w]/, "") }
+  u.password_confirmation { |s| s.password }
+  u.email                 { Faker::Internet.email }
 end
