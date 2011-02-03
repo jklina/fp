@@ -27,6 +27,14 @@ Factory.define(:static_page) do |p|
   p.slug  { |s| s.title.parameterize }
 end
 
+Factory.define(:topic) do |t|
+  t.title       { Faker::Lorem.sentence.chomp(".") }
+  t.content     { Faker::Lorem.sentences.join(" ") }
+  t.view        0
+  t.association :forum
+  t.association :user
+end
+
 Factory.define :user do |f|
   f.username "foo"
   f.password "foobar"
