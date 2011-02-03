@@ -21,6 +21,12 @@ Factory.define(:forum) do |f|
   f.association :forum_group
 end
 
+Factory.define(:static_page) do |p|
+  p.title { Faker::Lorem.sentence.chomp(".") }
+  p.body  { Faker::Lorem.sentences.join(" ") }
+  p.slug  { |s| s.title.parameterize }
+end
+
 Factory.define :user do |f|
   f.username "foo"
   f.password "foobar"

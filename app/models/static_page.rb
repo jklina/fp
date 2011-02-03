@@ -13,32 +13,33 @@
 #
 
 class StaticPage < ActiveRecord::Base
+  attr_accessible :title, :slug, :body
 
-  before_validation  :generate_and_slugify_if_necessary
+  before_validation  :generate_or_sanitize_slug
  
   validates_presence_of :title, :slug, :body
   validates_uniqueness_of :title, :case_sensitive => false
   validates_uniqueness_of :slug
- 
-  #Generates slug either based off of a specified slug or the title. 
+
   def to_param
-    "#{slug}"
+    slug
   end
-  
-  def generate_and_slugify_if_necessary
-    if slug.blank?
-	  self.slug = title.parameterize
-	else
-	  self.slug = self.slug.parameterize
-	end
-  end
-	
+
   def body_html
-    RedCloth.new(self.body).to_html.html_safe
+    RedCloth.new(body).to_html.html_safe
   end
 
   def published_at
-    self.created_at.strftime("%B %d, %Y")
+    created_at.strftime("%B %d, %Y")
   end
 
+  protected
+
+  def generate_or_sanitize_slug
+    if slug.blank?
+	    self.slug = title ? title.parameterize : nil
+	  else
+	    self.slug = slug.parameterize
+	  end
+  end
 end
