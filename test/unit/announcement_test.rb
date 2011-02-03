@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class AnnouncementTest < ActiveSupport::TestCase
-  context 'The Announcement class' do
+  context "The Announcement class" do
     should     allow_mass_assignment_of(:title)
     should     allow_mass_assignment_of(:body)
     should_not allow_mass_assignment_of(:id)
@@ -15,7 +15,7 @@ class AnnouncementTest < ActiveSupport::TestCase
     should validate_presence_of(:body)
   end
 
-  context 'An Announcement instance' do
+  context "An Announcement instance" do
     setup do
       @announcement = Factory(:announcement)
     end
