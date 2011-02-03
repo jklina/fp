@@ -8,7 +8,7 @@ class CategoryTest < Test::Unit::TestCase
     should_not allow_mass_assignment_of(:created_at)
     should_not allow_mass_assignment_of(:updated_at)
 
-    should have_many(:submissions)
+    should have_many(:submissions).dependent(:nullify)
 
     should validate_presence_of(:title)
   end

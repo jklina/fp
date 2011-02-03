@@ -9,7 +9,7 @@ class AnnouncementTest < ActiveSupport::TestCase
     should_not allow_mass_assignment_of(:updated_at)
 
     should belong_to(:user)
-    should have_many(:comments)
+    should have_many(:comments).dependent(:destroy)
 
     should validate_presence_of(:title)
     should validate_presence_of(:body)

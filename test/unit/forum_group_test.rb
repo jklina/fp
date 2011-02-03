@@ -8,7 +8,7 @@ class ForumGroupTest < ActiveSupport::TestCase
     should_not allow_mass_assignment_of(:created_at)
     should_not allow_mass_assignment_of(:updated_at)
 
-    should have_many(:forums)
+    should have_many(:forums).dependent(:nullify)
 
     should validate_presence_of(:title)
     should validate_presence_of(:weight)
