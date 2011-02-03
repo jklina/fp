@@ -1,6 +1,6 @@
-:address:        subdomain.mailhosting.com
-:port:           26
-:domain:         domain.org
+:address:        your.mailserver.com
+:port:           25
+:domain:         yourdomain.com
 :authentication: :login
-:user_name:      robot@pixelfuckers.org
+:user_name:      username
 :password:       password
