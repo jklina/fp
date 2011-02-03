@@ -18,6 +18,6 @@ class Category < ActiveRecord::Base
   validates_presence_of :title
 
   def description_html
-    RedCloth.new(self.description || "").to_html.html_safe
+    RedCloth.new(description || "").to_html.html_safe
   end
 end
