@@ -1,9 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
-#require File.dirname(__FILE__) + '../../test_helper'
+require 'test_helper'
 
 class UserTest < Test::Unit::TestCase
-  #fixtures :users
-  
   context "a user" do
     setup do
       @user = Factory.create(:user, :username => 'fate0000', :password => 'password')
