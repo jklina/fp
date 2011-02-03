@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.build(params[:comment])
+    
     @comment.user = current_user
 
     respond_to do |format|

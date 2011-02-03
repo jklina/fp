@@ -87,14 +87,18 @@ class Submission < ActiveRecord::Base
   def update_statistics!
     administrator_statistics = Calculations.statistics(self.admin_ratings)
     user_statistics = Calculations.statistics(self.user_ratings)
+    user_admin_average_statistics = Calculations.statistics(self.user_ratings + self.admin_ratings)
 
     attributes = {
-      :admin_rating =>             administrator_statistics[:mean],
-      :admin_rating_lower_bound => administrator_statistics[:lower_bound],
-      :admin_rating_upper_bound => administrator_statistics[:upper_bound], 
-      :user_rating =>              user_statistics[:mean],
-      :user_rating_lower_bound =>  user_statistics[:lower_bound],
-      :user_rating_upper_bound =>  user_statistics[:upper_bound]
+      :admin_rating =>                administrator_statistics[:mean],
+      :admin_rating_lower_bound =>    administrator_statistics[:lower_bound],
+      :admin_rating_upper_bound =>    administrator_statistics[:upper_bound], 
+      :user_rating =>                 user_statistics[:mean],
+      :user_rating_lower_bound =>     user_statistics[:lower_bound],
+      :user_rating_upper_bound =>     user_statistics[:upper_bound],
+      :average_rating =>              user_admin_average_statistics[:mean],
+      :average_rating_upper_bound =>  user_admin_average_statistics[:lower_bound],
+      :average_rating_lower_bound =>  user_admin_average_statistics[:upper_bound]
     }
 
     self.update_attributes!(attributes)

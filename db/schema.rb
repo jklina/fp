@@ -1,15 +1,16 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of Active Record to incrementally modify your database, and
-# then regenerate this schema definition.
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your database schema. If you need
-# to create the application database on another system, you should be using db:schema:load, not running
-# all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918195633) do
+ActiveRecord::Schema.define(:version => 20110203013931) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -121,10 +122,10 @@ ActiveRecord::Schema.define(:version => 20100918195633) do
     t.float    "admin_rating"
     t.float    "admin_rating_lower_bound"
     t.float    "admin_rating_upper_bound"
-    t.boolean  "trashed",                  :default => false
-    t.boolean  "moderated",                :default => false
-    t.integer  "views",                    :default => 0
-    t.integer  "downloads",                :default => 0
+    t.boolean  "trashed",                    :default => false
+    t.boolean  "moderated",                  :default => false
+    t.integer  "views",                      :default => 0
+    t.integer  "downloads",                  :default => 0
     t.string   "preview_file_name"
     t.string   "preview_content_type"
     t.integer  "preview_file_size"
@@ -134,6 +135,9 @@ ActiveRecord::Schema.define(:version => 20100918195633) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "featured_at"
+    t.float    "average_rating"
+    t.float    "average_rating_upper_bound"
+    t.float    "average_rating_lower_bound"
   end
 
   add_index "submissions", ["trashed", "moderated"], :name => "index_submissions_on_trashed_and_moderated"
@@ -163,7 +167,7 @@ ActiveRecord::Schema.define(:version => 20100918195633) do
     t.string   "yahoo"
     t.string   "website"
     t.text     "current_projects"
-    t.integer  "access_level",             :default => 1
+    t.integer  "access_level",               :default => 1
     t.string   "password_salt"
     t.string   "password_hash"
     t.datetime "created_at"
@@ -176,7 +180,7 @@ ActiveRecord::Schema.define(:version => 20100918195633) do
     t.float    "admin_rating"
     t.float    "admin_rating_lower_bound"
     t.float    "admin_rating_upper_bound"
-    t.boolean  "confirmed",                :default => false
+    t.boolean  "confirmed",                  :default => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -187,6 +191,9 @@ ActiveRecord::Schema.define(:version => 20100918195633) do
     t.datetime "banner_updated_at"
     t.string   "authentication_token"
     t.string   "time_zone"
+    t.float    "average_rating"
+    t.float    "average_rating_upper_bound"
+    t.float    "average_rating_lower_bound"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"

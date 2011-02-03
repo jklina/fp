@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])  
+    @user = User.find_by_username(params[:id])  
     @submissions = @user.submissions.paginate    :page => params[:submission_page],
                                           :per_page => 4,
                                           :order => "created_at DESC",
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
   end
 
   def require_self
