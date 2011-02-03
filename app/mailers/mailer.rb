@@ -1,4 +1,5 @@
 class Mailer < ActionMailer::Base
+  default_url_options[:host] = "www.pixelfuckers.org"
   default :from => "robot@pixelfuckers.org"
   
   def confirmation_email(user)
@@ -6,7 +7,11 @@ class Mailer < ActionMailer::Base
     @subject = "Activating your PF account"
 
     @name = user.name
-    @confirmation_url = url_for(:controller => "users", :action => "confirm", :token => user.confirmation_token, :only_path => false)
+    @confirmation_url = url_for(:controller => "users", 
+                                :action => "confirm",
+                                :token => user.confirmation_token,
+                                :only_path => false)
+
     mail(:to => @recipients, :subject => @subject)
   end
 end
