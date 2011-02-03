@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :photo,
                     :styles => { :thumbnail => "194x122>", :avatar => "58x58#" },
-		    :convert_options => { :all => "-quality 100 -strip" },
+                    :convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL,
                     :default_url => "/images/avatar.png"
@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :banner,
                     :styles => { :large => "736x58#" },
-					:convert_options => { :all => "-quality 100 -strip" },
+                    :convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL,
                     :default_url => "/images/banner.png"
@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   validates_format_of       :email, 				        :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
 
   before_create :generate_confirmation_token
-  before_save :encrypt_password
+  before_save   :encrypt_password
 
   def self.authenticate(username, password)
     user = self.find_by_username(username)
