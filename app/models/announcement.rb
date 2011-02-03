@@ -20,10 +20,10 @@ class Announcement < ActiveRecord::Base
   validates_presence_of :title, :body
 
   def body_html
-    RedCloth.new(self.body).to_html.html_safe
+    RedCloth.new(body).to_html.html_safe
   end
 
   def published_at
-    self.created_at.strftime("%B %d, %Y")
+    created_at.strftime("%B %d, %Y")
   end
 end
