@@ -14,6 +14,12 @@ Factory.define(:category) do |c|
   c.description { Faker::Lorem.sentences.join(" ") }
 end
 
+Factory.define(:comment) do |c|
+  c.body        { Faker::Lorem.sentences.join(" ") }
+  c.association :user
+  c.association :commentable, :factory => :submission # Using the obvious example here.
+end
+
 Factory.define(:forum_group) do |f|
   f.title  { Faker::Lorem.sentence.chomp(".") }
   f.weight { rand(101) }
