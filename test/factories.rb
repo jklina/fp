@@ -4,6 +4,11 @@ Factory.define(:announcement) do |a|
   a.association :user
 end
 
+Factory.define(:authorship) do |a|
+  a.association :submission
+  a.association :user
+end
+
 Factory.define(:category) do |c|
   c.title       { Faker::Lorem.sentence.chomp(".") }
   c.description { Faker::Lorem.sentences.join(" ") }
