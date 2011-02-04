@@ -36,8 +36,8 @@ class PagesController < ApplicationController
 
     order = case session[:order_filter].to_i
       when 1 then "created_at ASC"
-      when 2 then "user_rating DESC"
-      when 3 then "user_rating ASC"
+      when 2 then "average_rating DESC"
+      when 3 then "average_rating ASC"
       else "created_at DESC"
     end
 
