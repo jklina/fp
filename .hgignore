@@ -8,5 +8,5 @@ config/actionmailer.yml
 db/*.sqlite3
 log/
 public/assets/
-test/fixtures
+test/fixtures/*.yml
 tmp/

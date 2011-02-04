@@ -176,15 +176,15 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should "provide produce admin ratings on submissions when calling admin_ratings" do
-        pending "Update this test after submissions get their test suite."
+        pending "Update this test after reviews get their test suite."
       end
 
       should "provide produce user ratings on submissions when calling admin_ratings" do
-        pending "Update this test after submissions get their test suite."
+        pending "Update this test after reviews get their test suite."
       end
 
       should "update statistics when calling update_statistics!" do
-        pending "Update this test after submissions get their test suite."
+        pending "Update this test after reviews get their test suite."
       end
     end
 

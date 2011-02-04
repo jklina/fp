@@ -34,6 +34,15 @@ Factory.define(:static_page) do |p|
   p.slug  { |s| s.title.parameterize }
 end
 
+Factory.define(:submission) do |s|
+  s.title        { Faker::Lorem.sentence.chomp(".") }
+  s.description  { Faker::Lorem.sentences.join(" ") }
+  s.association  :category
+  s.preview      File.new(File.join(Rails.root, "test", "fixtures", "files", "submission.png"))
+  s.after_build  { |submission| submission.users << Factory.create(:user) }
+  s.after_create { |submission| submission.users << Factory.create(:user) }
+end
+
 Factory.define(:topic) do |t|
   t.title       { Faker::Lorem.sentence.chomp(".") }
   t.content     { Faker::Lorem.sentences.join(" ") }
