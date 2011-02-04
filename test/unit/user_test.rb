@@ -21,7 +21,6 @@ class UserTest < ActiveSupport::TestCase
     should     allow_mass_assignment_of(:time_zone)
     should     allow_mass_assignment_of(:photo)
     should     allow_mass_assignment_of(:banner)
-
     should_not allow_mass_assignment_of(:id)
     should_not allow_mass_assignment_of(:last_login_time)
     should_not allow_mass_assignment_of(:access_level)
@@ -48,7 +47,7 @@ class UserTest < ActiveSupport::TestCase
     should_not allow_mass_assignment_of(:updated_at)
 
     should have_many(:authorships)
-    should have_many(:submissions)
+    should have_many(:submissions).through(:authorships)
     should have_many(:reviews).dependent(:destroy)
     should have_many(:features)
     should have_many(:announcements)

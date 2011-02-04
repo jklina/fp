@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
                   :photo, :banner
 
   has_many :authorships
-  has_many :submissions, :through =>   :authorships
+  has_many :submissions, :through   => :authorships
   has_many :reviews,     :dependent => :destroy
   has_many :features
   has_many :announcements
