@@ -1,12 +1,15 @@
 class Feature < ActiveRecord::Base
-  has_many    :featurings
-  has_many    :submissions,   :through =>   :featurings
-  has_one     :feature_image, :dependent => :destroy
-  belongs_to  :user
+  attr_accessible :title, :comment, :user, :preview
+
+  belongs_to :user
+  has_many   :featurings
+  has_many   :submissions, :through => :featurings
+
+  validates_presence_of :title, :comment
 
   has_attached_file :preview,
                     :styles => { :large => "806x218>", :thumbnail => "194x122>" },
-					:convert_options => { :all => "-quality 100 -strip" },
+                    :convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
                     :url => PAPERCLIP_ASSET_URL
 
@@ -14,9 +17,7 @@ class Feature < ActiveRecord::Base
   validates_attachment_size         :preview, :less_than => 5.megabytes
   validates_attachment_content_type :preview, :content_type => PAPERCLIP_IMAGE
 
-  validates_presence_of :title, :comment
-
   def comment_html
-    self.comment ? RedCloth.new(self.comment).to_html.html_safe : ""
+     RedCloth.new(self.comment).to_html.html_safe
   end
 end

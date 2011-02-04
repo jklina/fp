@@ -20,6 +20,13 @@ Factory.define(:comment) do |c|
   c.association :commentable, :factory => :submission # Using the obvious example here.
 end
 
+Factory.define(:feature) do |f|
+  f.title       { Faker::Lorem.sentence.chomp(".") }
+  f.comment     { Faker::Lorem.sentences.join(" ") }
+  f.preview     File.new(File.join(Rails.root, "test", "fixtures", "files", "submission.png"))
+  f.association :user
+end
+
 Factory.define(:forum_group) do |f|
   f.title  { Faker::Lorem.sentence.chomp(".") }
   f.weight { rand(101) }
