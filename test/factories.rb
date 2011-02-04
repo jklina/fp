@@ -51,6 +51,13 @@ Factory.define(:post) do |p|
   p.association :user
 end
 
+Factory.define(:review) do |r|
+  r.rating           { rand(100) + 1 }
+  r.by_administrator false
+  r.association      :submission
+  r.association      :user
+end
+
 Factory.define(:static_page) do |p|
   p.title { Faker::Lorem.sentence.chomp(".") }
   p.body  { Faker::Lorem.sentences.join(" ") }

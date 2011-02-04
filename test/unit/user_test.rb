@@ -175,15 +175,72 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should "provide produce admin ratings on submissions when calling admin_ratings" do
-        pending "Update this test after reviews get their test suite."
+        ratings = [ [ 85, 92 ], [ 93, 87 ] ]
+
+        ratings.each do |rs|
+          @submission = Factory(:submission)
+          @submission.users << @user
+
+          rs.each do |rating|
+            review = Factory(:review, :rating => rating, :submission => @submission)
+            review.by_administrator = true
+            review.save!
+          end
+        end
+
+        @user.reload
+        assert_equal [ 85, 92, 93, 87 ], @user.admin_ratings
       end
 
-      should "provide produce user ratings on submissions when calling admin_ratings" do
-        pending "Update this test after reviews get their test suite."
+      should "provide produce user ratings on submissions when calling user_ratings" do
+        ratings = [ [ 81, 95 ], [ 88, 97 ] ]
+
+        ratings.each do |rs|
+          @submission = Factory(:submission)
+          @submission.users << @user
+
+          rs.each do |rating|
+            review = Factory(:review, :rating => rating, :submission => @submission)
+            review.save!
+          end
+        end
+
+        @user.reload
+        assert_equal [ 81, 95, 88, 97 ], @user.user_ratings
       end
 
+      # Testing indirectly, as the creation of a review changes a user's statistics.
       should "update statistics when calling update_statistics!" do
-        pending "Update this test after reviews get their test suite."
+        @submission = Factory(:submission)
+        @submission.users << @user
+
+        old_admin_rating             = @user.admin_rating
+        old_admin_rating_lower_bound = @user.admin_rating_lower_bound
+        old_admin_rating_upper_bound = @user.admin_rating_upper_bound
+        old_user_rating              = @user.user_rating
+        old_user_rating_lower_bound  = @user.user_rating_lower_bound
+        old_user_rating_upper_bound  = @user.user_rating_upper_bound
+
+
+        [ 83, 98, 93 ].each do |rating|
+          review = Factory.build(:review, :rating => rating, :submission => @submission)
+          review.save!
+          @user.reload
+        end
+
+        [ 85, 90, 95 ].each do |rating|
+          review = Factory.build(:review, :rating => rating, :submission => @submission)
+          review.by_administrator = true
+          review.save!
+          @user.reload
+        end
+
+        assert_not_equal old_admin_rating,             @user.admin_rating
+        assert_not_equal old_admin_rating_lower_bound, @user.admin_rating_lower_bound
+        assert_not_equal old_admin_rating_upper_bound, @user.admin_rating_upper_bound
+        assert_not_equal old_user_rating,              @user.user_rating
+        assert_not_equal old_user_rating_lower_bound,  @user.user_rating_lower_bound
+        assert_not_equal old_user_rating_upper_bound,  @user.user_rating_upper_bound
       end
     end
 

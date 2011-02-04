@@ -95,19 +95,88 @@ class SubmissionTest < ActiveSupport::TestCase
     end
 
     should "provide produce admin ratings on submissions when calling admin_ratings" do
-      pending "Update this test after reviews get their test suite."
+      ratings = [ 85, 90, 95 ]
+      ratings.each do |rating|
+        review = Factory.build(:review, :rating => rating, :submission => @submission)
+        review.by_administrator = true
+        review.save!
+      end
+
+      @submission.reload
+      assert_equal ratings, @submission.admin_ratings
     end
 
-    should "provide produce user ratings on submissions when calling admin_ratings" do
-      pending "Update this test after reviews get their test suite."
+    should "provide produce user ratings on submissions when calling user_ratings" do
+      ratings = [ 83, 98, 93 ]
+      ratings.each do |rating|
+        Factory(:review, :rating => rating, :submission => @submission)
+      end
+
+      @submission.reload
+      assert_equal ratings, @submission.user_ratings
     end
 
+    # Test this indirectly, since review creation or destruction triggers
+    # a callback that fires off update_statistics!
     should "update statistics when calling update_statistics!" do
-      pending "Update this test after reviews get their test suite."
+      old_admin_rating             = @submission.admin_rating
+      old_admin_rating_lower_bound = @submission.admin_rating_lower_bound
+      old_admin_rating_upper_bound = @submission.admin_rating_upper_bound
+      old_user_rating              = @submission.user_rating
+      old_user_rating_lower_bound  = @submission.user_rating_lower_bound
+      old_user_rating_upper_bound  = @submission.user_rating_upper_bound
+
+      [ 85, 90, 95 ].each do |rating|
+        review = Factory.build(:review, :rating => rating, :submission => @submission)
+        review.by_administrator = true
+        review.save!
+        @submission.reload
+      end
+
+      [ 83, 98, 93 ].each do |rating|
+        review = Factory.build(:review, :rating => rating, :submission => @submission)
+        review.save!
+        @submission.reload
+      end
+
+      assert_not_equal old_admin_rating,             @submission.admin_rating
+      assert_not_equal old_admin_rating_lower_bound, @submission.admin_rating_lower_bound
+      assert_not_equal old_admin_rating_upper_bound, @submission.admin_rating_upper_bound
+      assert_not_equal old_user_rating,              @submission.user_rating
+      assert_not_equal old_user_rating_lower_bound,  @submission.user_rating_lower_bound
+      assert_not_equal old_user_rating_upper_bound,  @submission.user_rating_upper_bound
     end
 
+    # Same indirect testing here.
     should "update its users' statistics when calling update_users_statistics!" do
-      pending "Update this test after reviews get their test suite."
+      user = @submission.users.first
+
+      old_admin_rating             = user.admin_rating
+      old_admin_rating_lower_bound = user.admin_rating_lower_bound
+      old_admin_rating_upper_bound = user.admin_rating_upper_bound
+      old_user_rating              = user.user_rating
+      old_user_rating_lower_bound  = user.user_rating_lower_bound
+      old_user_rating_upper_bound  = user.user_rating_upper_bound
+
+      [ 85, 90, 95 ].each do |rating|
+        review = Factory.build(:review, :rating => rating, :submission => @submission)
+        review.by_administrator = true
+        review.save!
+        user.reload
+      end
+
+      [ 83, 98, 93 ].each do |rating|
+        review = Factory.build(:review, :rating => rating, :submission => @submission)
+        review.save!
+        user.reload
+      end
+
+      assert_not_equal old_admin_rating,             user.admin_rating
+      assert_not_equal old_admin_rating_lower_bound, user.admin_rating_lower_bound
+      assert_not_equal old_admin_rating_upper_bound, user.admin_rating_upper_bound
+      assert_not_equal old_user_rating,              user.user_rating
+      assert_not_equal old_user_rating_lower_bound,  user.user_rating_lower_bound
+      assert_not_equal old_user_rating_upper_bound,  user.user_rating_upper_bound
     end
   end
 end

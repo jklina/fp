@@ -1,8 +1,8 @@
 class Review < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :submission
+  attr_accessible :comment, :rating
 
-  attr_protected :by_administrator
+  belongs_to :submission
+  belongs_to :user
 
   validates_presence_of     :comment,                           :if => :unrated?
   validates_presence_of     :rating,                            :if => :uncommented?
@@ -10,8 +10,12 @@ class Review < ActiveRecord::Base
   validates_numericality_of :rating,  :only_integer => true,    :unless => :unrated?
   validates_uniqueness_of   :user_id, :scope => :submission_id, :unless => :unrated?
 
-  after_save :update_submission_statistics!
+  after_save    :update_submission_statistics!
   after_destroy :update_submission_statistics!
+
+  def comment_html
+    RedCloth.new(comment || "").to_html.html_safe
+  end
 
   def unrated?
     self.rating.blank?
@@ -19,10 +23,6 @@ class Review < ActiveRecord::Base
 
   def uncommented?
     self.comment.blank?
-  end
-
-  def comment_html
-    self.comment ? RedCloth.new(self.comment).to_html.html_safe : ""
   end
 
   protected
