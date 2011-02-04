@@ -27,6 +27,11 @@ Factory.define(:feature) do |f|
   f.association :user
 end
 
+Factory.define(:featuring) do |f|
+  f.association :feature
+  f.association :submission
+end
+
 Factory.define(:forum_group) do |f|
   f.title  { Faker::Lorem.sentence.chomp(".") }
   f.weight { rand(101) }
