@@ -43,8 +43,8 @@ Factory.define(:topic) do |t|
 end
 
 Factory.define(:user) do |u|
-  u.username              { Faker::Lorem.words.first }
-  u.password              { Faker::Lorem.sentence.gsub(/[^\w]/, "") }
-  u.password_confirmation { |s| s.password }
+  u.username              { Faker::Internet.user_name }
   u.email                 { Faker::Internet.email }
+  u.password              { Faker::Lorem.words.join("") }
+  u.password_confirmation { |s| s.password }
 end

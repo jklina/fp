@@ -51,6 +51,14 @@ class User < ActiveRecord::Base
     REGULAR = 1
   end
 
+  attr_accessor :password, :password_confirmation
+
+  attr_accessible :name, :username, :email, :password, :password_confirmation,
+                  :location, :country, :time_zone,
+                  :aim, :msn, :icq, :yahoo,
+                  :website, :current_projects,
+                  :photo, :banner
+
   has_many :authorships
   has_many :submissions, :through =>   :authorships
   has_many :reviews,     :dependent => :destroy
@@ -61,11 +69,20 @@ class User < ActiveRecord::Base
   has_many :remarks,     :class_name => "Comment", :dependent => :destroy
   has_many :comments,    :as => :commentable,      :dependent => :destroy
 
+  validates_presence_of     :username, :email
+  validates_presence_of     :password,              :if => :password_required_or_present?
+  validates_presence_of     :password_confirmation, :if => :password_required_or_present?
+  validates_length_of	      :password,				      :if => :password_required_or_present?, :minimum => 5
+  validates_confirmation_of :password,              :if => :password_required_or_present?
+  validates_uniqueness_of   :username,              :case_sensitive => false
+  validates_uniqueness_of   :email,                 :case_sensitive => false
+  validates_format_of       :email, 				        :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
+
   has_attached_file :photo,
                     :styles => { :thumbnail => "194x122>", :avatar => "58x58#" },
                     :convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
-                    :url => PAPERCLIP_ASSET_URL,
+                    :url  => PAPERCLIP_ASSET_URL,
                     :default_url => "/images/avatar.png"
 
   validates_attachment_size         :photo, :less_than => 5.megabytes
@@ -75,85 +92,74 @@ class User < ActiveRecord::Base
                     :styles => { :large => "736x58#" },
                     :convert_options => { :all => "-quality 100 -strip" },
                     :path => PAPERCLIP_ASSET_PATH,
-                    :url => PAPERCLIP_ASSET_URL,
+                    :url  => PAPERCLIP_ASSET_URL,
                     :default_url => "/images/banner.png"
 
   validates_attachment_size         :banner, :less_than => 5.megabytes
   validates_attachment_content_type :banner, :content_type => PAPERCLIP_IMAGE
 
-  attr_accessor :password, :password_confirmation
-
-  validates_presence_of     :username
-  validates_presence_of     :password,              :if => :password_required_or_present?
-  validates_presence_of     :password_confirmation, :if => :password_required_or_present?
-  validates_length_of	      :password,				      :if => :password_required_or_present?, :minimum => 5
-  validates_confirmation_of :password,              :if => :password_required_or_present?
-  validates_uniqueness_of   :username,              :case_sensitive => false
-  validates_uniqueness_of   :email,                 :case_sensitive => false
-  validates_format_of       :email, 				        :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
-
   before_create :generate_confirmation_token
   before_save   :encrypt_password
 
-  def self.authenticate(username, password)
-    user = self.find_by_username(username)
-    !user.nil? && (self.encrypt("#{user.password_salt}--#{password}") == user.password_hash) ? user : nil
-  end
-  
-  def self.confirm(token)
-    user = self.find_by_confirmation_token(token) if token
-    user.update_attribute(:confirmed, true) if user
-  end
+  class << self
+    def authenticate(username, password)
+      user = find_by_username(username)
+      user && (encrypt("#{user.password_salt}--#{password}") == user.password_hash) ? user : nil
+    end
 
-  def self.encrypt(string)
-    Digest::SHA256.hexdigest(string)
-  end
+    def confirm(token)
+      user = find_by_confirmation_token(token) if token
+      user.update_attribute(:confirmed, true) if user
+    end
 
-  def update_statistics!
-    administrator_statistics = Calculations.statistics(self.admin_ratings)
-    user_statistics = Calculations.statistics(self.user_ratings)
-    user_admin_average_statistics = Calculations.statistics(self.user_ratings + self.admin_ratings)
-
-    attributes = {
-      :admin_rating =>                administrator_statistics[:mean],
-      :admin_rating_lower_bound =>    administrator_statistics[:lower_bound],
-      :admin_rating_upper_bound =>    administrator_statistics[:upper_bound], 
-      :user_rating =>                 user_statistics[:mean],
-      :user_rating_lower_bound =>     user_statistics[:lower_bound],
-      :user_rating_upper_bound =>     user_statistics[:upper_bound],
-      :average_rating =>              user_admin_average_statistics[:mean],
-      :average_rating_upper_bound =>  user_admin_average_statistics[:lower_bound],
-      :average_rating_lower_bound =>  user_admin_average_statistics[:upper_bound]
-    }
-
-    self.update_attributes!(attributes)
+    def encrypt(string)
+      Digest::SHA256.hexdigest(string)
+    end
   end
 
-  def admin_ratings
-    self.submissions.map { |s| s.reviews.map { |r| r.rating if r.by_administrator } }.flatten.compact
-  end
-
-  def user_ratings
-    self.submissions.map { |s| s.reviews.map { |r| r.rating unless r.by_administrator } }.flatten.compact
+  def to_param
+    username.parameterize
   end
 
   def remember
     token = self.class.encrypt("#{self.password_salt}--#{generate_salt}")
-    self.update_attribute(:authentication_token, token)
+    update_attribute(:authentication_token, token)
   end
 
   def forget
-    self.update_attribute(:authentication_token, nil)
+    update_attribute(:authentication_token, nil)
   end
-  
-  def to_param
-    username.parameterize
+
+  def admin_ratings
+    submissions.map { |s| s.reviews.map { |r| r.rating if r.by_administrator } }.flatten.compact
+  end
+
+  def user_ratings
+    submissions.map { |s| s.reviews.map { |r| r.rating unless r.by_administrator } }.flatten.compact
+  end
+
+  def update_statistics!
+    administrator_statistics      = Calculations.statistics(self.admin_ratings)
+    user_statistics               = Calculations.statistics(self.user_ratings)
+    user_admin_average_statistics = Calculations.statistics(self.user_ratings + self.admin_ratings)
+
+    self.admin_rating               = administrator_statistics[:mean]
+    self.admin_rating_lower_bound   = administrator_statistics[:lower_bound]
+    self.admin_rating_upper_bound   = administrator_statistics[:upper_bound]
+    self.user_rating                = user_statistics[:mean]
+    self.user_rating_lower_bound    = user_statistics[:lower_bound]
+    self.user_rating_upper_bound    = user_statistics[:upper_bound]
+    self.average_rating             = user_admin_average_statistics[:mean]
+    self.average_rating_upper_bound = user_admin_average_statistics[:lower_bound]
+    self.average_rating_lower_bound = user_admin_average_statistics[:upper_bound]
+
+    self.save!
   end
 
   protected
 
   def password_required_or_present?
-    self.password_hash.blank? || !password.blank?
+    new_record? || password.present? || password_confirmation.present?
   end
 
   def encrypt_password
