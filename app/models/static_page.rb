@@ -1,17 +1,3 @@
-# == Schema Information
-# Schema version: 20100906145157
-#
-# Table name: static_pages
-#
-#  id         :integer         not null, primary key
-#  title      :string(255)
-#  slug       :string(255)
-#  body       :string(255)
-#  published  :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class StaticPage < ActiveRecord::Base
   attr_accessible :title, :slug, :body
 

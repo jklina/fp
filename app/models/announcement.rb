@@ -1,16 +1,3 @@
-# == Schema Information
-# Schema version: 20100906145157
-#
-# Table name: announcements
-#
-#  id         :integer         not null, primary key
-#  title      :string(255)
-#  body       :text
-#  user_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class Announcement < ActiveRecord::Base
   attr_accessible :title, :body
 

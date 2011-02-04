@@ -1,35 +1,3 @@
-# == Schema Information
-# Schema version: 20100906145157
-#
-# Table name: submissions
-#
-#  id                       :integer         not null, primary key
-#  title                    :string(255)
-#  description              :text
-#  category_id              :integer
-#  created_at               :datetime
-#  updated_at               :datetime
-#  user_rating              :float
-#  user_rating_lower_bound  :float
-#  user_rating_upper_bound  :float
-#  admin_rating             :float
-#  admin_rating_lower_bound :float
-#  admin_rating_upper_bound :float
-#  trashed                  :boolean
-#  moderated                :boolean
-#  views                    :integer         default(0)
-#  downloads                :integer         default(0)
-#  preview_file_name        :string(255)
-#  preview_content_type     :string(255)
-#  preview_file_size        :integer
-#  preview_updated_at       :datetime
-#  file_file_name           :string(255)
-#  file_content_type        :string(255)
-#  file_file_size           :integer
-#  file_updated_at          :datetime
-#  featured_at              :datetime
-#
-
 require "calculations"
 
 class Submission < ActiveRecord::Base

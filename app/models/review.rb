@@ -1,18 +1,3 @@
-# == Schema Information
-# Schema version: 20100906145157
-#
-# Table name: reviews
-#
-#  id               :integer         not null, primary key
-#  submission_id    :integer
-#  user_id          :integer
-#  rating           :integer
-#  comment          :text
-#  by_administrator :boolean
-#  created_at       :datetime
-#  updated_at       :datetime
-#
-
 class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :submission

@@ -1,17 +1,3 @@
-# == Schema Information
-# Schema version: 20100906213500
-#
-# Table name: forums
-#
-#  id             :integer         not null, primary key
-#  title          :string(255)
-#  description    :text
-#  created_at     :datetime
-#  updated_at     :datetime
-#  forum_group_id :integer
-#  weight         :integer         default(0), not null
-#
-
 class Forum < ActiveRecord::Base
   attr_accessible :title, :description, :weight, :forum_group_id
 
