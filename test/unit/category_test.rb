@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CategoryTest < Test::Unit::TestCase
+class CategoryTest < ActiveSupport::TestCase
   context "The Category class" do
     should     allow_mass_assignment_of(:title)
     should     allow_mass_assignment_of(:description)
