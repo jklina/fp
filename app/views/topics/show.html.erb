@@ -24,7 +24,13 @@
 
 <%= render(:partial => "posts/post", :collection => @posts) %>
 
-<% form_for [@topic, @post] do |f| -%>
-<%= render :partial => "posts/form", :locals => { :f => f } -%>
-<p><%= submit_tag "Post Response" -%></p>
-<% end %>
+<div id="topic_footer">
+  <% if logged_in? %>
+    <% form_for [@topic, @post] do |f| -%>
+    <%= render :partial => "posts/form", :locals => { :f => f } -%>
+    <p><%= submit_tag "Post Response" -%></p>
+    <% end %>
+  <% else -%>
+    <p><%= link_to "Log in", login_path -%> or <%= link_to "register", register_path -%> to post in the forums!</p>
+  <% end -%>
+</div>

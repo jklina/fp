@@ -39,19 +39,19 @@
 <%= render :partial => "reviews/review", :collection => @submission.reviews -%>
 
 <% if logged_in? %>
-    <% if @review.new_record? -%>
-<% form_for [@submission, @review] do |f| -%>
-<%= render :partial => "reviews/form", :locals => { :f => f } -%>
-<p><%= submit_tag "Submit Review" -%></p>
-<% end -%>
-    <% else -%>
-<% form_for [@submission, @review], :html => { :method => :put } do |f| -%>
-<%= render :partial => "reviews/form", :locals => { :f => f } -%>
-<p><%= submit_tag "Edit Review" -%></p>
-<% end -%>
-  <% end -%>
+  <% if @review.new_record? -%>
+		<% form_for [@submission, @review] do |f| -%>
+  		<%= render :partial => "reviews/form", :locals => { :f => f } -%>
+  		<p><%= submit_tag "Submit Review" -%></p>
+		<% end -%>
+  <% else -%>
+		<% form_for [@submission, @review], :html => { :method => :put } do |f| -%>
+		  <%= render :partial => "reviews/form", :locals => { :f => f } -%>
+		  <p><%= submit_tag "Edit Review" -%></p>
+		<% end -%>
+	<% end -%>
 <% else -%>
-<p><%= link_to "Log in", login_path -%> or <%= link_to "register", register_path -%> to post comments and rate submissions!</p>
+  <p><%= link_to "Log in", login_path -%> or <%= link_to "register", register_path -%> to post comments and rate submissions!</p>
 <% end -%>
 
 <% if has_authority? -%>
