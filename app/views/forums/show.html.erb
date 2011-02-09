@@ -29,10 +29,8 @@
       <td><%=h topic.posts.count %></td>
       <td><%=h topic.view %></td>
       <td class="left-align">
-        <% unless topic.posts.empty? %>
-        <%=h topic.last_post_created_at.to_formatted_s(:forum) %> by
-        <%= link_to topic.posts.last.user.username, user_path(topic.posts.last.user) %>
-        <% end %>
+        <%=h topic.last_post_at.to_formatted_s(:forum) %> by
+        <%= link_to topic.last_poster.username, user_path(topic.last_poster) %>
       </td>
     </tr>
     <% end %>

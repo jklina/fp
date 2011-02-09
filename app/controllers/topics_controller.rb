@@ -50,6 +50,10 @@ class TopicsController < ApplicationController
   def create
     @topic = @forum.topics.build(params[:topic])
     @topic.user = current_user
+    
+    #So the topic gets pushed to the top without any replies
+    @topic.last_poster = current_user
+    @topic.last_post_at = Time.now
 
     respond_to do |format|
       if @topic.save

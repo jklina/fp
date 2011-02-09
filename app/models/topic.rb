@@ -4,6 +4,7 @@ class Topic < ActiveRecord::Base
   belongs_to :forum
   belongs_to :user
   has_many   :posts, :dependent => :destroy
+  belongs_to :last_poster, :class_name => "User"
 
   validates_presence_of :title, :forum_id, :user_id
   
