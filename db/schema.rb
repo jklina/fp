@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110203013931) do
+ActiveRecord::Schema.define(:version => 20110209022323) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -151,8 +151,7 @@ ActiveRecord::Schema.define(:version => 20110203013931) do
     t.integer  "forum_id"
     t.integer  "user_id"
     t.text     "content"
-    t.integer  "view",                 :default => 0, :null => false
-    t.datetime "last_post_created_at"
+    t.integer  "view",           :default => 0, :null => false
   end
 
   create_table "users", :force => true do |t|
