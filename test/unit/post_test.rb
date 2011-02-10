@@ -23,12 +23,12 @@ class PostTest < ActiveSupport::TestCase
       @topic = Factory(:topic)
       @post  = Factory.build(:post, :topic => @topic)
     end
-
-    should "update its topic's last_post_created_at when saving" do
-      last_post_created_at = @topic.last_post_created_at
+    
+    should "update its topic's last_post_at when saving" do
+      last_post_at = @topic.last_post_at
       assert @post.save
       @topic.reload
-      assert_not_equal last_post_created_at, @topic.last_post_created_at
+      assert_not_equal last_post_at, @topic.last_post_at
     end
 
     should "produce HTML when calling content_html" do

@@ -53,7 +53,7 @@ class SubmissionsController < ApplicationController
 
     respond_to do |format|
       if @submission.save
-	authorship = Authorship.new
+        authorship = Authorship.new
         authorship.submission = @submission
         authorship.user = current_user
         authorship.save!

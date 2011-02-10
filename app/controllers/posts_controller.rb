@@ -44,10 +44,6 @@ class PostsController < ApplicationController
     @post = @topic.posts.build(params[:post])
     @post.user = current_user
     @topic.forum.posts << @post
-    
-    # Update topic so topic knows from whom and when the last post was made to it.
-    @topic.last_post_at = Time.now
-    @topic.last_poster = current_user
 
     respond_to do |format|
       if @post.save && @topic.save
