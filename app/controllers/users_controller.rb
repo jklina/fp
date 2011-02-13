@@ -19,7 +19,7 @@ class UsersController < ApplicationController
                                           :include => :users
 
     @reviews = @user.reviews.paginate 		:page => params[:review_page],
-					  :per_page => 4,
+                                          :per_page => 4,
                                           :order => "created_at DESC",
                                           :include => [ :user, { :submission => :users } ]
 
