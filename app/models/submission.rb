@@ -27,6 +27,8 @@ class Submission < ActiveRecord::Base
                     :url  => PAPERCLIP_ASSET_URL
 
   validates_attachment_size :file, :less_than => 30.megabytes
+  
+  scope :unmoderated, where(:moderated => false)
 
   after_destroy :update_users_statistics!
 
