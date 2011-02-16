@@ -18,7 +18,7 @@ class UsersController < ApplicationController
                                                             :moderated => false },
                                           :include => :users
 
-    @reviews = @user.reviews.paginate 		:page => params[:review_page],
+    @reviews = @user.reviews.unmoderated_submission.paginate    :page => params[:review_page],
                                           :per_page => 4,
                                           :order => "created_at DESC",
                                           :include => [ :user, { :submission => :users } ]
