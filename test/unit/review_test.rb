@@ -93,6 +93,18 @@ class ReviewTest < ActiveSupport::TestCase
         assert_not_equal old_user_rating_lower_bound, @submission.user_rating_lower_bound
         assert_not_equal old_user_rating_upper_bound, @submission.user_rating_upper_bound
       end
+      
+      should "only show reviews of unmoderated submissions when the unmoderated submission scope is called" do
+        review = Factory(:review, :submission => @submission)
+        review.save!
+        assert_not_equal @submission.moderated, true
+        assert_equal Review.unmoderated_submission.find(review), review
+        @submission.moderated = true
+        @submission.save!
+        assert_raises(ActiveRecord::RecordNotFound) do
+          Review.unmoderated_submission.find(review)
+        end
+      end
     end
 
     context "that's been saved" do
