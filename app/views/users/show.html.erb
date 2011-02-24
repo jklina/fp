@@ -13,9 +13,11 @@
   <dt>location:</dt>
   <dd><%=h @user.location -%></dd>
   <% end -%>
+  <% if @user.displayed_email? -%>
   <dt>email:</dt>
-  <dd><%= mail_to @user.email, nil, :encode => "javascript" -%></dd>
-  <% if @user.website -%>
+  <dd><%= mail_to @user.displayed_email, nil, :encode => "javascript" -%></dd>
+  <% end -%>
+  <% if @user.website? -%>
   <dt>url:</dt>
   <dd><%= link_to h(@user.website), @user.website -%></dd>
   <% end -%>

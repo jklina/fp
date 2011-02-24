@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :password, :password_confirmation
 
-  attr_accessible :name, :username, :email, :password, :password_confirmation,
-                  :location, :country, :time_zone,
+  attr_accessible :name, :username, :email, :displayed_email, :password,
+                  :password_confirmation, :location, :country, :time_zone,
                   :aim, :msn, :icq, :yahoo,
                   :website, :current_projects,
                   :photo, :banner
