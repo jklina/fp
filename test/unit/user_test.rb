@@ -11,6 +11,7 @@ class UserTest < ActiveSupport::TestCase
     should     allow_mass_assignment_of(:location)
     should     allow_mass_assignment_of(:country)
     should     allow_mass_assignment_of(:email)
+    should     allow_mass_assignment_of(:displayed_email)
     should     allow_mass_assignment_of(:aim)
     should     allow_mass_assignment_of(:msn)
     should     allow_mass_assignment_of(:icq)

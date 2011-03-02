@@ -41,9 +41,9 @@
   </ul>
 
   <ul class="toolbar autoclear">
-    <li><%= link_to "New Submission", new_submission_path, :class => "icon upload" -%></li>
-    <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon settings" -%></li><% end -%>
-    <li><%= link_to "Help", "/static_pages/help", :class => "icon help" -%></li>
+    <li><%= link_to "New Submission", new_submission_path, :class => "icon upload", :title => "New Submission" -%></li>
+    <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon settings", :title => "Edit Profile" -%></li><% end -%>
+    <li><%= link_to "Help", "/static_pages/help", :class => "icon help", :title => "Help" -%></li>
   </ul>
 
   <ul class="actions">
@@ -70,9 +70,9 @@
 
 <div id="foot">
   <ul class="toolbar autoclear">
-    <li><%= link_to "New Submission", new_submission_path, :class => "icon upload" -%></li>
-    <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon settings" -%></li><% end -%>
-    <li><%= link_to "Help", "/static_pages/help", :class => "icon help" -%></li>
+    <li><%= link_to "New Submission", new_submission_path, :class => "icon upload", :title => "New Submission" -%></li>
+    <% if logged_in? -%><li><%= link_to "Edit Profile", edit_user_path(current_user), :class => "icon settings", :title => "Edit Profile" -%></li><% end -%>
+    <li><%= link_to "Help", "/static_pages/help", :class => "icon help", :title => "Help" -%></li>
   </ul>
 
   <ul class="inline">
