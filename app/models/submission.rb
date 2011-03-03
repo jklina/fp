@@ -29,6 +29,7 @@ class Submission < ActiveRecord::Base
   validates_attachment_size :file, :less_than => 30.megabytes
   
   scope :unmoderated, where(:moderated => false)
+  scope :untrashed, where(:trashed => false)
 
   after_destroy :update_users_statistics!
 

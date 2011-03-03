@@ -43,6 +43,7 @@ Fixelpuckers::Application.routes.draw do
   resources :comments, :only => [:destroy]
   resources :reviews, :only => [:destroy]
   resources :features, :as => 'featured'
+  #resources :menu, :controller => "menu_items", :path_names => { :new => "add" }
   
   resources :announcements do
     resources :comments

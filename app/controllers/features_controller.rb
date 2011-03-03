@@ -50,7 +50,7 @@ class FeaturesController < ApplicationController
 
 	      pending_featured_submissions = []
 	      flash[:notice] = "Successfully featured your submissions!"
-	      format.html { redirect_to feature_url(@feature) }
+	      format.html { redirect_to featured_url(@feature) }
 	    else
 	      format.html { render :action => "new" }
 	    end

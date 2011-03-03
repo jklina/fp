@@ -13,7 +13,7 @@ class Review < ActiveRecord::Base
   after_save    :update_submission_statistics!
   after_destroy :update_submission_statistics!
   
-  scope :unmoderated_submission, Review.joins(:submission) & Submission.unmoderated
+  scope :public_submissions, Review.joins(:submission) & Submission.unmoderated.untrashed
 
   def comment_html
     RedCloth.new(comment || "").to_html.html_safe
