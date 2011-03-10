@@ -6,6 +6,7 @@ gem 'sqlite3', '1.3.3', :require => 'sqlite3'
 gem 'RedCloth', '4.2.7'
 gem 'will_paginate', '~> 3.0.pre2'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
+gem 'jquery-rails'
 
 group :test do
   gem 'factory_girl_rails', '1.0.1'
