@@ -5,7 +5,7 @@
 <hr class="invisible" />
 
 <h3>Submit Feature</h3>
-<% form_for @feature, :url => featured_path, :html => { :multipart => true } do |f| -%>
+<% form_for @feature, :url => featured_index_path, :html => { :multipart => true } do |f| %>
 <%= render :partial => "form", :locals => { :f => f } -%>
 <p><%= submit_tag "Feature these submissions" -%></p>
-<% end -%>
+<% end %>

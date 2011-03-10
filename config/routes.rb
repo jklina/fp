@@ -1,6 +1,6 @@
 Fixelpuckers::Application.routes.draw do
   
-  resources :forum_groups
+  resources :forum_groups, :categories
 
   resources :forums do
     resources :topics
@@ -29,21 +29,14 @@ Fixelpuckers::Application.routes.draw do
   match "submissions/:id/unmoderate" => "submissions#unmoderate", :as => :unmoderate_submission
   match "submissions/:id/feature" => "submissions#feature", :as => :feature_submission
   match "submissions/:id/unfeature" => "submissions#unfeature", :as => :unfeature_submission
-  
-  #Will work on this later. 
-  #map.user "users/:username", :controller => "users", action => "show"
-  
-  #map.page "page",	:controller => "static_page", :action => "show"
 
   resources :static_pages do
     resources :comments
   end
 
-  resources :categories
   resources :comments, :only => [:destroy]
   resources :reviews, :only => [:destroy]
-  resources :features, :as => 'featured'
-  #resources :menu, :controller => "menu_items", :path_names => { :new => "add" }
+  resources :featured, :controller => "features"
   
   resources :announcements do
     resources :comments

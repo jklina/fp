@@ -169,7 +169,7 @@ class SubmissionsController < ApplicationController
     respond_to do |format|
       if pending_featured_submissions.include?(@submission.id)
         flash[:warning] = "#{@submission.title} is already waiting to be featured."
-        format.html { render :action => "show", :id => @submission }
+        format.html { redirect_to submission_url(@submission) }
       else
         pending_featured_submissions << @submission.id
         flash[:notice] = "Added #{@submission.title} to pending featured submissions."
