@@ -30,7 +30,7 @@
       <li>Downloads: <%=h @submission.downloads -%></li>
       <li>Admin Rating: <%=h number_with_precision(@submission.admin_rating, :precision => 2) -%></li>
       <li>User Rating: <%=h number_with_precision(@submission.user_rating, :precision => 2) -%></li>
-      <% if @submission.featured_at -%><li>Featured: <%=h shortdate(@submission.featured_at) -%></li><% end -%>
+      <% if @submission.featured_at -%><li id="featured">Featured: <%=h shortdate(@submission.featured_at) -%></li><% end -%>
     </ul>
   </div>
 </div>

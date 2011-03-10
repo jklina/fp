@@ -205,11 +205,19 @@ div.submission div.meta { float: left; }
 
 div.submission div.notes {
 	border-right: 1px solid #b9b9b0;
-	width: 80%;
+	width: 75%;
 	padding: 0 10px 0 0;
 }
 
 div.submission div.meta { padding: 0 0 0 10px; }
+
+div.submission div.meta li { padding-left: 20px; }
+
+div.submission div.meta li#featured{ 
+  padding-top: 10px;
+  line-height: 20px;
+  background: url(/images/featured.png) no-repeat left center;
+}
 
 div.review,
 div.announcement,
