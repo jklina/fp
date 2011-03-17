@@ -179,6 +179,10 @@ p.pagination { clear: left; }
 
 div.submission { margin: 0 0 20px;}
 
+div.submission h2#submission_header { float: left; }
+
+div.submission p#position_navigation { float: right; }
+
 div.submission ul.toolbar {
 	float: none;
 	margin: 2px 0 1.3em;
