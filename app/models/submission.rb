@@ -44,6 +44,14 @@ class Submission < ActiveRecord::Base
   def authored_by?(user)
     self.users.include?(user)
   end
+  
+  def previous()
+    Submission.unmoderated.untrashed.where("id < ?", self.id).order("created_at DESC").limit(1).first   
+  end
+  
+  def next()
+    Submission.unmoderated.untrashed.where("id > ?", self.id).order("created_at ASC").limit(1).first   
+  end
 
   def trash
     self.update_attribute(:trashed, true)

@@ -20,6 +20,8 @@ class SubmissionsController < ApplicationController
   def show
     @submission = Submission.find(params[:id], :include => [ :users, { :reviews => :user }, :category ])
     @review = @submission.reviews.find_last_by_user_id(current_user) || Review.new
+    @prev_submission = @submission.previous
+    @next_submission = @submission.next
 
     respond_to do |format|
         if @submission.trashed
