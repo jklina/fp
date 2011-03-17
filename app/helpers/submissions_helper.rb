@@ -10,4 +10,5 @@ module SubmissionsHelper
       submission.users.map { |u| h(u.username) }.to_sentence
     end
   end
+
 end

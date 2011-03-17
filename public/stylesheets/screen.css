@@ -223,11 +223,13 @@ div.submission div.meta li#featured{
   background: url(/images/featured.png) no-repeat left center;
 }
 
+div#reviews { margin: 0 0 1.3em; }
+
 div.review,
 div.announcement,
 div.comment {
 	border-bottom: 1px solid #e5e5e5;
-	margin: 0 0 1.3em;
+	padding: 15px;
 }
 
 div.review p.avatar,
@@ -239,8 +241,10 @@ div.comment p.avatar {
 div.review div.text,
 div.comment div.text {
 	float: right;
-	width: 742px;
+	width: 700px;
 }
+
+div.author { background-color: #f1f0ed;}
 
 .moderate_comment {
   float: right;

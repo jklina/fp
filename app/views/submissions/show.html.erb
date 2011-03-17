@@ -44,7 +44,9 @@
 </div>
 </div>
 
-<%= render :partial => "reviews/review", :collection => @submission.reviews -%>
+<div id="reviews">
+  <%= render :partial => "reviews/review", :collection => @submission.reviews -%>
+</div>
 
 <% if logged_in? %>
   <% if @review.new_record? -%>

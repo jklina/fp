@@ -1,4 +1,4 @@
-<div class="review autoclear<% if review.by_administrator -%> moderator<% end -%>">
+<div class="review autoclear<% if review.submission.authored_by?(review.user) -%> author<% end %>">
   <p class="avatar shadow"><%= link_to image_tag(review.user.photo.url(:avatar)), user_path(review.user) -%></p>
   <div class="text">
     <p>
