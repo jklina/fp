@@ -94,12 +94,12 @@ class ApplicationController < ActionController::Base
         flash[:warning] = "You must be a moderator or an administrator to do that."
         format.html { redirect_to :back }
       end
-	elsif admin_authority_required? && !has_admin_authority?
+	  elsif admin_authority_required? && !has_admin_authority?
       respond_to do |format|
         flash[:warning] = "You must be an administrator to do that."
         format.html { redirect_to :back }
       end
-	end
+	  end
   end
 
   def respond_with_404
@@ -118,4 +118,5 @@ class ApplicationController < ActionController::Base
     a = Announcement.last
     @headline = a && a.created_at > 7.days.ago ? a : nil
   end
+
 end

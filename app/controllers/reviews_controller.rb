@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review = Review.where(:submission_id => @submission.id, :user_username => current_user.username).last
+    @review = Review.where(:submission_id => @submission.id, :user_id => current_user.id).last
 
     respond_to do |format|
       if !@review.unrated? && @submission.authored_by?(current_user)

@@ -51,6 +51,7 @@
   <ul class="actions">
     <% if logged_in? -%>
       <li><%= link_to h(current_user.username), user_path(current_user) -%> :</li>
+      <li><%=h current_user.notifications.count %></li>
       <li><%= link_to "log out", logout_path -%></li>
     <% else -%>
       <li><%= link_to "log in", login_path -%></li>

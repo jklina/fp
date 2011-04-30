@@ -17,14 +17,16 @@ class User < ActiveRecord::Base
                   :photo, :banner
 
   has_many :authorships
-  has_many :submissions, :through   => :authorships
-  has_many :reviews,     :dependent => :destroy
+  has_many :submissions, :through     => :authorships
+  has_many :reviews,     :dependent   => :destroy
   has_many :features
   has_many :announcements
   has_many :topics
   has_many :posts
-  has_many :remarks,     :class_name => "Comment", :dependent => :destroy
-  has_many :comments,    :as => :commentable,      :dependent => :destroy
+  has_many :remarks,     :class_name  => "Comment", :dependent => :destroy
+  has_many :comments,    :as          => :commentable,      :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
+
 
   validates_presence_of     :username, :email
   validates_presence_of     :password,              :if => :password_required_or_present?
