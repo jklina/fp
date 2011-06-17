@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110429213500) do
+ActiveRecord::Schema.define(:version => 20110617031617) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20110429213500) do
 
   create_table "notifications", :force => true do |t|
     t.text     "description"
-    t.boolean  "read"
+    t.boolean  "read",            :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"

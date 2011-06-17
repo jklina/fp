@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'capistrano', '2.5.19'
-gem 'rails', '3.0.7'
+gem 'rails', '3.0.9'
 gem 'sqlite3', '1.3.3', :require => 'sqlite3'
 gem 'RedCloth', '4.2.7'
 gem 'will_paginate', '~> 3.0.pre2'
