@@ -41,6 +41,12 @@ Fixelpuckers::Application.routes.draw do
   resources :announcements do
     resources :comments
   end
+  
+  resources :notifications, :only => [:index] do
+    collection do
+      put 'mass_modify'
+    end
+  end
 
   root :to => "pages#root"
   match "browse", :to => "pages#browse"

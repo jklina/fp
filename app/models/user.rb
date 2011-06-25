@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   has_many :remarks,     :class_name  => "Comment", :dependent => :destroy
   has_many :comments,    :as          => :commentable,      :dependent => :destroy
   has_many :notifications, :dependent => :destroy
-
+  has_many :initiated_notifications, :class_name => "Notification", :foreign_key => "initiator_id"
 
   validates_presence_of     :username, :email
   validates_presence_of     :password,              :if => :password_required_or_present?

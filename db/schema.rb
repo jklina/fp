@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110617031617) do
+ActiveRecord::Schema.define(:version => 20110624211043) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20110617031617) do
     t.integer  "user_id"
     t.integer  "notifiable_id"
     t.string   "notifiable_type"
+    t.integer  "initiator_id"
   end
 
   create_table "posts", :force => true do |t|
