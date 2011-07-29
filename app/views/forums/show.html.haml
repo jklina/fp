@@ -24,7 +24,7 @@
         %td= h topic.posts.count
         %td= h topic.view
         %td.left-align
-          = h topic.last_post_at.to_formatted_s(:forum)
+          = h topic.last_post_at.try(:to_formatted_s(:forum))
           by
           \#{link_to topic.last_poster.username, user_path(topic.last_poster)}
 %p.pagination= will_paginate @topics, :container => false
