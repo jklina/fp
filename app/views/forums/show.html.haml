@@ -23,9 +23,10 @@
         %td= link_to topic.user.username, user_path(topic.user)
         %td= h topic.posts.count
         %td= h topic.view
-        %td.left-align
-          = h topic.try(:last_post_at).to_formatted_s(:forum)
-          by
-          \#{link_to topic.last_poster.username, user_path(topic.last_poster)}
+        -if topic.last_post_at
+          %td.left-align
+            = h topic.last_post_at.to_formatted_s(:forum)
+            by
+            \#{link_to topic.last_poster.username, user_path(topic.last_poster)}
 %p.pagination= will_paginate @topics, :container => false
 = button_to 'Post New Topic', new_forum_topic_path(@forum), :method => :get
