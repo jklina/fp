@@ -1,0 +1,25 @@
+#breadcrumb
+  = link_to @topic.forum.forum_group.title, forums_path()
+  >> #{link_to @topic.forum.title, forum_path(@topic.forum)} >> #{h @topic.title}
+#firstpost.post
+  %h3
+    %span
+      = h @topic.created_at.to_formatted_s(:forum)
+  .box
+    .post-left
+      = link_to @topic.user.username, user_path(@topic.user), :class => "username"
+      .clear
+      = link_to image_tag(@topic.user.photo.url(:avatar)), @topic.user.photo.url, :class => "user-avatar"
+    .post-right
+      .textile
+        = @topic.content_html
+= render(:partial => "posts/post", :collection => @posts)
+#topic_footer
+  - if logged_in?
+    - form_for [@topic, @post] do |f|
+      = render :partial => "posts/form", :locals => { :f => f }
+      %p= submit_tag "Post Response"
+  - else
+    %p
+      = link_to "Log in", login_path
+      or #{link_to "register", register_path} to post in the forums!

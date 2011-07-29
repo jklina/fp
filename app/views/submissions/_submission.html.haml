@@ -1,0 +1,6 @@
+.thumb
+  %p.preview= link_to image_tag(submission.preview.url(:thumbnail)), submission_path(submission)
+  %p.meta
+    = link_to h(submission.title), submission_path(submission)
+    - unless controller.controller_name == "users"
+      by #{authors(submission)}

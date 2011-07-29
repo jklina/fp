@@ -1,0 +1,5 @@
+%h2 New Static Page
+- form_for @static_page do |f|
+  = render :partial => "form", :locals => { :f => f }
+  %p= submit_tag "Submit"
+= link_to 'Back', static_pages_path

@@ -1,0 +1,6 @@
+= render "shared/error_messages", :target => @category
+%dl
+  %dt= f.label :title
+  %dd= f.text_field :title
+  %dt= f.label :description
+  %dd= f.text_area :description

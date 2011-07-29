@@ -1,8 +1,0 @@
-<div class="review">
-  <p class="preview"><%= link_to image_tag(review.submission.preview.url(:thumbnail)), submission_path(review.submission) -%></p>
-  <p class="meta">
-    <%= link_to h(review.submission.title), submission_path(review.submission) -%>
-    by <%= review.submission.users.collect { |u| link_to h(u.username), user_path(u) }.to_sentence -%>
-  </p>
-  <p class="comment"><span><%=h review.user.username -%></span><% if review.rating -%> [<%=h review.rating -%>]<% end -%><% if review.comment -%> wrote: <%= truncate(h(review.comment)) -%><% end -%></p>
-</div>

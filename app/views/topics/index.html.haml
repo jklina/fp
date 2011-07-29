@@ -1,0 +1,14 @@
+%h1 Listing topics
+%table
+  %tr
+    %th Title
+    %th Last poster
+    %th Last post at
+  - @topics.each do |topic|
+    %tr
+      %td= h topic.title
+      %td= h topic.last_poster_id
+      %td= h topic.last_post_at
+      %td= link_to 'Show', topic
+      %td= link_to 'Edit', edit_topic_path(topic)
+      %td= link_to 'Destroy', topic, :confirm => 'Are you sure?', :method => :delete

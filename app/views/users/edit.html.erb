@@ -1,6 +1,0 @@
-<h2>Editing Your Profile</h2>
-
-<% form_for @user, :html => { :multipart => true, :method => :put } do |f| -%>
-<%= render :partial => "form", :locals => { :f => f } -%>
-<p><%= submit_tag "Save these changes" -%></p>
-<% end -%>

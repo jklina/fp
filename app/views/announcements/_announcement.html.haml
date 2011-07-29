@@ -1,0 +1,6 @@
+.announcement
+  %h2= link_to h(announcement.title), announcement_path(announcement)
+  %p
+    by #{link_to h(announcement.user.username), user_path(announcement.user)} on #{announcement.published_at}
+  .textile
+    = announcement.body_html

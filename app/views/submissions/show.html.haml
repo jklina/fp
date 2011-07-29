@@ -1,0 +1,62 @@
+- content_for(:head) do
+  = javascript_include_tag "submission_key_bindings"
+.submission
+  %h2#submission_header
+    = h @submission.title
+    by #{authors(@submission)} in #{link_to h(@submission.category.title), url_for(:controller => "pages", :action => "browse", :things => @submission.category_id)}
+  %p#position_navigation
+    = link_to "Previous", submission_path(@prev_submission), :id => "previous"
+    | #{link_to "Next", submission_path(@next_submission), :id => "next"}
+  %p.shadow= link_to image_tag(@submission.preview.url(:large)), @submission.preview.url
+  %ul.toolbar
+    %li= link_to "View Original Image", @submission.preview.url, :class => "tile zoom"
+    %li= link_to "Download", download_submission_path(@submission), :class => "tile download"
+    - if @submission.authored_by?(current_user)
+      %li= link_to "Edit", edit_submission_path(@submission), :class => "tile settings"
+      - if @submission.trashed
+        %li= link_to "Untrash", untrash_submission_path(@submission), :class => "tile app_add"
+      - else
+        %li= link_to "Trash", trash_submission_path(@submission), :class => "tile app_delete"
+  %h2 Artist Notes
+  .autoclear
+    .notes.textile
+      = @submission.description_html
+    .meta
+      %ul
+        %li
+          Submitted: #{h shortdate(@submission.created_at)}
+        %li
+          Reviews: #{h @submission.reviews.count}
+        %li
+          Views: #{h @submission.views}
+        %li
+          Downloads: #{h @submission.downloads}
+        %li
+          Admin Rating: #{h number_with_precision(@submission.admin_rating, :precision => 2)}
+        %li
+          User Rating: #{h number_with_precision(@submission.user_rating, :precision => 2)}
+        - if @submission.featured_at
+          %li#featured
+            Featured: #{h shortdate(@submission.featured_at)}
+#reviews
+  = render :partial => "reviews/review", :collection => @submission.reviews
+- if logged_in?
+  - if @review.new_record?
+    - form_for [@submission, @review] do |f|
+      = render :partial => "reviews/form", :locals => { :f => f }
+      %p= submit_tag "Submit Review"
+  - else
+    - form_for [@submission, @review], :html => { :method => :put } do |f|
+      = render :partial => "reviews/form", :locals => { :f => f }
+      %p= submit_tag "Edit Review"
+- else
+  %p
+    = link_to "Log in", login_path
+    or #{link_to "register", register_path} to post comments and rate submissions!
+- if has_authority?
+  %ul
+    - if @submission.moderated
+      %li= link_to 'Unmoderate this submission', unmoderate_submission_path(@submission)
+    - else
+      %li= link_to 'Feature this submission', feature_submission_path(@submission)
+      %li= link_to 'Moderate this submission', moderate_submission_path(@submission)

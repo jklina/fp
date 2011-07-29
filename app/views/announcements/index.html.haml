@@ -1,0 +1,5 @@
+- unless @announcements.empty?
+  = render :partial => @announcements
+- else
+  %p No news yet&mdash;stay tuned!
+%p.pagination= will_paginate @announcements, :container => false

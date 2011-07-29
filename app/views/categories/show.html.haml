@@ -1,0 +1,5 @@
+%h2= h @category.title
+.textile
+  = @category.description_html
+= render :partial => "submissions/submission", :collection => @submissions
+%p.pagination= will_paginate @submissions, :container => false

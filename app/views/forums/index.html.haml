@@ -1,0 +1,37 @@
+- @forum_groups.each do |forum_group|
+  %table#forums
+    %colgroup
+      %col#title/
+      %col#topics/
+      %col#posts/
+      %col#last-post/
+      - if administrator?
+        %col#edit/
+        %col#delete/
+    %thead
+      %tr
+        %th.left-align= h forum_group.title
+        %th Topics
+        %th Posts
+        %th.left-align Last Post
+        - if administrator?
+          %th= link_to 'Edit', edit_forum_group_path(forum_group)
+          %th= link_to 'Delete', forum_group, :confirm => 'Are you sure? All forum group forums will be orphaned.', :method => :delete
+    - forum_group.forums.each do |forum|
+      %tr
+        %td.left-align
+          .group-info
+            = link_to forum.title, forum_path(forum)
+            %br/
+            = h forum.description
+        %td= h forum.topics.count
+        %td= h forum.posts.count
+        %td.left-align
+          - if forum.posts.last.blank?
+            No Posts Yet!
+          - else
+            = h forum.posts.last.created_at.to_formatted_s(:forum)
+            by  #{link_to forum.posts.last.user.username, user_path(forum.posts.last.user)}
+        - if administrator?
+          %td= link_to 'Edit', edit_forum_path(forum)
+          %td= link_to 'Delete', forum, :confirm => 'Are you sure? All forum posts will be deleted.', :method => :delete

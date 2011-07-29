@@ -1,9 +1,0 @@
-<h2><%=h @category.title -%></h2>
-
-<div class="textile">
-<%= @category.description_html -%>
-</div>
-
-<%= render :partial => "submissions/submission", :collection => @submissions -%>
-
-<p class="pagination"><%= will_paginate @submissions, :container => false -%></p>

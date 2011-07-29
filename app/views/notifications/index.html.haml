@@ -1,0 +1,18 @@
+= form_tag mass_modify_notifications_path, :method => :put do
+  %p
+    = submit_tag "Delete Notices"
+  %table#notifications
+    %colgroup
+      %col#selected
+      %col#description
+    %thead
+      %tr
+        %th Delete
+        %th Description
+    - @notifications.each do |notification|
+      %tr
+        %td.left-align
+          = check_box_tag "notification_ids[]", notification.id
+        %td
+          = link_to h(notification.initiator.username), notification.initiator
+          mentioned you in a #{h link_to_notifiable(notification)} #{time_ago_in_words(notification.created_at)} ago.

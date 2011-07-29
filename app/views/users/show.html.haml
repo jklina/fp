@@ -1,0 +1,48 @@
+%h2= h @user.username
+.autoclear
+  %p.photo.shadow= link_to image_tag(@user.photo.url(:avatar)), @user.photo.url
+  %p.banner.shadow= link_to image_tag(@user.banner.url(:large)), @user.banner.url
+%h3
+  User Info
+  - if @user == current_user
+    (#{link_to "Edit", edit_user_path(@user)})
+%dl.info.autoclear
+  %dt name:
+  %dd= h @user.name
+  - if @user.location
+    %dt location:
+    %dd= h @user.location
+  - if @user.displayed_email?
+    %dt email:
+    %dd= mail_to @user.displayed_email, nil, :encode => "javascript"
+  - if @user.website?
+    %dt url:
+    %dd= link_to h(@user.website), @user.website
+%h3 User Stats
+%dl.stats.autoclear
+  %dt average admin rating:
+  %dd= h number_with_precision(@user.admin_rating, :precision => 2)
+  %dt average user rating:
+  %dd= h number_with_precision(@user.user_rating, :precision => 2)
+%h3 Recent Submissions
+.autoclear
+  = render :partial => "submissions/submission", :collection => @submissions
+  %p.pagination= will_paginate @submissions, :param_name => 'submission_page', :container => false
+%h3 Recent Reviews
+.autoclear
+  = render :partial => "users/review", :collection => @reviews
+  %p.pagination= will_paginate @reviews, :param_name => 'review_page', :container => false
+- if @user == current_user
+  %h3 Trashed Submissions (only you can see this)
+  .autoclear
+    = render :partial => "submissions/submission", :collection => @trash
+%h3 User Comments
+= render :partial => "comments/comment", :collection => @comments
+- if logged_in?
+  - form_for @comment, :url => commentable_url(@user) do |f|
+    = render :partial => "comments/form", :locals => { :f => f }
+    %p= submit_tag "Publish your comment"
+- else
+  %p
+    = link_to "Log in", login_path
+    or #{link_to "register", register_path} to post comments!

@@ -1,0 +1,11 @@
+.comment.autoclear
+  %p.avatar.shadow= link_to image_tag(comment.user.photo.url(:avatar)), user_path(comment.user)
+  .text
+    %p
+      %strong= link_to h(comment.user.username), user_path(comment.user)
+      - if comment.body
+        wrote:
+      - if moderator?
+        = link_to_if moderator?, "Moderate this comment", comment_path(comment), :method => :delete, :class => "moderate_comment", :confirm => "Are you sure? This will permanently delete the comment."
+    .textile
+      = comment.body_html

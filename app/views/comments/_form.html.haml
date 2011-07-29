@@ -1,0 +1,4 @@
+= render "shared/error_messages", :target => @comment
+%dl
+  %dt= f.label :body, "Add Your Comment"
+  %dd= f.text_area :body

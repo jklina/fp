@@ -1,0 +1,24 @@
+%h2 Listing Static Pages
+%table#staticPageListTable{:cellspacing => "0"}
+  %colgroup
+    %col#pageTitleCol/
+    %col#pageSlugCol/
+    %col#pageEditLinkCol/
+    %col#pageDeleteLinkCol/
+  %thead
+    %tr
+      %th{:scope => "col"} Title
+      %th{:scope => "col"} Slug
+      %th{:scope => "col"} View
+      %th{:scope => "col"} Edit
+      %th{:scope => "col"} Delete
+  %tbody
+    - @static_pages.each do |static_page|
+      %tr{:class => cycle("even", "odd")}
+        %td= h static_page.title
+        %td= h static_page.slug
+        %td= link_to 'View Page', static_page
+        %td= link_to 'Edit', edit_static_page_path(static_page)
+        %td= link_to 'Delete', static_page, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Pixelfuckers Page', new_static_page_path

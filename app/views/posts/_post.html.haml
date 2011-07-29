@@ -1,0 +1,13 @@
+.post
+  %h3
+    %span
+      = h post.created_at.to_formatted_s(:forum)
+  .box
+    .post-left
+      - unless post.user.blank?
+        = link_to post.user.username, user_path(post.user), :class => "username"
+        .clear
+        = link_to image_tag(post.user.photo.url(:avatar)), post.user.photo.url, :class => "user-avatar"
+    .post-right
+      .textile
+        = post.content_html

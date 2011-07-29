@@ -1,0 +1,10 @@
+= render "shared/error_messages", :target => @forum
+%dl
+  %dt= f.label :title
+  %dd= f.text_field :title
+  %dt= f.label :description
+  %dd= f.text_area :description
+  %dt= f.label :weight
+  %dd= f.text_field :weight
+  %dt= f.label :forum_group_id
+  %dd= f.collection_select :forum_group_id, @forum_groups, :id, :title

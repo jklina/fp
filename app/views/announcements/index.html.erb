@@ -1,7 +1,0 @@
-<% unless @announcements.empty? -%>
-<%= render :partial => @announcements -%>
-<% else -%>
-<p>No news yet&mdash;stay tuned!</p>
-<% end -%>
-
-<p class="pagination"><%= will_paginate @announcements, :container => false -%></p>

@@ -1,5 +1,0 @@
-<h2><%= controller.action_name == "moderated" ? "Moderated" : "Listing" -%> submissions</h2>
-
-<%= render :partial => @submissions -%>
-
-<p class="pagination"><%= will_paginate @submissions, :container => false -%></p>

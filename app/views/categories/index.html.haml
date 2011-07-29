@@ -1,0 +1,5 @@
+%h2 Categories
+%ul
+  = render :partial => "category", :collection => @categories
+- if has_authority?
+  = link_to 'New category', new_category_path

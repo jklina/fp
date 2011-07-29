@@ -1,0 +1,8 @@
+= render "shared/error_messages", :target => @feature
+%dl
+  %dt= f.label :title
+  %dd= f.text_field :title
+  %dt= f.label :comment
+  %dd= f.text_area :comment
+  %dt= f.label :preview, 'Preview (should be 807x217)'
+  %dd= f.file_field :preview

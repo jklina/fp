@@ -1,0 +1,37 @@
+= render "shared/error_messages", :target => @user
+%dl
+  %dt= f.label :username
+  %dd= f.text_field :username
+  %dt= f.label :name
+  %dd= f.text_field :name
+  %dt= f.label :location
+  %dd= f.text_field :location
+  %dt= f.label :country
+  %dd= f.text_field :country
+  %dt= f.label :email
+  %dd= f.text_field :email
+  %dt= f.label :displayed_email
+  %dd= f.text_field :displayed_email
+  %dt= f.label :aim
+  %dd= f.text_field :aim
+  %dt= f.label :msn
+  %dd= f.text_field :msn
+  %dt= f.label :icq
+  %dd= f.text_field :icq
+  %dt= f.label :yahoo
+  %dd= f.text_field :yahoo
+  %dt= f.label :website
+  %dd= f.text_field :website
+  %dt= f.label :current_projects
+  %dd= f.text_area :current_projects
+  %dt= f.label :photo
+  %dd= f.file_field :photo
+  %dt= f.label :banner, 'Banner <span class="reminder">(should be 736x58)</span>'
+  %dd= f.file_field :banner
+  %dt= f.label :time_zone
+  %dd
+    = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones
+  %dt= f.label :password
+  %dd= f.password_field :password
+  %dt= f.label :password_confirmation, "Confirm password"
+  %dd= f.password_field :password_confirmation

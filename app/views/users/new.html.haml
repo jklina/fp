@@ -1,0 +1,13 @@
+%h2 Register
+- form_for @user do |f|
+  = render "shared/error_messages", :target => @user
+  %dl
+    %dt= f.label :username
+    %dd= f.text_field :username
+    %dt= f.label :email
+    %dd= f.text_field :email
+    %dt= f.label :password
+    %dd= f.password_field :password
+    %dt= f.label :password_confirmation, "Confirm password"
+    %dd= f.password_field :password_confirmation
+  %p= submit_tag "Sign me up!"

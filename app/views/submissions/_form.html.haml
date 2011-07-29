@@ -1,0 +1,12 @@
+= render "shared/error_messages", :target => @submission
+%dl
+  %dt= f.label :title
+  %dd= f.text_field :title
+  %dt= f.label :description
+  %dd= f.text_area :description
+  %dt= f.label :category_id
+  %dd= f.collection_select :category_id, @categories, :id, :title
+  %dt= f.label :preview
+  %dd= f.file_field :preview
+  %dt= f.label :file
+  %dd= f.file_field :file

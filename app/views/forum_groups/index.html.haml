@@ -1,0 +1,20 @@
+%table#forum-groups
+  %colgroup
+    %col#title/
+    %col#weight/
+    %col#edit/
+    %col#delete/
+  %thead
+    %tr
+      %th Title
+      %th Weight
+      %th Edit
+      %th Delete
+  - @forum_groups.each do |forum_group|
+    %tr
+      %td= h forum_group.title
+      %td= h forum_group.weight
+      %td= link_to 'Edit', edit_forum_group_path(forum_group)
+      %td= link_to 'Destroy', forum_group, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New forum_group', new_forum_group_path

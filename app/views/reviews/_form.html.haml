@@ -1,0 +1,6 @@
+= render "shared/error_messages", :target => @review
+%dl
+  %dt= f.label :rating
+  %dd= tag(:input, {:type => :number, :id => 'rating', :name => 'review[rating]', :placeholder => '100', :value => f.object.rating, :min => "1", :max => "100", :size => "6", :maxlength => "3"})
+  %dt= f.label :comment
+  %dd= f.text_area :comment

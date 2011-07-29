@@ -1,6 +1,0 @@
-<h3>Editing &ldquo;<%=h @feature.title -%>&rdquo;</h3>
-
-<% form_for @feature, :html => { :multipart => true, :method => :put } do |f| -%>
-<%= render :partial => "form", :locals => { :f => f } -%>
-<p><%= submit_tag "Save these changes" -%></p>
-<% end -%>

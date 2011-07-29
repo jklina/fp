@@ -1,0 +1,4 @@
+%h2 New Forum Group
+- form_for @forum_group do |f|
+  = render :partial => "form", :locals => { :f => f }
+  %p= submit_tag "Create"

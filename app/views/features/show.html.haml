@@ -1,0 +1,10 @@
+%h2= h @feature.title
+%p.preview= link_to image_tag(@feature.preview.url(:large)), @feature.preview.url
+.textile
+  = RedCloth.new(@feature.comment + " &mdash; chosen by #{link_to h(@feature.user.username), user_path(@feature.user)}").to_html.html_safe
+.autoclear
+  = render :partial => "submissions/submission", :collection => @feature.submissions
+- if has_authority?
+  %ul
+    %li= link_to "Edit this feature", edit_feature_path(@feature)
+    %li= link_to "Delete this feature", feature_path(@feature), :method => :delete, :confirm => "Are you sure?"

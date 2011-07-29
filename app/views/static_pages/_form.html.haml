@@ -1,0 +1,8 @@
+= render "shared/error_messages", :target => @static_page
+%dl
+  %dt= f.label :title
+  %dd= f.text_field :title
+  %dt= f.label :body
+  %dd= f.text_area :body
+  %dt= f.label :slug
+  %dd= f.text_field :slug
