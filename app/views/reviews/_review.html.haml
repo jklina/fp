@@ -1,4 +1,4 @@
-.review.if{:class => "autoclear<haml:silent> review.submission.authored_by?(review.user) </haml:silent><haml:block> author</haml:block>"}
+.review.if{:class => "autoclear"}
   %p.avatar.shadow= link_to image_tag(review.user.photo.url(:avatar)), user_path(review.user)
   .text
     %p
