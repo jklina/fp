@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   validates_length_of	      :password,				      :if => :password_required_or_present?, :minimum => 5
   validates_confirmation_of :password,              :if => :password_required_or_present?
   validates_uniqueness_of   :username,              :case_sensitive => false
+  validates_format_of       :username,              :with => /^[\w]{1,15}$/, :message => "Please use a URL safe username."
   validates_uniqueness_of   :email,                 :case_sensitive => false
   validates_format_of       :email, 				        :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
 
