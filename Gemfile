@@ -2,16 +2,21 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
 gem 'RedCloth', '4.2.7'
-gem 'will_paginate', '~> 3.0.pre2'
+gem 'will_paginate', '~> 3.0'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'twitter-text', '1.4.2'
 
 group :test do
-  gem 'factory_girl_rails', '1.0.1'
-  gem 'faker', '0.9.5'
-  gem 'shoulda', '2.11.3'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
+  gem 'database_cleaner'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-readline'
 end
 
 group :production do

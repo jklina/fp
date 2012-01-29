@@ -2,6 +2,7 @@ syntax: glob
 
 fixelpuckers.kpf
 *.DS_Store
+*.swp
 .bundle/config
 config/database.yml
 config/actionmailer.yml
