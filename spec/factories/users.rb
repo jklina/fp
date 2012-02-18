@@ -9,7 +9,7 @@ FactoryGirl.define do
     password_confirmation 'secret'
 
     factory :normal_user do
-      after_create { |u| Factory(:assignment, :user => u) }
+      access_level 1
     end
 
   end
