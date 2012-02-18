@@ -32,9 +32,6 @@ RSpec.configure do |config|
   #Include Factory Girl methods
   config.include Factory::Syntax::Methods
 
-  config.include(LoginMacros)
-  config.include(DateFormatMacros)
-
   #Database cleaning
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation 
