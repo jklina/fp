@@ -1,4 +1,4 @@
 %h2 Please Log In
-- form_for(:user, @user, :url => { :action => "create" }) do |f|
+= form_for(:user, :url => { :action => "create" }) do |f|
   = render :partial => "sessions/form", :locals => { :f => f }
   %p= submit_tag "Log In"
