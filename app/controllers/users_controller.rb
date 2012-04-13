@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class UsersController < ApplicationController
   before_filter :find_user, :except => [ :index, :show, :new, :create, :confirm ]
   before_filter :require_self, :only => [ :edit, :update, :destroy ]

@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
 gem 'RedCloth', '4.2.7'
-gem 'will_paginate', '~> 3.0'
+gem 'will_paginate', '3.0.3'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 gem 'jquery-rails'
 gem 'haml-rails'
