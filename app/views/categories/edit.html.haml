@@ -1,5 +1,5 @@
 %h2
   Editing &ldquo;#{h @category.title}&rdquo;
-- form_for @category do |f|
+= form_for @category do |f|
   = render :partial => "form", :locals => { :f => f }
   = submit_tag "Save these changes"

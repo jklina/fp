@@ -1,4 +1,4 @@
 %h2 New Category
-- form_for @category do |f|
+= form_for @category do |f|
   = render :partial => "form", :locals => { :f => f }
   %p= submit_tag "Create this category"

@@ -1,5 +1,5 @@
 %h2
   Editing &ldquo;#{h @submission.title}&rdquo;
-- form_for @submission, :html => { :multipart => true, :method => :put } do |f|
+= form_for @submission, :html => { :multipart => true, :method => :put } do |f|
   = render :partial => "form", :locals => { :f => f }
   %p= submit_tag "Save these changes"

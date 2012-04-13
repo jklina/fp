@@ -42,11 +42,11 @@
   = render :partial => "reviews/review", :collection => @submission.reviews
 - if logged_in?
   - if @review.new_record?
-    - form_for [@submission, @review] do |f|
+    = form_for [@submission, @review] do |f|
       = render :partial => "reviews/form", :locals => { :f => f }
       %p= submit_tag "Submit Review"
   - else
-    - form_for [@submission, @review], :html => { :method => :put } do |f|
+    = form_for [@submission, @review], :html => { :method => :put } do |f|
       = render :partial => "reviews/form", :locals => { :f => f }
       %p= submit_tag "Edit Review"
 - else

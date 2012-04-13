@@ -1,5 +1,5 @@
 %h1 Editing topic
-- form_for [@forum, @topic] do |f|
+= form_for [@forum, @topic] do |f|
   = render :partial => "form", :locals => { :f => f }
   %p= submit_tag "Update Topic"
 = link_to 'Back', forum_topic_path(@forum, @topic)
