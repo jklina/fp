@@ -1,5 +1,6 @@
-= render :partial => @static_page
-- if has_authority?
-  %ul
-    %li= link_to 'Edit this page', edit_static_page_path(@static_page)
-    %li= link_to 'Delete this page', static_page_path(@static_page), :method => :delete
+- if @static_page.present?
+  = render :partial => 'static_page', :locals => { :static_page => @static_page }
+  - if has_authority?
+    %ul
+      %li= link_to 'Edit this page', edit_static_page_path(@static_page)
+      %li= link_to 'Delete this page', static_page_path(@static_page), :method => :delete

@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
   # GET /static_pages/1
   # GET /static_pages/1.xml
   def show
-	@static_page = StaticPage.find_by_slug(params[:id], [ :user, { :comments => :user }])
+    @static_page = StaticPage.find_by_slug(params[:id], [ :user, { :comments => :user }])
 
     respond_to do |format|
       format.html # show.html.erb
